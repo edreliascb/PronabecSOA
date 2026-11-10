@@ -1,0 +1,171 @@
+{
+    "version": "1.0",
+    "cobertura": "PARCIAL",
+    "descripcion": "Base territorial inicial de EduPerú. Preparada para ser reemplazada o ampliada con una fuente oficial completa.",
+    "departamentos": [
+        {
+            "codigo": "15",
+            "nombre": "Lima",
+            "provincias": [
+                {
+                    "codigo": "1501",
+                    "nombre": "Lima",
+                    "distritos": [
+                        {
+                            "codigo": "150101",
+                            "nombre": "Lima"
+                        },
+                        {
+                            "codigo": "150122",
+                            "nombre": "Miraflores"
+                        },
+                        {
+                            "codigo": "150131",
+                            "nombre": "San Isidro"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "codigo": "22",
+            "nombre": "San Martín",
+            "provincias": [
+                {
+                    "codigo": "2201",
+                    "nombre": "Moyobamba",
+                    "distritos": [
+                        {
+                            "codigo": "220101",
+                            "nombre": "Moyobamba"
+                        },
+                        {
+                            "codigo": "220102",
+                            "nombre": "Calzada"
+                        },
+                        {
+                            "codigo": "220103",
+                            "nombre": "Habana"
+                        },
+                        {
+                            "codigo": "220104",
+                            "nombre": "Jepelacio"
+                        },
+                        {
+                            "codigo": "220105",
+                            "nombre": "Soritor"
+                        },
+                        {
+                            "codigo": "220106",
+                            "nombre": "Yantaló"
+                        }
+                    ]
+                },
+                {
+                    "codigo": "2208",
+                    "nombre": "Rioja",
+                    "distritos": [
+                        {
+                            "codigo": "220801",
+                            "nombre": "Rioja"
+                        },
+                        {
+                            "codigo": "220802",
+                            "nombre": "Awajún"
+                        },
+                        {
+                            "codigo": "220803",
+                            "nombre": "Elías Soplín Vargas"
+                        },
+                        {
+                            "codigo": "220804",
+                            "nombre": "Nueva Cajamarca"
+                        },
+                        {
+                            "codigo": "220805",
+                            "nombre": "Pardo Miguel"
+                        },
+                        {
+                            "codigo": "220806",
+                            "nombre": "Pósic"
+                        },
+                        {
+                            "codigo": "220807",
+                            "nombre": "San Fernando"
+                        },
+                        {
+                            "codigo": "220808",
+                            "nombre": "Yorongos"
+                        },
+                        {
+                            "codigo": "220809",
+                            "nombre": "Yuracyacu"
+                        }
+                    ]
+                },
+                {
+                    "codigo": "2209",
+                    "nombre": "San Martín",
+                    "distritos": [
+                        {
+                            "codigo": "220901",
+                            "nombre": "Tarapoto"
+                        },
+                        {
+                            "codigo": "220902",
+                            "nombre": "Alberto Leveau"
+                        },
+                        {
+                            "codigo": "220903",
+                            "nombre": "Cacatachi"
+                        },
+                        {
+                            "codigo": "220904",
+                            "nombre": "Chazuta"
+                        },
+                        {
+                            "codigo": "220905",
+                            "nombre": "Chipurana"
+                        },
+                        {
+                            "codigo": "220906",
+                            "nombre": "El Porvenir"
+                        },
+                        {
+                            "codigo": "220907",
+                            "nombre": "Huimbayoc"
+                        },
+                        {
+                            "codigo": "220908",
+                            "nombre": "Juan Guerra"
+                        },
+                        {
+                            "codigo": "220909",
+                            "nombre": "La Banda de Shilcayo"
+                        },
+                        {
+                            "codigo": "220910",
+                            "nombre": "Morales"
+                        },
+                        {
+                            "codigo": "220911",
+                            "nombre": "Papaplaya"
+                        },
+                        {
+                            "codigo": "220912",
+                            "nombre": "San Antonio"
+                        },
+                        {
+                            "codigo": "220913",
+                            "nombre": "Sauce"
+                        },
+                        {
+                            "codigo": "220914",
+                            "nombre": "Shapaja"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

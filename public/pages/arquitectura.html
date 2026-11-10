@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Arquitectura SOA | EduPerú</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/arquitectura.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>EduPerú</h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Arquitectura SOA
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+            <a href="/" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/pages/oportunidades.html" class="nav-item">
+                <i data-lucide="search"></i>
+                <span>Oportunidades</span>
+            </a>
+
+            <a href="/pages/explorar-peru.html" class="nav-item">
+                <i data-lucide="map"></i>
+                <span>Explorar Perú</span>
+            </a>
+
+            <a href="/pages/carreras.html" class="nav-item">
+                <i data-lucide="graduation-cap"></i>
+                <span>Carreras</span>
+            </a>
+
+            <a href="/pages/instituciones.html" class="nav-item">
+                <i data-lucide="building-2"></i>
+                <span>Instituciones</span>
+            </a>
+
+            <a href="/pages/convenios.html" class="nav-item">
+                <i data-lucide="handshake"></i>
+                <span>Convenios</span>
+            </a>
+
+            <a href="/pages/requisitos.html" class="nav-item">
+                <i data-lucide="files"></i>
+                <span>Requisitos</span>
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+            <a href="/pages/favoritos.html" class="nav-item">
+                <i data-lucide="heart"></i>
+                <span>Favoritos</span>
+            </a>
+
+            <a href="/pages/alertas.html" class="nav-item">
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+            <a
+                href="/pages/arquitectura.html"
+                class="nav-item active"
+            >
+                <i data-lucide="network"></i>
+                <span>Arquitectura SOA</span>
+            </a>
+
+            <a href="/pages/estadisticas.html" class="nav-item">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Estadísticas</span>
+            </a>
+
+            <a href="/pages/estado.html" class="nav-item">
+                <i data-lucide="activity"></i>
+                <span>Estado del sistema</span>
+            </a>
+
+
+            <span class="nav-title">
+                SISTEMA
+            </span>
+
+            <a href="/pages/admin.html" class="nav-item">
+                <i data-lucide="shield"></i>
+                <span>Administración</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>SOA 40/40</strong>
+                    <small>EduPerú v1.9.0</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                    aria-label="Abrir menú"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Diseño técnico
+                    </span>
+
+                    <h2>
+                        Arquitectura Orientada a Servicios
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <a
+                    class="architecture-top-link"
+                    href="/api-docs"
+                    target="_blank"
+                >
+                    <i data-lucide="book-open-code"></i>
+                    Swagger
+                </a>
+
+                <button
+                    class="icon-button"
+                    id="refreshArchitecture"
+                    type="button"
+                    aria-label="Actualizar"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content architecture-page">
+
+            <div class="breadcrumbs">
+                <a href="/">Inicio</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Arquitectura SOA</span>
+            </div>
+
+
+            <section class="architecture-hero">
+
+                <div class="architecture-hero-content">
+
+                    <span class="architecture-badge">
+                        EduPerú SOA · Versión 1.9.0
+                    </span>
+
+                    <h1>
+                        40 servicios empresariales integrados
+                        en una arquitectura desacoplada
+                    </h1>
+
+                    <p>
+                        La plataforma organiza capacidades educativas,
+                        seguridad, datos, integración, analítica y
+                        administración mediante contratos de servicio
+                        claramente definidos.
+                    </p>
+
+                    <div class="architecture-hero-actions">
+
+                        <a
+                            href="/api/contratos"
+                            target="_blank"
+                            class="architecture-button primary"
+                        >
+                            <i data-lucide="braces"></i>
+                            Ver contratos JSON
+                        </a>
+
+                        <a
+                            href="/api-docs"
+                            target="_blank"
+                            class="architecture-button secondary"
+                        >
+                            <i data-lucide="file-code-2"></i>
+                            Abrir OpenAPI
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="architecture-hero-status">
+
+                    <div class="architecture-status-icon">
+                        <i data-lucide="network"></i>
+                    </div>
+
+                    <span>
+                        Estado de arquitectura
+                    </span>
+
+                    <strong id="architectureStatus">
+                        Consultando...
+                    </strong>
+
+                    <small id="architectureStatusText">
+                        Verificando contratos y monitoreo
+                    </small>
+
+                </div>
+
+            </section>
+
+
+            <section class="architecture-kpis">
+
+                <article class="architecture-kpi">
+
+                    <span>Total de servicios</span>
+
+                    <strong id="architectureTotal">
+                        --
+                    </strong>
+
+                    <small>
+                        Inventario empresarial
+                    </small>
+
+                </article>
+
+
+                <article class="architecture-kpi">
+
+                    <span>Implementados</span>
+
+                    <strong id="architectureImplemented">
+                        --
+                    </strong>
+
+                    <small>
+                        Servicios disponibles
+                    </small>
+
+                </article>
+
+
+                <article class="architecture-kpi">
+
+                    <span>Planificados</span>
+
+                    <strong id="architecturePlanned">
+                        --
+                    </strong>
+
+                    <small>
+                        Pendientes de implementación
+                    </small>
+
+                </article>
+
+
+                <article class="architecture-kpi">
+
+                    <span>Con autenticación</span>
+
+                    <strong id="architectureAuth">
+                        --
+                    </strong>
+
+                    <small>
+                        Protegidos por JWT
+                    </small>
+
+                </article>
+
+            </section>
+
+
+            <section class="architecture-section">
+
+                <div class="architecture-section-header">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            Modelo SOA
+                        </span>
+
+                        <h3>
+                            Capas de la solución
+                        </h3>
+
+                        <p>
+                            Vista lógica de cómo las capacidades del sistema
+                            se organizan desde la experiencia del usuario
+                            hasta datos e integración.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="soa-layers">
+
+                    <article class="soa-layer experience">
+
+                        <div>
+                            <i data-lucide="monitor-smartphone"></i>
+                        </div>
+
+                        <strong>
+                            Experiencia
+                        </strong>
+
+                        <span>
+                            Web EduPerú · Dashboard · Swagger
+                        </span>
+
+                    </article>
+
+
+                    <div class="soa-arrow">
+                        <i data-lucide="arrow-down"></i>
+                    </div>
+
+
+                    <article class="soa-layer composition">
+
+                        <div>
+                            <i data-lucide="workflow"></i>
+                        </div>
+
+                        <strong>
+                            Composición y procesos
+                        </strong>
+
+                        <span>
+                            Consulta · Recomendación · Orientación · Calendario · Reportes
+                        </span>
+
+                    </article>
+
+
+                    <div class="soa-arrow">
+                        <i data-lucide="arrow-down"></i>
+                    </div>
+
+
+                    <article class="soa-layer business">
+
+                        <div>
+                            <i data-lucide="boxes"></i>
+                        </div>
+
+                        <strong>
+                            Servicios empresariales
+                        </strong>
+
+                        <span>
+                            Convocatorias · Carreras · Perfil · Seguimiento · Documentos
+                        </span>
+
+                    </article>
+
+
+                    <div class="soa-arrow">
+                        <i data-lucide="arrow-down"></i>
+                    </div>
+
+
+                    <article class="soa-layer utility">
+
+                        <div>
+                            <i data-lucide="shield-check"></i>
+                        </div>
+
+                        <strong>
+                            Servicios de utilidad
+                        </strong>
+
+                        <span>
+                            JWT · Base de datos · Health · Auditoría · Configuración
+                        </span>
+
+                    </article>
+
+
+                    <div class="soa-arrow">
+                        <i data-lucide="arrow-down"></i>
+                    </div>
+
+
+                    <article class="soa-layer data">
+
+                        <div>
+                            <i data-lucide="database"></i>
+                        </div>
+
+                        <strong>
+                            Datos e integración
+                        </strong>
+
+                        <span>
+                            SQL Server · PRONABEC · Plataforma Nacional de Datos Abiertos
+                        </span>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <section class="architecture-grid-section">
+
+                <article class="architecture-panel">
+
+                    <div class="architecture-panel-header">
+
+                        <div>
+                            <span class="section-kicker">
+                                Inventario dinámico
+                            </span>
+
+                            <h3>
+                                Servicios por tipo
+                            </h3>
+                        </div>
+
+                        <i data-lucide="pie-chart"></i>
+
+                    </div>
+
+                    <div
+                        id="architectureTypeSummary"
+                        class="architecture-type-summary"
+                    >
+                        <div class="architecture-loading">
+                            Cargando clasificación...
+                        </div>
+                    </div>
+
+                </article>
+
+
+                <article class="architecture-panel">
+
+                    <div class="architecture-panel-header">
+
+                        <div>
+                            <span class="section-kicker">
+                                Integración
+                            </span>
+
+                            <h3>
+                                Fuentes y disponibilidad
+                            </h3>
+                        </div>
+
+                        <i data-lucide="cloud-cog"></i>
+
+                    </div>
+
+                    <div
+                        id="architectureSources"
+                        class="architecture-source-list"
+                    >
+                        <div class="architecture-loading">
+                            Consultando fuentes oficiales...
+                        </div>
+                    </div>
+
+                    <p class="architecture-note">
+                        EduPerú no genera datos ficticios cuando una
+                        fuente oficial no se encuentra disponible.
+                    </p>
+
+                </article>
+
+            </section>
+
+
+            <section class="architecture-section">
+
+                <div class="architecture-section-header service-header">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            Catálogo de contratos
+                        </span>
+
+                        <h3>
+                            40 servicios empresariales
+                        </h3>
+
+                        <p id="architectureServiceResult">
+                            Cargando inventario...
+                        </p>
+
+                    </div>
+
+
+                    <div class="architecture-filters">
+
+                        <label class="architecture-search">
+
+                            <i data-lucide="search"></i>
+
+                            <input
+                                id="architectureSearch"
+                                type="search"
+                                placeholder="Buscar servicio, dominio o endpoint"
+                                autocomplete="off"
+                            >
+
+                        </label>
+
+
+                        <select
+                            id="architectureTypeFilter"
+                            class="architecture-select"
+                            aria-label="Filtrar por tipo"
+                        >
+                            <option value="">
+                                Todos los tipos
+                            </option>
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="architectureServiceGrid"
+                    class="architecture-service-grid"
+                >
+
+                    <div class="architecture-loading">
+                        Consultando /api/contratos...
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="architecture-principles">
+
+                <div>
+
+                    <span class="section-kicker">
+                        Buenas prácticas SOA
+                    </span>
+
+                    <h3>
+                        Principios aplicados
+                    </h3>
+
+                    <p>
+                        Los contratos de EduPerú se organizan para
+                        favorecer reutilización, autonomía,
+                        descubrimiento y composición.
+                    </p>
+
+                </div>
+
+
+                <div
+                    id="architecturePrinciples"
+                    class="architecture-principle-grid"
+                >
+                </div>
+
+            </section>
+
+
+            <section class="architecture-technical-links">
+
+                <a href="/api/health" target="_blank">
+                    <i data-lucide="activity"></i>
+                    <div>
+                        <strong>Health Check</strong>
+                        <span>Estado operativo y fuentes</span>
+                    </div>
+                </a>
+
+                <a href="/api/contratos" target="_blank">
+                    <i data-lucide="network"></i>
+                    <div>
+                        <strong>Contratos SOA</strong>
+                        <span>Inventario formal 40/40</span>
+                    </div>
+                </a>
+
+                <a href="/api-docs" target="_blank">
+                    <i data-lucide="book-open-code"></i>
+                    <div>
+                        <strong>Swagger</strong>
+                        <span>Documentación interactiva</span>
+                    </div>
+                </a>
+
+                <a href="/api-docs.json" target="_blank">
+                    <i data-lucide="file-json"></i>
+                    <div>
+                        <strong>OpenAPI JSON</strong>
+                        <span>Especificación técnica</span>
+                    </div>
+                </a>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+                <strong>EduPerú SOA</strong>
+                <span>Arquitectura empresarial de servicios</span>
+            </div>
+
+            <div id="architectureLastUpdate">
+                Última actualización: --
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/arquitectura.js"></script>
+
+</body>
+
+</html>

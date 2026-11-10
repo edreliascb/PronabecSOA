@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Oportunidades | EduPerú SOA
+    </title>
+
+
+    <link
+        rel="stylesheet"
+        href="/css/app.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/oportunidades.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/responsive.css"
+    >
+
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    EduPerú
+                </h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a
+                href="/"
+                class="nav-item"
+            >
+
+                <i data-lucide="layout-dashboard"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item active"
+            >
+
+                <i data-lucide="search"></i>
+
+                <span>
+                    Oportunidades
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="graduation-cap"></i>
+
+                <span>
+                    Carreras
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="building-2"></i>
+
+                <span>
+                    Instituciones
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="handshake"></i>
+
+                <span>
+                    Convenios
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="files"></i>
+
+                <span>
+                    Requisitos
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="heart"></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+                <span
+                    class="nav-badge"
+                    id="contadorFavoritos"
+                >
+                    0
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="bell"></i>
+
+                <span>
+                    Alertas
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="chart-no-axes-combined"></i>
+
+                <span>
+                    Estadísticas
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="activity"></i>
+
+                <span>
+                    Estado del sistema
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/admin.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="shield-check"></i>
+
+                <span>
+                    Administración
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTENIDO
+    =================================================== -->
+
+    <div class="main-wrapper">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar en oportunidades..."
+                    >
+
+                    <kbd>
+                        Ctrl K
+                    </kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    title="Actualizar"
+                    type="button"
+                >
+
+                    <i data-lucide="refresh-cw"></i>
+
+                </button>
+
+
+                <button
+                    class="icon-button"
+                    type="button"
+                    id="compareTopButton"
+                    title="Comparar"
+                >
+
+                    <i data-lucide="columns-3"></i>
+
+                </button>
+
+
+                <div class="user-menu">
+
+                    <div class="user-avatar">
+                        EC
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong>
+                            Usuario
+                        </strong>
+
+                        <span>
+                            Estudiante
+                        </span>
+
+                    </div>
+
+                    <i
+                        data-lucide="chevron-down"
+                        class="user-chevron"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             MAIN
+        =================================================== -->
+
+        <main class="main-content">
+
+
+            <!-- BREADCRUMB -->
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Oportunidades
+                </span>
+
+            </div>
+
+
+            <!-- CABECERA -->
+
+            <section class="opportunities-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Buscador nacional
+                    </span>
+
+                    <h2>
+                        Oportunidades educativas
+                    </h2>
+
+                    <p>
+                        Explora convocatorias y oportunidades
+                        recuperadas por los servicios de EduPerú.
+                    </p>
+
+                </div>
+
+
+                <div class="heading-actions">
+
+                    <button
+                        class="btn btn-secondary"
+                        id="clearFiltersButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="rotate-ccw"></i>
+
+                        Limpiar filtros
+
+                    </button>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="createAlertButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="bell-plus"></i>
+
+                        Crear alerta
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 RESUMEN
+            =================================================== -->
+
+            <section class="opportunity-summary-grid">
+
+
+                <article class="mini-kpi">
+
+                    <div class="mini-kpi-icon">
+
+                        <i data-lucide="search"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Resultados
+                        </span>
+
+                        <strong id="resultadoTotal">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="mini-kpi">
+
+                    <div class="mini-kpi-icon green">
+
+                        <i data-lucide="circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Vigentes
+                        </span>
+
+                        <strong id="resultadoVigentes">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="mini-kpi">
+
+                    <div class="mini-kpi-icon purple">
+
+                        <i data-lucide="graduation-cap"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Carreras
+                        </span>
+
+                        <strong id="resultadoCarreras">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="mini-kpi">
+
+                    <div class="mini-kpi-icon orange">
+
+                        <i data-lucide="map-pin"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Regiones / sedes
+                        </span>
+
+                        <strong id="resultadoRegiones">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- ==================================================
+                 BUSCADOR Y FILTROS
+            =================================================== -->
+
+            <section class="filter-panel">
+
+
+                <div class="main-search-row">
+
+                    <div class="opportunity-main-search">
+
+                        <i data-lucide="search"></i>
+
+                        <input
+                            type="search"
+                            id="searchInput"
+                            placeholder="Buscar por convocatoria, carrera, región o palabra clave..."
+                        >
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="searchButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="search"></i>
+
+                        Buscar
+
+                    </button>
+
+                </div>
+
+
+                <div class="advanced-filters">
+
+
+                    <div class="filter-field">
+
+                        <label for="careerFilter">
+                            Carrera
+                        </label>
+
+                        <select id="careerFilter">
+
+                            <option value="">
+                                Todas las carreras
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-field">
+
+                        <label for="regionFilter">
+                            Región / sede
+                        </label>
+
+                        <select id="regionFilter">
+
+                            <option value="">
+                                Todo el Perú
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-field">
+
+                        <label for="statusFilter">
+                            Estado
+                        </label>
+
+                        <select id="statusFilter">
+
+                            <option value="">
+                                Todos
+                            </option>
+
+                            <option value="vigente">
+                                Vigente
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="filter-field">
+
+                        <label for="sourceFilter">
+                            Fuente
+                        </label>
+
+                        <select id="sourceFilter">
+
+                            <option value="">
+                                Todas
+                            </option>
+
+                            <option value="api">
+                                API PRONABEC
+                            </option>
+
+                            <option value="respaldo">
+                                Respaldo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 BARRA DE RESULTADOS
+            =================================================== -->
+
+            <section class="results-toolbar">
+
+
+                <div>
+
+                    <strong id="resultsTitle">
+                        Oportunidades encontradas
+                    </strong>
+
+                    <span id="resultsDescription">
+                        Consultando información...
+                    </span>
+
+                </div>
+
+
+                <div class="toolbar-actions">
+
+
+                    <button
+                        class="comparison-counter"
+                        id="comparisonButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="columns-3"></i>
+
+                        Comparar
+
+                        <span id="comparisonCount">
+                            0
+                        </span>
+
+                    </button>
+
+
+                    <select
+                        id="sortSelect"
+                        class="sort-select"
+                    >
+
+                        <option value="nombre">
+                            Ordenar por nombre
+                        </option>
+
+                        <option value="carrera">
+                            Ordenar por carrera
+                        </option>
+
+                        <option value="region">
+                            Ordenar por región
+                        </option>
+
+                    </select>
+
+
+                    <div class="view-switch">
+
+                        <button
+                            class="view-switch-button active"
+                            id="gridViewButton"
+                            type="button"
+                            title="Tarjetas"
+                        >
+
+                            <i data-lucide="layout-grid"></i>
+
+                        </button>
+
+
+                        <button
+                            class="view-switch-button"
+                            id="listViewButton"
+                            type="button"
+                            title="Lista"
+                        >
+
+                            <i data-lucide="list"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 RESULTADOS
+            =================================================== -->
+
+            <section
+                class="opportunities-grid"
+                id="opportunitiesContainer"
+            >
+
+                <div class="loading-state">
+
+                    <div class="spinner"></div>
+
+                    <span>
+                        Consultando ConvocatoriaService...
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- PAGINACIÓN -->
+
+            <section
+                class="pagination-container"
+                id="paginationContainer"
+            >
+            </section>
+
+
+            <!-- AVISO FUENTE -->
+
+            <section class="data-source-notice">
+
+                <div>
+
+                    <i data-lucide="database"></i>
+
+                </div>
+
+                <p>
+
+                    EduPerú distingue entre información
+                    recuperada desde una API externa y datos
+                    locales de demostración. Los registros de
+                    respaldo no representan información oficial
+                    vigente de alcance nacional.
+
+                </p>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- FOOTER -->
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú SOA
+                </strong>
+
+                <span>
+                    Oportunidades Educativas
+                </span>
+
+            </div>
+
+            <div>
+                Perú
+            </div>
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/oportunidades.js"></script>
+
+
+<script>
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

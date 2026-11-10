@@ -1,0 +1,1287 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="EduPerú SOA - Plataforma Nacional de Oportunidades Educativas del Perú"
+    >
+
+    <title>EduPerú SOA | Dashboard Nacional</title>
+
+    <!-- ESTILOS -->
+    <link
+        rel="stylesheet"
+        href="/css/app.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/responsive.css"
+    >
+
+    <!-- ICONOS -->
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    EduPerú
+                </h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a
+                href="/"
+                class="nav-item active"
+            >
+
+                <i
+                    data-lucide="layout-dashboard"
+                ></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="search"
+                ></i>
+
+                <span>
+                    Oportunidades
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="graduation-cap"
+                ></i>
+
+                <span>
+                    Carreras
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="building-2"
+                ></i>
+
+                <span>
+                    Instituciones
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="handshake"
+                ></i>
+
+                <span>
+                    Convenios
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="files"
+                ></i>
+
+                <span>
+                    Requisitos
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="heart"
+                ></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="bell"
+                ></i>
+
+                <span>
+                    Alertas
+                </span>
+</a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="chart-no-axes-combined"
+                ></i>
+
+                <span>
+                    Estadísticas
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="activity"
+                ></i>
+
+                <span>
+                    Estado del sistema
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/admin.html"
+                class="nav-item"
+            >
+
+                <i
+                    data-lucide="shield-check"
+                ></i>
+
+                <span>
+                    Administración
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTENIDO
+    =================================================== -->
+
+    <div class="main-wrapper">
+
+
+        <!-- ==============================================
+             TOPBAR
+        =============================================== -->
+
+        <header class="topbar">
+
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar becas, carreras, instituciones..."
+                        autocomplete="off"
+                    >
+
+                    <kbd>
+                        Ctrl K
+                    </kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    title="Actualizar información"
+                    type="button"
+                >
+
+                    <i data-lucide="refresh-cw"></i>
+
+                </button>
+
+
+                <button
+                    class="icon-button notification-button"
+                    title="Notificaciones"
+                    type="button"
+                >
+
+                    <i data-lucide="bell"></i>
+</button>
+
+
+                <div class="user-menu">
+
+                    <div class="user-avatar">
+                        EC
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong>
+                            Usuario
+                        </strong>
+
+                        <span>
+                            Estudiante
+                        </span>
+
+                    </div>
+
+                    <i
+                        data-lucide="chevron-down"
+                        class="user-chevron"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==============================================
+             MAIN
+        =============================================== -->
+
+        <main class="main-content">
+
+
+            <!-- ==========================================
+                 ENCABEZADO
+            =========================================== -->
+
+            <section class="dashboard-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Plataforma Nacional
+                    </span>
+
+                    <h2>
+                        Dashboard de oportunidades educativas
+                    </h2>
+
+                    <p>
+                        Consulta oportunidades, instituciones,
+                        convocatorias y servicios educativos
+                        disponibles desde una plataforma integrada.
+                    </p>
+
+                </div>
+
+
+                <div class="heading-actions">
+
+                    <button
+                        class="btn btn-secondary"
+                        id="systemStatusButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="activity"></i>
+
+                        Estado del sistema
+
+                    </button>
+
+
+                    <a
+                        href="/pages/oportunidades.html"
+                        class="btn btn-primary"
+                    >
+
+                        <i data-lucide="search"></i>
+
+                        Buscar oportunidades
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 HERO / BUSCADOR NACIONAL
+            =========================================== -->
+
+            <section class="national-search-card">
+
+                <div class="national-search-content">
+
+                    <span class="national-badge">
+                        🇵🇪 Cobertura nacional
+                    </span>
+
+                    <h3>
+                        Encuentra tu próxima oportunidad educativa
+                    </h3>
+
+                    <p>
+                        Busca por carrera, convocatoria,
+                        institución o región del Perú.
+                    </p>
+
+
+                    <div class="national-search-box">
+
+                        <div class="search-field">
+
+                            <i data-lucide="search"></i>
+
+                            <input
+                                type="text"
+                                id="nationalSearch"
+                                placeholder="Ej. Ingeniería de Sistemas"
+                            >
+
+                        </div>
+
+
+                        <div class="search-field">
+
+                            <i data-lucide="map-pin"></i>
+
+                            <select id="nationalRegion">
+
+                                <option value="">
+                                    Todo el Perú
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <button
+                            class="btn btn-search"
+                            id="nationalSearchButton"
+                            type="button"
+                        >
+
+                            Buscar
+
+                            <i data-lucide="arrow-right"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="national-search-visual">
+
+                    <div class="peru-symbol">
+                        🇵🇪
+                    </div>
+
+                    <span>
+                        Educación para todo el Perú
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 KPI
+            =========================================== -->
+
+            <section class="section-block">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h3>
+                            Resumen nacional
+                        </h3>
+
+                        <p>
+                            Información recuperada por los
+                            servicios de la plataforma.
+                        </p>
+
+                    </div>
+
+
+                    <span
+                        class="last-update"
+                        id="lastUpdate"
+                    >
+                        Actualizando...
+                    </span>
+
+                </div>
+
+
+                <div class="kpi-grid">
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-icon blue">
+
+                            <i data-lucide="megaphone"></i>
+
+                        </div>
+
+                        <div class="kpi-content">
+
+                            <span>
+                                Convocatorias
+                            </span>
+
+                            <strong id="kpiConvocatorias">
+                                --
+                            </strong>
+
+                            <small>
+                                Registros recuperados
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-icon purple">
+
+                            <i data-lucide="graduation-cap"></i>
+
+                        </div>
+
+                        <div class="kpi-content">
+
+                            <span>
+                                Carreras
+                            </span>
+
+                            <strong id="kpiCarreras">
+                                --
+                            </strong>
+
+                            <small>
+                                Registros oficiales
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-icon green">
+
+                            <i data-lucide="handshake"></i>
+
+                        </div>
+
+                        <div class="kpi-content">
+
+                            <span>
+                                Convenios
+                            </span>
+
+                            <strong id="kpiConvenios">
+                                --
+                            </strong>
+
+                            <small>
+                                Total reportado
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-icon orange">
+
+                            <i data-lucide="map"></i>
+
+                        </div>
+
+                        <div class="kpi-content">
+
+                            <span>
+                                Regiones
+                            </span>
+
+                            <strong id="kpiRegiones">
+                                --
+                            </strong>
+
+                            <small>
+                                Departamentos del catálogo
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-icon cyan">
+
+                            <i data-lucide="file-check-2"></i>
+
+                        </div>
+
+                        <div class="kpi-content">
+
+                            <span>
+                                Documentos
+                            </span>
+
+                            <strong id="kpiDocumentos">
+                                --
+                            </strong>
+
+                            <small>
+                                Requisitos recuperados
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="kpi-card">
+
+                        <div class="kpi-icon pink">
+
+                            <i data-lucide="users"></i>
+
+                        </div>
+
+                        <div class="kpi-content">
+
+                            <span>
+                                Postulaciones
+                            </span>
+
+                            <strong id="kpiPostulaciones">
+                                --
+                            </strong>
+
+                            <small>
+                                Total reportado
+                            </small>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 CONTENIDO PRINCIPAL
+            =========================================== -->
+
+            <div class="dashboard-columns">
+
+
+                <!-- ======================================
+                     OPORTUNIDADES
+                ======================================= -->
+
+                <section class="panel opportunities-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Oportunidades destacadas
+                            </h3>
+
+                            <p>
+                                Convocatorias recuperadas
+                                por ConvocatoriaService.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="/pages/oportunidades.html"
+                            class="text-link"
+                        >
+
+                            Ver todas
+
+                            <i data-lucide="arrow-right"></i>
+
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        class="opportunity-list"
+                        id="dashboardOpportunities"
+                    >
+
+                        <div class="loading-state">
+
+                            <div class="spinner"></div>
+
+                            <span>
+                                Consultando oportunidades...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- ======================================
+                     ESTADO
+                ======================================= -->
+
+                <aside class="panel system-panel">
+
+                    <div class="panel-header">
+
+                        <div>
+
+                            <h3>
+                                Servicios SOA
+                            </h3>
+
+                            <p>
+                                Estado de la infraestructura.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="service-status-list">
+
+
+                        <div class="service-status-item">
+
+                            <div class="service-meta">
+
+                                <span class="service-icon">
+                                    C
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Convocatorias
+                                    </strong>
+
+                                    <small>
+                                        ConvocatoriaService
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <span
+                                class="service-state loading"
+                                id="serviceConvocatorias"
+                            >
+                                ...
+                            </span>
+
+                        </div>
+
+
+                        <div class="service-status-item">
+
+                            <div class="service-meta">
+
+                                <span class="service-icon">
+                                    P
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Postulaciones
+                                    </strong>
+
+                                    <small>
+                                        PostulacionService
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <span
+                                class="service-state loading"
+                                id="servicePostulaciones"
+                            >
+                                ...
+                            </span>
+
+                        </div>
+
+
+                        <div class="service-status-item">
+
+                            <div class="service-meta">
+
+                                <span class="service-icon">
+                                    D
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Documentos
+                                    </strong>
+
+                                    <small>
+                                        DocumentoRequisitoService
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <span
+                                class="service-state loading"
+                                id="serviceDocumentos"
+                            >
+                                ...
+                            </span>
+
+                        </div>
+
+
+                        <div class="service-status-item">
+
+                            <div class="service-meta">
+
+                                <span class="service-icon">
+                                    V
+                                </span>
+
+                                <div>
+
+                                    <strong>
+                                        Convenios
+                                    </strong>
+
+                                    <small>
+                                        ConvenioService
+                                    </small>
+
+                                </div>
+
+                            </div>
+
+                            <span
+                                class="service-state loading"
+                                id="serviceConvenios"
+                            >
+                                ...
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+
+                    <a
+                        href="/pages/estado.html"
+                        class="btn btn-outline btn-full"
+                    >
+
+                        <i data-lucide="activity"></i>
+
+                        Ver infraestructura
+
+                    </a>
+
+                </aside>
+
+            </div>
+
+
+            <!-- ==========================================
+                 ACCIONES RÁPIDAS
+            =========================================== -->
+
+            <section class="section-block">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <h3>
+                            Acciones rápidas
+                        </h3>
+
+                        <p>
+                            Accede a las principales herramientas
+                            de EduPerú.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="quick-actions-grid">
+
+
+                    <a
+                        href="/pages/oportunidades.html"
+                        class="quick-action-card"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i data-lucide="search"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Buscar oportunidades
+                            </strong>
+
+                            <span>
+                                Becas, carreras y convocatorias
+                            </span>
+
+                        </div>
+
+                        <i
+                            data-lucide="chevron-right"
+                            class="quick-arrow"
+                        ></i>
+
+                    </a>
+
+
+                    <a
+                        href="/pages/instituciones.html"
+                        class="quick-action-card"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i data-lucide="building-2"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Explorar instituciones
+                            </strong>
+
+                            <span>
+                                Universidades e instituciones
+                            </span>
+
+                        </div>
+
+                        <i
+                            data-lucide="chevron-right"
+                            class="quick-arrow"
+                        ></i>
+
+                    </a>
+
+
+                    <a
+                        href="/pages/convenios.html"
+                        class="quick-action-card"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i data-lucide="handshake"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Consultar convenios
+                            </strong>
+
+                            <span>
+                                Convenios educativos
+                            </span>
+
+                        </div>
+
+                        <i
+                            data-lucide="chevron-right"
+                            class="quick-arrow"
+                        ></i>
+
+                    </a>
+
+
+                    <a
+                        href="/pages/alertas.html"
+                        class="quick-action-card"
+                    >
+
+                        <div class="quick-action-icon">
+                            <i data-lucide="bell-ring"></i>
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Crear una alerta
+                            </strong>
+
+                            <span>
+                                Sigue oportunidades de tu interés
+                            </span>
+
+                        </div>
+
+                        <i
+                            data-lucide="chevron-right"
+                            class="quick-arrow"
+                        ></i>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==========================================
+                 ARQUITECTURA
+            =========================================== -->
+
+            <section class="architecture-banner">
+
+                <div class="architecture-content">
+
+                    <div class="architecture-icon">
+
+                        <i data-lucide="network"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="architecture-label">
+                            Arquitectura Orientada a Servicios
+                        </span>
+
+                        <h3>
+                            EduPerú integra 40 servicios
+                            empresariales independientes y reutilizables
+                        </h3>
+
+                        <p>
+                            Convocatorias, postulaciones,
+                            documentos, convenios, estadísticas,
+                            autenticación, territorio y otros módulos
+                            se gestionan como componentes desacoplados.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="heading-actions">
+
+                    <a
+                        href="/pages/arquitectura.html"
+                        class="btn btn-light"
+                    >
+                        <i data-lucide="network"></i>
+                        Ver arquitectura
+                    </a>
+
+                    <a
+                        href="/api/contratos"
+                        target="_blank"
+                        class="btn btn-light"
+                    >
+                        <i data-lucide="code-xml"></i>
+                        Ver contratos SOA
+                    </a>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <!-- ==============================================
+             FOOTER
+        =============================================== -->
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú SOA
+                </strong>
+
+                <span>
+                    Plataforma Nacional de Oportunidades Educativas
+                </span>
+
+            </div>
+
+
+            <div>
+                Arquitectura SOA · Perú
+            </div>
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<!-- ==================================================
+     OVERLAY MOBILE
+=================================================== -->
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+=================================================== -->
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/dashboard.js"></script>
+
+
+<script>
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+        }
+    );
+</script>
+
+
+
+</body>
+
+</html>
+

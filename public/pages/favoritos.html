@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Favoritos | EduPerú</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/favoritos.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>EduPerú</h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>Perú</strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a href="/" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+                <i data-lucide="search"></i>
+                <span>Oportunidades</span>
+            </a>
+
+
+            <a
+                href="/pages/explorar-peru.html"
+                class="nav-item"
+            >
+                <i data-lucide="map"></i>
+                <span>Explorar Perú</span>
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+                <i data-lucide="graduation-cap"></i>
+                <span>Carreras</span>
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+                <i data-lucide="building-2"></i>
+                <span>Instituciones</span>
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+                <i data-lucide="handshake"></i>
+                <span>Convenios</span>
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+                <i data-lucide="files"></i>
+                <span>Requisitos</span>
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item active"
+            >
+                <i data-lucide="heart"></i>
+                <span>Favoritos</span>
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/arquitectura.html"
+                class="nav-item"
+            >
+                <i data-lucide="network"></i>
+                <span>Arquitectura SOA</span>
+            </a>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Estadísticas</span>
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+                <i data-lucide="activity"></i>
+                <span>Estado del sistema</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar en favoritos..."
+                    >
+
+                    <kbd>Ctrl K</kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+            </div>
+
+
+            <section class="favorites-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Mi espacio
+                    </span>
+
+                    <h2>
+                        Mis favoritos
+                    </h2>
+
+                    <p>
+                        Guarda oportunidades educativas para
+                        revisarlas posteriormente.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="/pages/oportunidades.html"
+                    class="btn btn-primary"
+                >
+                    <i data-lucide="search"></i>
+                    Buscar oportunidades
+                </a>
+
+            </section>
+
+
+            <section class="favorites-hero">
+
+                <div>
+
+                    <span class="favorites-tag">
+                        Sincronizados con tu cuenta
+                    </span>
+
+                    <h3>
+                        Tus oportunidades importantes en un solo lugar
+                    </h3>
+
+                    <p>
+                        Tus favoritos se almacenan en SQL Server y
+                        quedan asociados a tu cuenta mediante JWT.
+                    </p>
+
+                </div>
+
+
+                <div class="favorites-hero-icon">
+
+                    <i data-lucide="heart"></i>
+
+                    <strong id="heroFavoritesCount">
+                        0
+                    </strong>
+
+                    <span>
+                        oportunidades guardadas
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="favorites-kpis">
+
+                <article class="favorites-kpi">
+
+                    <div class="favorites-kpi-icon">
+
+                        <i data-lucide="heart"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Favoritos
+                        </span>
+
+                        <strong id="favoritesCount">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="favorites-kpi">
+
+                    <div class="favorites-kpi-icon green">
+
+                        <i data-lucide="graduation-cap"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Carreras detectadas
+                        </span>
+
+                        <strong id="favoritesCareers">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="favorites-kpi">
+
+                    <div class="favorites-kpi-icon purple">
+
+                        <i data-lucide="map-pin"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Ubicaciones
+                        </span>
+
+                        <strong id="favoritesLocations">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="favorites-toolbar">
+
+                <div class="favorites-search">
+
+                    <i data-lucide="search"></i>
+
+                    <input
+                        id="favoritesSearch"
+                        type="search"
+                        placeholder="Buscar convocatoria, carrera o ubicación..."
+                    >
+
+                </div>
+
+
+                <select id="favoritesOrder">
+
+                    <option value="recent">
+                        Más recientes
+                    </option>
+
+                    <option value="az">
+                        Nombre A - Z
+                    </option>
+
+                    <option value="za">
+                        Nombre Z - A
+                    </option>
+
+                </select>
+
+
+                <button
+                    id="clearFavoritesButton"
+                    class="btn btn-secondary"
+                    type="button"
+                >
+                    <i data-lucide="trash-2"></i>
+                    Limpiar
+                </button>
+
+            </section>
+
+
+            <section>
+
+                <div class="favorites-section-header">
+
+                    <div>
+
+                        <h3>
+                            Oportunidades guardadas
+                        </h3>
+
+                        <p id="favoritesResultText">
+                            0 favoritos
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="favorites-grid"
+                    id="favoritesGrid"
+                >
+                </div>
+
+            </section>
+
+
+            <section class="favorites-notice">
+
+                <i data-lucide="info"></i>
+
+                <div>
+
+                    <strong>
+                        Sincronización con tu cuenta
+                    </strong>
+
+                    <p>
+                        Los favoritos se guardan en EduPeruDB y se consultan
+                        usando tu sesión autenticada. Cada usuario puede ver
+                        únicamente las oportunidades asociadas a su cuenta.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú
+                </strong>
+
+                <span>
+                    Mis Favoritos
+                </span>
+
+            </div>
+
+            <div>
+                SQL Server + JWT
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/auth-client.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/favoritos.js"></script>
+
+</body>
+
+</html>

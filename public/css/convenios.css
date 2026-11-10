@@ -1,0 +1,949 @@
+/* =========================================================
+   EDUPERÚ
+   CONVENIOS
+========================================================= */
+
+.breadcrumb {
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #8b96a7;
+
+    font-size: 10.5px;
+}
+
+
+.breadcrumb svg {
+    width: 12px;
+    height: 12px;
+}
+
+
+.agreement-heading {
+    margin-bottom: 22px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.agreement-heading h2 {
+    margin-bottom: 6px;
+
+    color: #172033;
+
+    font-size: 28px;
+
+    letter-spacing: -0.6px;
+}
+
+
+.agreement-heading p {
+    max-width: 730px;
+
+    color: #687487;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.agreement-hero {
+    min-height: 230px;
+
+    margin-bottom: 22px;
+
+    padding: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        270px;
+
+    gap: 25px;
+
+    align-items: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            125deg,
+            #33205f,
+            #5337a1,
+            #6950c7
+        );
+
+    color: white;
+
+    box-shadow:
+        0 13px 38px
+        rgba(71, 49, 150, 0.18);
+}
+
+
+.agreement-hero::after {
+    content: "";
+
+    position: absolute;
+
+    width: 310px;
+    height: 310px;
+
+    right: -100px;
+    top: -150px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+.agreement-hero-content,
+.agreement-visual {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.agreement-tag {
+    display: inline-flex;
+
+    margin-bottom: 11px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.11);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.agreement-hero h3 {
+    margin-bottom: 7px;
+
+    font-size: 27px;
+}
+
+
+.agreement-hero p {
+    max-width: 650px;
+
+    margin-bottom: 20px;
+
+    color:
+        rgba(255, 255, 255, 0.78);
+
+    font-size: 11px;
+}
+
+
+.agreement-search {
+    width: min(700px, 100%);
+
+    min-height: 48px;
+
+    padding: 5px 5px 5px 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    border-radius: 10px;
+
+    background: white;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.13);
+}
+
+
+.agreement-search svg {
+    width: 17px;
+    height: 17px;
+
+    color: #8c97a8;
+}
+
+
+.agreement-search input {
+    min-width: 0;
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    color: #344054;
+
+    font-size: 11px;
+}
+
+
+.agreement-search button {
+    height: 38px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #583dad;
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.agreement-visual {
+    min-height: 155px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 14px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+.agreement-symbol {
+    width: 61px;
+    height: 61px;
+
+    margin-bottom: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+}
+
+
+.agreement-symbol svg {
+    width: 29px;
+    height: 29px;
+}
+
+
+.agreement-visual strong {
+    font-size: 13px;
+}
+
+
+.agreement-visual span {
+    margin-top: 3px;
+
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.agreement-kpis {
+    margin-bottom: 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+
+.agreement-kpi {
+    min-height: 86px;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border:
+        1px solid #e4e9f1;
+
+    border-radius: 12px;
+
+    background: white;
+
+    box-shadow:
+        0 4px 16px
+        rgba(27, 42, 70, 0.04);
+}
+
+
+.agreement-kpi-icon {
+    width: 41px;
+    height: 41px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #eee9ff;
+
+    color: #6546bc;
+}
+
+
+.agreement-kpi-icon.green {
+    background: #e8f8f1;
+    color: #16895d;
+}
+
+
+.agreement-kpi-icon.purple {
+    background: #f0eafe;
+    color: #7148cf;
+}
+
+
+.agreement-kpi-icon.orange {
+    background: #fff0e2;
+    color: #d9782c;
+}
+
+
+.agreement-kpi-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+
+.agreement-kpi > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.agreement-kpi span {
+    color: #7e8999;
+
+    font-size: 9.5px;
+}
+
+
+.agreement-kpi strong {
+    margin-top: 3px;
+
+    color: #273246;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.agreement-filter-panel {
+    margin-bottom: 18px;
+
+    padding: 19px;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 13px;
+
+    background: white;
+
+    box-shadow:
+        0 5px 20px
+        rgba(27, 42, 70, 0.04);
+}
+
+
+.agreement-filter-header {
+    margin-bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.agreement-filter-header h3 {
+    margin-bottom: 2px;
+
+    color: #344054;
+
+    font-size: 12px;
+}
+
+
+.agreement-filter-header p {
+    color: #8b96a7;
+
+    font-size: 9px;
+}
+
+
+.agreement-filters {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.agreement-filter-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.agreement-filter-field label {
+    color: #657186;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.agreement-filter-field select {
+    min-height: 39px;
+
+    padding: 0 10px;
+
+    border:
+        1px solid #dde4ed;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    color: #556276;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.agreement-toolbar {
+    margin-bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.agreement-toolbar > div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.agreement-toolbar strong {
+    color: #344054;
+
+    font-size: 12px;
+}
+
+
+.agreement-toolbar span {
+    margin-top: 2px;
+
+    color: #8b96a7;
+
+    font-size: 9px;
+}
+
+
+.agreement-toolbar select {
+    min-height: 34px;
+
+    padding: 0 10px;
+
+    border:
+        1px solid #dce3ec;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    color: #647084;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.agreement-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   TARJETA
+========================================================= */
+
+.agreement-card {
+    min-width: 0;
+
+    overflow: hidden;
+
+    border:
+        1px solid #e4e9f1;
+
+    border-radius: 14px;
+
+    background: white;
+
+    box-shadow:
+        0 5px 18px
+        rgba(26, 42, 70, 0.045);
+
+    transition: 0.2s;
+}
+
+
+.agreement-card:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #cdc0ef;
+
+    box-shadow:
+        0 14px 32px
+        rgba(56, 35, 120, 0.10);
+}
+
+
+.agreement-card-header {
+    padding: 18px 18px 12px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.agreement-card-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f0eafe;
+
+    color: #6847bf;
+}
+
+
+.agreement-card-icon svg {
+    width: 21px;
+    height: 21px;
+}
+
+
+.agreement-status {
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #e7f8ef;
+
+    color: #14764e;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+
+.agreement-card-body {
+    padding: 0 18px 18px;
+}
+
+
+.agreement-source {
+    display: inline-flex;
+
+    margin-bottom: 9px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #e7f8ef;
+
+    color: #14764e;
+
+    font-size: 8px;
+
+    font-weight: 750;
+}
+
+
+.agreement-source.fallback {
+    background: #fff2d8;
+
+    color: #8b6111;
+}
+
+
+.agreement-card h3 {
+    min-height: 39px;
+
+    margin-bottom: 6px;
+
+    color: #273246;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+.agreement-type {
+    min-height: 15px;
+
+    margin-bottom: 13px;
+
+    color: #798497;
+
+    font-size: 10px;
+}
+
+
+.agreement-information {
+    padding: 12px 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    border-top:
+        1px solid #edf0f4;
+
+    border-bottom:
+        1px solid #edf0f4;
+}
+
+
+.agreement-info-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #6f7b8e;
+
+    font-size: 9.5px;
+}
+
+
+.agreement-info-row svg {
+    width: 14px;
+    height: 14px;
+
+    color: #98a4b5;
+}
+
+
+.agreement-card-actions {
+    padding-top: 14px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto;
+
+    gap: 8px;
+}
+
+
+.agreement-detail-button {
+    min-height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #6042b5;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    font-size: 9.5px;
+
+    font-weight: 700;
+}
+
+
+.agreement-detail-button:hover {
+    background: #4e329b;
+}
+
+
+.agreement-institution-button {
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    border:
+        1px solid #dce3ec;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #607085;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   AVISO
+========================================================= */
+
+.agreement-notice {
+    margin-top: 24px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    border:
+        1px solid #ddd7ef;
+
+    border-radius: 11px;
+
+    background: #faf8ff;
+}
+
+
+.agreement-notice > svg {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    color: #6546bc;
+}
+
+
+.agreement-notice strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #344054;
+
+    font-size: 10px;
+}
+
+
+.agreement-notice p {
+    color: #69778b;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .agreement-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .agreement-hero {
+        grid-template-columns: 1fr;
+    }
+
+
+    .agreement-visual {
+        display: none;
+    }
+
+
+    .agreement-kpis,
+    .agreement-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .agreement-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .agreement-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .agreement-toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .agreement-kpis,
+    .agreement-filters {
+        grid-template-columns: 1fr;
+    }
+
+
+    .agreement-search {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 10px;
+    }
+
+}

@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Convenios | EduPerú SOA
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/app.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/convenios.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/responsive.css"
+    >
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    EduPerú
+                </h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a
+                href="/"
+                class="nav-item"
+            >
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+                <i data-lucide="search"></i>
+                <span>Oportunidades</span>
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+                <i data-lucide="graduation-cap"></i>
+                <span>Carreras</span>
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+                <i data-lucide="building-2"></i>
+                <span>Instituciones</span>
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item active"
+            >
+                <i data-lucide="handshake"></i>
+                <span>Convenios</span>
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+                <i data-lucide="files"></i>
+                <span>Requisitos</span>
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+                <i data-lucide="heart"></i>
+                <span>Favoritos</span>
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Estadísticas</span>
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+                <i data-lucide="activity"></i>
+                <span>Estado del sistema</span>
+            </a>
+
+
+            <a
+                href="/pages/admin.html"
+                class="nav-item"
+            >
+                <i data-lucide="shield-check"></i>
+                <span>Administración</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         PRINCIPAL
+    =================================================== -->
+
+    <div class="main-wrapper">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar convenios..."
+                    >
+
+                    <kbd>
+                        Ctrl K
+                    </kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+
+                <a
+                    href="/pages/instituciones.html"
+                    class="icon-button"
+                    title="Instituciones"
+                >
+                    <i data-lucide="building-2"></i>
+                </a>
+
+
+                <div class="user-menu">
+
+                    <div class="user-avatar">
+                        EC
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong>
+                            Usuario
+                        </strong>
+
+                        <span>
+                            Estudiante
+                        </span>
+
+                    </div>
+
+                    <i
+                        data-lucide="chevron-down"
+                        class="user-chevron"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+
+            <!-- BREADCRUMB -->
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Convenios
+                </span>
+
+            </div>
+
+
+            <!-- CABECERA -->
+
+            <section class="agreement-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Cooperación educativa
+                    </span>
+
+                    <h2>
+                        Convenios educativos
+                    </h2>
+
+                    <p>
+                        Consulta información de convenios
+                        recuperada mediante ConvenioService
+                        e integrada con el catálogo institucional.
+                    </p>
+
+                </div>
+
+
+                <div class="heading-actions">
+
+                    <a
+                        href="/pages/instituciones.html"
+                        class="btn btn-secondary"
+                    >
+
+                        <i data-lucide="building-2"></i>
+
+                        Instituciones
+
+                    </a>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="openStatsButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="chart-column"></i>
+
+                        Resumen
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- HERO -->
+
+            <section class="agreement-hero">
+
+                <div class="agreement-hero-content">
+
+                    <span class="agreement-tag">
+                        EduPerú · ConvenioService
+                    </span>
+
+                    <h3>
+                        Red de cooperación educativa
+                    </h3>
+
+                    <p>
+                        Explora acuerdos e instituciones identificados
+                        mediante las fuentes integradas en la plataforma.
+                    </p>
+
+
+                    <div class="agreement-search">
+
+                        <i data-lucide="search"></i>
+
+                        <input
+                            type="search"
+                            id="agreementSearch"
+                            placeholder="Buscar institución, convenio o ubicación..."
+                        >
+
+                        <button
+                            id="agreementSearchButton"
+                            type="button"
+                        >
+                            Buscar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="agreement-visual">
+
+                    <div class="agreement-symbol">
+
+                        <i data-lucide="handshake"></i>
+
+                    </div>
+
+                    <strong>
+                        Red nacional
+                    </strong>
+
+                    <span>
+                        Integración educativa
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- KPI -->
+
+            <section class="agreement-kpis">
+
+                <article class="agreement-kpi">
+
+                    <div class="agreement-kpi-icon">
+
+                        <i data-lucide="handshake"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Convenios
+                        </span>
+
+                        <strong id="agreementTotal">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="agreement-kpi">
+
+                    <div class="agreement-kpi-icon green">
+
+                        <i data-lucide="building-2"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Instituciones
+                        </span>
+
+                        <strong id="agreementInstitutions">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="agreement-kpi">
+
+                    <div class="agreement-kpi-icon purple">
+
+                        <i data-lucide="map-pin"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Ubicaciones
+                        </span>
+
+                        <strong id="agreementLocations">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="agreement-kpi">
+
+                    <div class="agreement-kpi-icon orange">
+
+                        <i data-lucide="tags"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Tipos
+                        </span>
+
+                        <strong id="agreementTypes">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <!-- FILTROS -->
+
+            <section class="agreement-filter-panel">
+
+                <div class="agreement-filter-header">
+
+                    <div>
+
+                        <h3>
+                            Filtros de convenios
+                        </h3>
+
+                        <p>
+                            Filtra la información disponible
+                            en la consulta actual.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary"
+                        id="clearAgreementFilters"
+                        type="button"
+                    >
+
+                        <i data-lucide="rotate-ccw"></i>
+
+                        Limpiar
+
+                    </button>
+
+                </div>
+
+
+                <div class="agreement-filters">
+
+
+                    <div class="agreement-filter-field">
+
+                        <label>
+                            Institución
+                        </label>
+
+                        <select id="agreementInstitutionFilter">
+
+                            <option value="">
+                                Todas
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="agreement-filter-field">
+
+                        <label>
+                            Ubicación
+                        </label>
+
+                        <select id="agreementLocationFilter">
+
+                            <option value="">
+                                Todo el Perú
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="agreement-filter-field">
+
+                        <label>
+                            Tipo de convenio
+                        </label>
+
+                        <select id="agreementTypeFilter">
+
+                            <option value="">
+                                Todos
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="agreement-filter-field">
+
+                        <label>
+                            Fuente
+                        </label>
+
+                        <select id="agreementSourceFilter">
+
+                            <option value="">
+                                Todas
+                            </option>
+
+                            <option value="api">
+                                API PRONABEC
+                            </option>
+
+                            <option value="respaldo">
+                                Respaldo temporal
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- TOOLBAR -->
+
+            <section class="agreement-toolbar">
+
+                <div>
+
+                    <strong>
+                        Catálogo de convenios
+                    </strong>
+
+                    <span id="agreementResultText">
+                        Consultando información...
+                    </span>
+
+                </div>
+
+
+                <select id="agreementSort">
+
+                    <option value="institucion">
+                        Institución A-Z
+                    </option>
+
+                    <option value="ubicacion">
+                        Ubicación
+                    </option>
+
+                    <option value="tipo">
+                        Tipo
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <!-- RESULTADOS -->
+
+            <section
+                class="agreement-grid"
+                id="agreementContainer"
+            >
+
+                <div class="loading-state">
+
+                    <div class="spinner"></div>
+
+                    <span>
+                        Consultando ConvenioService...
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section
+                class="pagination-container"
+                id="agreementPagination"
+            >
+            </section>
+
+
+            <!-- AVISO -->
+
+            <section class="agreement-notice">
+
+                <i data-lucide="shield-check"></i>
+
+                <div>
+
+                    <strong>
+                        Trazabilidad del dato
+                    </strong>
+
+                    <p>
+                        EduPerú conserva el estado de la fuente.
+                        Si ConvenioService trabaja en modo respaldo,
+                        los registros serán identificados como datos
+                        temporales de demostración y no como un
+                        catálogo oficial nacional vigente.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú SOA
+                </strong>
+
+                <span>
+                    Convenios Educativos
+                </span>
+
+            </div>
+
+            <div>
+                Perú
+            </div>
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/convenios.js"></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

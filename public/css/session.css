@@ -1,0 +1,386 @@
+/* =========================================================
+   EDUPERÚ
+   SESIÓN GLOBAL
+========================================================= */
+
+.session-area {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.session-login-button {
+    min-height: 36px;
+
+    padding: 0 13px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    border: 1px solid #dce3ec;
+
+    border-radius: 9px;
+
+    color: #3f4c60;
+
+    background: #ffffff;
+
+    font-size: 9px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.session-login-button:hover {
+    color: #0d5bd7;
+
+    border-color: #b9cce8;
+
+    background: #f8fbff;
+}
+
+.session-login-button svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+/* =========================================================
+   USUARIO
+========================================================= */
+
+.session-user {
+    position: relative;
+}
+
+.session-user-button {
+    min-height: 38px;
+
+    padding: 5px 9px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    border: 1px solid #e1e6ed;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.session-user-button:hover {
+    border-color: #c5d5e8;
+
+    background: #f9fbfd;
+}
+
+.session-avatar {
+    width: 29px;
+    height: 29px;
+
+    display: grid;
+    place-items: center;
+
+    flex-shrink: 0;
+
+    border-radius: 8px;
+
+    color: #ffffff;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d5bd7,
+            #367cd9
+        );
+
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.session-user-info {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+}
+
+.session-user-info strong {
+    max-width: 145px;
+
+    overflow: hidden;
+
+    color: #3a4659;
+
+    font-size: 8.5px;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.session-user-info span {
+    margin-top: 1px;
+
+    color: #8792a3;
+
+    font-size: 7px;
+}
+
+.session-chevron {
+    width: 13px;
+    height: 13px;
+
+    color: #8793a4;
+}
+
+
+/* =========================================================
+   DROPDOWN
+========================================================= */
+
+.session-dropdown {
+    position: absolute;
+
+    top: calc(100% + 8px);
+    right: 0;
+
+    z-index: 1000;
+
+    width: 230px;
+
+    padding: 7px;
+
+    display: none;
+
+    border: 1px solid #e1e6ed;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 16px 35px
+        rgba(27, 43, 67, 0.14);
+}
+
+.session-dropdown.open {
+    display: block;
+}
+
+.session-dropdown-header {
+    padding: 10px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.session-dropdown-header strong {
+    display: block;
+
+    color: #344054;
+
+    font-size: 9px;
+}
+
+.session-dropdown-header span {
+    display: block;
+
+    margin-top: 3px;
+
+    overflow: hidden;
+
+    color: #8490a2;
+
+    font-size: 7.5px;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+.session-role {
+    display: inline-flex !important;
+
+    width: max-content;
+
+    margin-top: 6px !important;
+    padding: 3px 6px;
+
+    border-radius: 999px;
+
+    color: #315b9e !important;
+
+    background: #eaf2ff;
+
+    font-size: 6.5px !important;
+
+    font-weight: 800;
+}
+
+.session-dropdown-link {
+    width: 100%;
+
+    margin-top: 4px;
+    padding: 9px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    color: #596679;
+
+    background: transparent;
+
+    font-size: 8.5px;
+
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.session-dropdown-link:hover {
+    color: #0d5bd7;
+
+    background: #f3f7fc;
+}
+
+.session-dropdown-link.danger {
+    color: #a43c4f;
+}
+
+.session-dropdown-link.danger:hover {
+    background: #fff1f3;
+}
+
+.session-dropdown-link svg {
+    width: 14px;
+    height: 14px;
+}
+
+
+/* =========================================================
+   ADMIN GUARD
+========================================================= */
+
+.admin-access-loading {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: grid;
+    place-items: center;
+
+    background: #f6f8fb;
+}
+
+.admin-access-card {
+    width: min(360px, 90%);
+
+    padding: 30px;
+
+    text-align: center;
+
+    border: 1px solid #e1e6ed;
+
+    border-radius: 14px;
+
+    background: #ffffff;
+
+    box-shadow:
+        0 15px 40px
+        rgba(25, 42, 67, 0.08);
+}
+
+.admin-access-spinner {
+    width: 31px;
+    height: 31px;
+
+    margin:
+        0 auto
+        14px;
+
+    border:
+        3px solid #dce7f6;
+
+    border-top-color: #0d5bd7;
+
+    border-radius: 50%;
+
+    animation:
+        adminSpin 0.8s
+        linear infinite;
+}
+
+.admin-access-card strong {
+    display: block;
+
+    color: #344054;
+
+    font-size: 12px;
+}
+
+.admin-access-card span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #8490a2;
+
+    font-size: 9px;
+}
+
+@keyframes adminSpin {
+
+    to {
+        transform:
+            rotate(360deg);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .session-user-info {
+        display: none;
+    }
+
+    .session-chevron {
+        display: none;
+    }
+
+    .session-user-button {
+        padding: 4px;
+    }
+
+    .session-dropdown {
+        right: -3px;
+
+        width: 210px;
+    }
+
+}

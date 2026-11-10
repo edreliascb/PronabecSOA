@@ -1,0 +1,1040 @@
+/* =========================================================
+   EDUPERÚ
+   INSTITUCIONES
+========================================================= */
+
+
+.breadcrumb {
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #8b96a7;
+
+    font-size: 10.5px;
+}
+
+
+.breadcrumb svg {
+    width: 12px;
+    height: 12px;
+}
+
+
+.breadcrumb a:hover {
+    color: #0d5bd7;
+}
+
+
+/* =========================================================
+   CABECERA
+========================================================= */
+
+.institution-heading {
+    margin-bottom: 22px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.institution-heading h2 {
+    margin-bottom: 6px;
+
+    color: #172033;
+
+    font-size: 28px;
+
+    letter-spacing: -0.6px;
+}
+
+
+.institution-heading p {
+    max-width: 700px;
+
+    color: #687487;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.institution-hero {
+    min-height: 235px;
+
+    margin-bottom: 22px;
+
+    padding: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        280px;
+
+    gap: 25px;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    position: relative;
+
+    border-radius: 17px;
+
+    background:
+        linear-gradient(
+            125deg,
+            #15294a,
+            #0c559e,
+            #1372cb
+        );
+
+    color: white;
+
+    box-shadow:
+        0 13px 38px
+        rgba(15, 70, 125, 0.18);
+}
+
+
+.institution-hero::after {
+    content: "";
+
+    position: absolute;
+
+    right: -90px;
+    top: -120px;
+
+    width: 310px;
+    height: 310px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+
+.institution-hero > div {
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.institution-hero-label {
+    display: inline-flex;
+
+    margin-bottom: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    font-size: 9.5px;
+
+    font-weight: 700;
+}
+
+
+.institution-hero h3 {
+    max-width: 650px;
+
+    margin-bottom: 7px;
+
+    font-size: 26px;
+
+    line-height: 1.25;
+}
+
+
+.institution-hero p {
+    max-width: 680px;
+
+    margin-bottom: 20px;
+
+    color:
+        rgba(255, 255, 255, 0.78);
+
+    font-size: 11.5px;
+}
+
+
+.institution-main-search {
+    width: min(700px, 100%);
+
+    min-height: 48px;
+
+    padding: 5px 5px 5px 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    background: white;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0, 0, 0, 0.14);
+}
+
+
+.institution-main-search svg {
+    width: 17px;
+    height: 17px;
+
+    color: #8c97a8;
+}
+
+
+.institution-main-search input {
+    flex: 1;
+
+    min-width: 0;
+
+    border: none;
+
+    outline: none;
+
+    color: #344054;
+
+    font-size: 11px;
+}
+
+
+.institution-main-search button {
+    height: 38px;
+
+    padding: 0 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0d5bd7;
+
+    color: white;
+
+    font-size: 10px;
+
+    font-weight: 700;
+}
+
+
+.institution-main-search button:hover {
+    background: #084caf;
+}
+
+
+.institution-hero-graphic {
+    min-height: 160px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 14px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+
+.institution-hero-icon {
+    width: 60px;
+    height: 60px;
+
+    margin-bottom: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+}
+
+
+.institution-hero-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+
+.institution-hero-graphic strong {
+    font-size: 13px;
+}
+
+
+.institution-hero-graphic span {
+    margin-top: 3px;
+
+    color:
+        rgba(255, 255, 255, 0.7);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.institution-kpis {
+    margin-bottom: 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 13px;
+}
+
+
+.institution-kpi {
+    min-height: 87px;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: white;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 4px 16px
+        rgba(27, 42, 70, 0.04);
+}
+
+
+.institution-kpi-icon {
+    width: 41px;
+    height: 41px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #eaf2ff;
+
+    color: #0d5bd7;
+}
+
+
+.institution-kpi-icon.green {
+    background: #e8f8f1;
+    color: #16895d;
+}
+
+
+.institution-kpi-icon.purple {
+    background: #f0eafe;
+    color: #7148cf;
+}
+
+
+.institution-kpi-icon.orange {
+    background: #fff0e2;
+    color: #d9782c;
+}
+
+
+.institution-kpi-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+
+.institution-kpi > div:last-child {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.institution-kpi span {
+    color: #7e8999;
+
+    font-size: 9.5px;
+}
+
+
+.institution-kpi strong {
+    margin-top: 3px;
+
+    color: #273246;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.institution-filter-panel {
+    margin-bottom: 18px;
+
+    padding: 19px;
+
+    background: white;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(27, 42, 70, 0.04);
+}
+
+
+.institution-filter-header {
+    margin-bottom: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.institution-filter-header h3 {
+    margin-bottom: 2px;
+
+    color: #344054;
+
+    font-size: 12px;
+}
+
+
+.institution-filter-header p {
+    color: #8b96a7;
+
+    font-size: 9px;
+}
+
+
+.institution-filters {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 12px;
+}
+
+
+.institution-filter-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.institution-filter-field label {
+    color: #657186;
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.institution-filter-field select {
+    min-height: 39px;
+
+    padding: 0 10px;
+
+    border: 1px solid #dde4ed;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    color: #556276;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.institution-toolbar {
+    margin-bottom: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.institution-toolbar > div {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.institution-toolbar strong {
+    color: #344054;
+
+    font-size: 12px;
+}
+
+
+.institution-toolbar span {
+    margin-top: 2px;
+
+    color: #8b96a7;
+
+    font-size: 9px;
+}
+
+
+.institution-toolbar select {
+    min-height: 34px;
+
+    padding: 0 10px;
+
+    border: 1px solid #dce3ec;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #647084;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.institution-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.institution-card {
+    min-width: 0;
+
+    background: white;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 5px 18px
+        rgba(26, 42, 70, 0.045);
+
+    transition:
+        0.2s ease;
+}
+
+
+.institution-card:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        #c7d7ed;
+
+    box-shadow:
+        0 14px 32px
+        rgba(26, 42, 70, 0.10);
+}
+
+
+.institution-card-top {
+    padding: 18px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 12px;
+}
+
+
+.institution-logo {
+    width: 51px;
+    height: 51px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e9f2ff,
+            #dfeeff
+        );
+
+    color: #0d5bd7;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    border: 1px solid #d7e6fa;
+}
+
+
+.institution-state {
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #e7f8ef;
+
+    color: #14764e;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+}
+
+
+.institution-card-body {
+    padding:
+        0 18px 18px;
+}
+
+
+.institution-source-badge {
+    display: inline-flex;
+
+    margin-bottom: 9px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: #eaf2ff;
+
+    color: #0d5bd7;
+
+    font-size: 8px;
+
+    font-weight: 750;
+}
+
+
+.institution-source-badge.fallback {
+    background: #fff2d8;
+
+    color: #8b6111;
+}
+
+
+.institution-card h3 {
+    min-height: 40px;
+
+    margin-bottom: 6px;
+
+    color: #273246;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+.institution-type {
+    margin-bottom: 14px;
+
+    color: #788497;
+
+    font-size: 10px;
+}
+
+
+.institution-info {
+    padding: 12px 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+
+    border-top:
+        1px solid #edf0f4;
+
+    border-bottom:
+        1px solid #edf0f4;
+}
+
+
+.institution-info-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    color: #6f7b8e;
+
+    font-size: 9.5px;
+}
+
+
+.institution-info-row svg {
+    width: 14px;
+    height: 14px;
+
+    color: #98a4b5;
+}
+
+
+.institution-card-actions {
+    padding-top: 14px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    gap: 8px;
+}
+
+
+.institution-detail-button {
+    min-height: 36px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #0d5bd7;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    font-size: 9.5px;
+
+    font-weight: 700;
+}
+
+
+.institution-detail-button:hover {
+    background: #084caf;
+}
+
+
+.institution-detail-button svg {
+    width: 13px;
+    height: 13px;
+}
+
+
+.institution-convenio-button {
+    min-height: 36px;
+
+    padding: 0 11px;
+
+    border: 1px solid #dce3ec;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #607085;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   FUENTE
+========================================================= */
+
+.institution-source {
+    margin-top: 24px;
+
+    padding: 15px;
+
+    display: flex;
+
+    gap: 11px;
+
+    align-items: flex-start;
+
+    border-radius: 11px;
+
+    border: 1px solid #dce5f2;
+
+    background: #f7faff;
+}
+
+
+.institution-source > svg {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    color: #0d5bd7;
+}
+
+
+.institution-source strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #344054;
+
+    font-size: 10px;
+}
+
+
+.institution-source p {
+    color: #69778b;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   DETALLE
+========================================================= */
+
+.institution-detail-header {
+    margin-bottom: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.institution-detail-logo {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #eaf2ff;
+
+    color: #0d5bd7;
+
+    font-size: 14px;
+
+    font-weight: 800;
+}
+
+
+.institution-detail-header strong {
+    display: block;
+
+    color: #344054;
+
+    font-size: 13px;
+}
+
+
+.institution-detail-header span {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #8b96a7;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .institution-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .institution-hero {
+        grid-template-columns: 1fr;
+    }
+
+
+    .institution-hero-graphic {
+        display: none;
+    }
+
+
+    .institution-kpis {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+
+    .institution-filters {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .institution-heading {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .institution-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .institution-toolbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .institution-kpis,
+    .institution-filters {
+        grid-template-columns: 1fr;
+    }
+
+
+    .institution-main-search {
+        align-items: stretch;
+
+        flex-direction: column;
+
+        padding: 10px;
+    }
+
+
+    .institution-main-search button {
+        width: 100%;
+    }
+
+}

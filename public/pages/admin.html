@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Administración | EduPerú</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>EduPerú</h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Administración
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a href="/" class="nav-item">
+
+                <i data-lucide="layout-dashboard"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="search"></i>
+
+                <span>
+                    Oportunidades
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/explorar-peru.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="map"></i>
+
+                <span>
+                    Explorar Perú
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="graduation-cap"></i>
+
+                <span>
+                    Carreras
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="building-2"></i>
+
+                <span>
+                    Instituciones
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="handshake"></i>
+
+                <span>
+                    Convenios
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="files"></i>
+
+                <span>
+                    Requisitos
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="heart"></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="bell"></i>
+
+                <span>
+                    Alertas
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/arquitectura.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="network"></i>
+
+                <span>
+                    Arquitectura SOA
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="chart-no-axes-combined"></i>
+
+                <span>
+                    Estadísticas
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="activity"></i>
+
+                <span>
+                    Estado del sistema
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                SISTEMA
+            </span>
+
+
+            <a
+                href="/pages/admin.html"
+                class="nav-item active"
+            >
+
+                <i data-lucide="shield"></i>
+
+                <span>
+                    Administración
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Panel Admin
+                    </strong>
+
+                    <small>
+                        EduPerú SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar servicio..."
+                    >
+
+                    <kbd>Ctrl K</kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar panel"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Administración
+                </span>
+
+            </div>
+
+
+            <section class="admin-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Gestión del sistema
+                    </span>
+
+                    <h2>
+                        Administración EduPerú
+                    </h2>
+
+                    <p>
+                        Supervisión de servicios, datos, contratos
+                        y componentes principales de la plataforma.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="btn btn-primary"
+                    id="adminRefreshButton"
+                    type="button"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                    Actualizar panel
+                </button>
+
+            </section>
+
+
+            <section class="admin-hero">
+
+                <div>
+
+                    <span class="admin-tag">
+                        Centro de control
+                    </span>
+
+                    <h3>
+                        EduPerú SOA Administration Center
+                    </h3>
+
+                    <p>
+                        Información consolidada de arquitectura,
+                        analítica, territorio y estado de las fuentes.
+                    </p>
+
+                </div>
+
+
+                <div class="admin-hero-status">
+
+                    <i data-lucide="shield-check"></i>
+
+                    <strong id="adminSystemStatus">
+                        Cargando...
+                    </strong>
+
+                    <span id="adminSystemStatusText">
+                        Analizando plataforma
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="admin-kpis">
+
+                <article class="admin-kpi">
+
+                    <div class="admin-kpi-icon blue">
+                        <i data-lucide="network"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Servicios SOA
+                        </span>
+
+                        <strong id="adminServices">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="admin-kpi">
+
+                    <div class="admin-kpi-icon green">
+                        <i data-lucide="database"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Registros analizados
+                        </span>
+
+                        <strong id="adminRecords">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="admin-kpi">
+
+                    <div class="admin-kpi-icon purple">
+                        <i data-lucide="map"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Departamentos
+                        </span>
+
+                        <strong id="adminRegions">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="admin-kpi">
+
+                    <div class="admin-kpi-icon orange">
+                        <i data-lucide="database-backup"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Fuentes oficiales activas
+                        </span>
+
+                        <strong id="adminBackups">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="admin-kpi">
+
+                    <div class="admin-kpi-icon red">
+                        <i data-lucide="heart"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Favoritos locales
+                        </span>
+
+                        <strong id="adminFavorites">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="admin-kpi">
+
+                    <div class="admin-kpi-icon yellow">
+                        <i data-lucide="bell"></i>
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Alertas locales
+                        </span>
+
+                        <strong id="adminAlerts">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="admin-grid">
+
+                <article class="admin-panel">
+
+                    <div class="admin-panel-header">
+
+                        <div>
+
+                            <h3>
+                                Estado de las fuentes
+                            </h3>
+
+                            <p>
+                                Modo actual de los servicios educativos.
+                            </p>
+
+                        </div>
+
+                        <i data-lucide="server"></i>
+
+                    </div>
+
+
+                    <div
+                        id="adminSources"
+                        class="admin-source-list"
+                    >
+
+                        <div class="loading-state">
+
+                            <div class="spinner"></div>
+
+                            <span>
+                                Analizando fuentes...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="admin-panel">
+
+                    <div class="admin-panel-header">
+
+                        <div>
+
+                            <h3>
+                                Información territorial
+                            </h3>
+
+                            <p>
+                                Estado de RegionService y UbigeoService.
+                            </p>
+
+                        </div>
+
+                        <i data-lucide="map-pinned"></i>
+
+                    </div>
+
+
+                    <div class="territorial-admin">
+
+                        <div class="territorial-admin-item">
+
+                            <span>
+                                Departamentos
+                            </span>
+
+                            <strong id="adminTerritoryDepartments">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="territorial-admin-item">
+
+                            <span>
+                                Provincias cargadas
+                            </span>
+
+                            <strong id="adminTerritoryProvinces">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="territorial-admin-item">
+
+                            <span>
+                                Distritos cargados
+                            </span>
+
+                            <strong id="adminTerritoryDistricts">
+                                --
+                            </strong>
+
+                        </div>
+
+
+                        <div class="territorial-admin-item">
+
+                            <span>
+                                Cobertura
+                            </span>
+
+                            <strong id="adminTerritoryCoverage">
+                                --
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="admin-panel admin-services-panel">
+
+                <div class="admin-panel-header">
+
+                    <div>
+
+                        <h3>
+                            Inventario de servicios SOA
+                        </h3>
+
+                        <p id="adminServicesResult">
+                            Cargando contratos...
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="/api/contratos"
+                        target="_blank"
+                        class="admin-text-link"
+                    >
+                        Ver JSON
+                    </a>
+
+                </div>
+
+
+                <div
+                    id="adminServiceGrid"
+                    class="admin-service-grid"
+                >
+                </div>
+
+            </section>
+
+
+            <section class="admin-panel">
+
+                <div class="admin-panel-header">
+
+                    <div>
+
+                        <h3>
+                            Acciones administrativas
+                        </h3>
+
+                        <p>
+                            Accesos directos a módulos técnicos.
+                        </p>
+
+                    </div>
+
+                    <i data-lucide="settings"></i>
+
+                </div>
+
+
+                <div class="admin-actions">
+
+
+                    <a
+                        href="/pages/estado.html"
+                        class="admin-action-card"
+                    >
+
+                        <i data-lucide="activity"></i>
+
+                        <div>
+
+                            <strong>
+                                Comprobar sistema
+                            </strong>
+
+                            <span>
+                                Revisar servicios y endpoints
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="/pages/arquitectura.html"
+                        class="admin-action-card"
+                    >
+
+                        <i data-lucide="network"></i>
+
+                        <div>
+
+                            <strong>
+                                Arquitectura SOA
+                            </strong>
+
+                            <span>
+                                Contratos y composición
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="/pages/estadisticas.html"
+                        class="admin-action-card"
+                    >
+
+                        <i data-lucide="chart-no-axes-combined"></i>
+
+                        <div>
+
+                            <strong>
+                                Analítica
+                            </strong>
+
+                            <span>
+                                Indicadores del sistema
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="/pages/explorar-peru.html"
+                        class="admin-action-card"
+                    >
+
+                        <i data-lucide="map"></i>
+
+                        <div>
+
+                            <strong>
+                                Territorio
+                            </strong>
+
+                            <span>
+                                Revisar cobertura territorial
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="/api"
+                        target="_blank"
+                        class="admin-action-card"
+                    >
+
+                        <i data-lucide="braces"></i>
+
+                        <div>
+
+                            <strong>
+                                API principal
+                            </strong>
+
+                            <span>
+                                Ver catálogo de endpoints
+                            </span>
+
+                        </div>
+
+                    </a>
+
+
+                    <a
+                        href="/api/contratos"
+                        target="_blank"
+                        class="admin-action-card"
+                    >
+
+                        <i data-lucide="file-json"></i>
+
+                        <div>
+
+                            <strong>
+                                Contratos JSON
+                            </strong>
+
+                            <span>
+                                Ver definición de servicios
+                            </span>
+
+                        </div>
+
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <section class="admin-warning">
+
+                <i data-lucide="shield-alert"></i>
+
+                <div>
+
+                    <strong>
+                        Seguridad administrativa habilitada
+                    </strong>
+
+                    <p>
+                        Las operaciones administrativas del backend están
+                        protegidas mediante JWT y autorización por rol
+                        ADMINISTRADOR.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú SOA
+                </strong>
+
+                <span>
+                    Administration Center
+                </span>
+
+            </div>
+
+            <div id="adminLastUpdate">
+                Última actualización: --
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/admin.js"></script>
+
+</body>
+
+</html>

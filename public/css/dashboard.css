@@ -1,0 +1,1362 @@
+/* =========================================================
+   EDUPERÚ SOA
+   DASHBOARD
+========================================================= */
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.kpi-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            6,
+            minmax(0, 1fr)
+        );
+
+    gap: 14px;
+}
+
+
+.kpi-card {
+    min-height: 126px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eaf1;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(27, 42, 70, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.kpi-card:hover {
+    transform: translateY(-3px);
+
+    border-color: #cddbef;
+
+    box-shadow:
+        0 12px 28px
+        rgba(27, 42, 70, 0.10);
+}
+
+
+.kpi-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    right: -35px;
+    top: -35px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(13, 91, 215, 0.04);
+}
+
+
+.kpi-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 13px;
+}
+
+
+.kpi-icon svg {
+    width: 22px;
+    height: 22px;
+
+    stroke-width: 2;
+}
+
+
+.kpi-icon.blue {
+    background: #eaf2ff;
+    color: #0d5bd7;
+}
+
+
+.kpi-icon.purple {
+    background: #f0eafe;
+    color: #7044d4;
+}
+
+
+.kpi-icon.green {
+    background: #e8f8f1;
+    color: #159865;
+}
+
+
+.kpi-icon.orange {
+    background: #fff2e6;
+    color: #df7524;
+}
+
+
+.kpi-icon.cyan {
+    background: #e6f7fb;
+    color: #10859d;
+}
+
+
+.kpi-icon.pink {
+    background: #fdebf4;
+    color: #c95086;
+}
+
+
+.kpi-content {
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.kpi-content > span {
+    color: #6d788a;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+.kpi-content strong {
+    color: #172033;
+
+    font-size: 27px;
+
+    line-height: 1;
+
+    margin: 7px 0 6px;
+
+    letter-spacing: -0.8px;
+}
+
+
+.kpi-content small {
+    color: #99a3b2;
+
+    font-size: 9.5px;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   LISTA DE OPORTUNIDADES
+========================================================= */
+
+.opportunity-list {
+    padding: 8px 20px 20px;
+}
+
+
+.opportunity-card {
+    padding: 18px 4px;
+
+    display: grid;
+
+    grid-template-columns:
+        48px
+        minmax(0, 1fr)
+        auto;
+
+    gap: 14px;
+
+    align-items: center;
+
+    border-bottom:
+        1px solid #edf0f4;
+}
+
+
+.opportunity-card:last-child {
+    border-bottom: none;
+}
+
+
+.opportunity-card:hover
+.opportunity-title {
+    color: #0d5bd7;
+}
+
+
+.opportunity-logo {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 12px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            145deg,
+            #edf4ff,
+            #e4efff
+        );
+
+    color: #0d5bd7;
+
+    font-weight: 800;
+
+    font-size: 14px;
+
+    border:
+        1px solid #dce8f8;
+}
+
+
+.opportunity-body {
+    min-width: 0;
+}
+
+
+.opportunity-topline {
+    margin-bottom: 5px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.opportunity-title {
+    color: #273246;
+
+    font-size: 12.5px;
+
+    font-weight: 700;
+
+    transition: 0.18s;
+}
+
+
+.opportunity-badge {
+    padding: 3px 7px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 20px;
+
+    background: #e8f7ef;
+
+    color: #14764e;
+
+    font-size: 8.5px;
+
+    font-weight: 800;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
+}
+
+
+.opportunity-badge.fallback {
+    background: #fff3d8;
+
+    color: #8e6416;
+}
+
+
+.opportunity-description {
+    color: #768194;
+
+    font-size: 10.5px;
+
+    margin-bottom: 8px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+.opportunity-meta {
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 9px 14px;
+}
+
+
+.opportunity-meta-item {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 4px;
+
+    color: #7f8a9b;
+
+    font-size: 9.5px;
+}
+
+
+.opportunity-meta-item svg {
+    width: 13px;
+    height: 13px;
+
+    color: #9aa6b6;
+}
+
+
+.opportunity-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.small-action {
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid #dfe5ed;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #687487;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    transition: 0.18s;
+}
+
+
+.small-action:hover {
+    color: #0d5bd7;
+
+    background: #f3f7fd;
+
+    border-color: #c6d8f2;
+}
+
+
+.small-action svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+.small-action.favorite-active {
+    color: #d94f7e;
+
+    background: #fdeef4;
+
+    border-color: #f4cada;
+}
+
+
+.view-button {
+    min-height: 34px;
+
+    padding: 0 11px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #edf4fe;
+
+    color: #0d5bd7;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    font-size: 9.5px;
+
+    font-weight: 700;
+
+    transition: 0.18s;
+}
+
+
+.view-button:hover {
+    background: #0d5bd7;
+
+    color: white;
+}
+
+
+.view-button svg {
+    width: 13px;
+    height: 13px;
+}
+
+
+/* =========================================================
+   VACÍO / ERROR
+========================================================= */
+
+.empty-state {
+    min-height: 230px;
+
+    padding: 25px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.empty-state-icon {
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 12px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: #7f8a9b;
+
+    background: #f3f5f8;
+}
+
+
+.empty-state-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+
+.empty-state h4 {
+    color: #344054;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+
+.empty-state p {
+    max-width: 330px;
+
+    color: #8b95a4;
+
+    font-size: 10.5px;
+
+    line-height: 1.6;
+}
+
+
+.error-state
+.empty-state-icon {
+    color: #c43f3f;
+
+    background: #fdecec;
+}
+
+
+/* =========================================================
+   MINI FILTROS
+========================================================= */
+
+.dashboard-filter-bar {
+    margin-bottom: 20px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 12px;
+}
+
+
+.filter-group {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+
+.filter-chip {
+    min-height: 31px;
+
+    padding: 0 11px;
+
+    border: 1px solid #dde4ed;
+
+    border-radius: 20px;
+
+    background: white;
+
+    color: #647083;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    transition: 0.17s;
+}
+
+
+.filter-chip:hover {
+    border-color: #aac6ee;
+
+    color: #0d5bd7;
+
+    background: #f7faff;
+}
+
+
+.filter-chip.active {
+    background: #eaf2ff;
+
+    color: #0d5bd7;
+
+    border-color: #bed4f4;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TARJETAS ESTADÍSTICAS ADICIONALES
+========================================================= */
+
+.analytics-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 16px;
+}
+
+
+.analytics-card {
+    padding: 20px;
+
+    background: white;
+
+    border: 1px solid #e5eaf1;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(27, 42, 70, 0.045);
+}
+
+
+.analytics-header {
+    margin-bottom: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+}
+
+
+.analytics-header h4 {
+    color: #344054;
+
+    font-size: 12px;
+}
+
+
+.analytics-header span {
+    color: #8d98a8;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   BARRAS SIMPLES
+========================================================= */
+
+.stat-bars {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+.stat-row {
+    display: grid;
+
+    grid-template-columns:
+        minmax(80px, 120px)
+        minmax(0, 1fr)
+        auto;
+
+    gap: 9px;
+
+    align-items: center;
+}
+
+
+.stat-label {
+    color: #697588;
+
+    font-size: 9.5px;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+.stat-track {
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: #edf1f6;
+}
+
+
+.stat-fill {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #0d5bd7,
+            #4387ec
+        );
+
+    min-width: 3px;
+}
+
+
+.stat-value {
+    min-width: 24px;
+
+    text-align: right;
+
+    color: #4a5568;
+
+    font-size: 9.5px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ESTADOS / BADGES GENERALES
+========================================================= */
+
+.badge {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 4px;
+
+    min-height: 22px;
+
+    padding: 0 8px;
+
+    border-radius: 20px;
+
+    font-size: 8.5px;
+
+    font-weight: 750;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.25px;
+}
+
+
+.badge-success {
+    background: #e7f8ef;
+
+    color: #14764e;
+}
+
+
+.badge-warning {
+    background: #fff2d8;
+
+    color: #8b6111;
+}
+
+
+.badge-danger {
+    background: #fde9e9;
+
+    color: #b33838;
+}
+
+
+.badge-primary {
+    background: #e9f2ff;
+
+    color: #0d5bd7;
+}
+
+
+.badge-neutral {
+    background: #eef1f5;
+
+    color: #6d7888;
+}
+
+
+/* =========================================================
+   TOOLTIP SIMPLE
+========================================================= */
+
+[data-tooltip] {
+    position: relative;
+}
+
+
+[data-tooltip]::after {
+    content:
+        attr(data-tooltip);
+
+    position: absolute;
+
+    left: 50%;
+    bottom: calc(100% + 8px);
+
+    transform:
+        translateX(-50%);
+
+    padding: 6px 8px;
+
+    border-radius: 6px;
+
+    background: #172033;
+
+    color: white;
+
+    font-size: 8.5px;
+
+    white-space: nowrap;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: 0.15s;
+
+    z-index: 3000;
+}
+
+
+[data-tooltip]:hover::after {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================================================
+   TOASTS
+========================================================= */
+
+.toast-container {
+    position: fixed;
+
+    right: 24px;
+    bottom: 24px;
+
+    z-index: 5000;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+.toast {
+    min-width: 280px;
+
+    max-width: 360px;
+
+    padding: 14px 15px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    background: white;
+
+    border: 1px solid #e0e6ee;
+
+    box-shadow:
+        0 15px 40px
+        rgba(22, 35, 58, 0.16);
+
+    animation:
+        toastEntry 0.25s ease;
+}
+
+
+.toast-icon {
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: #eaf2ff;
+
+    color: #0d5bd7;
+}
+
+
+.toast-icon svg {
+    width: 15px;
+    height: 15px;
+}
+
+
+.toast-content {
+    min-width: 0;
+}
+
+
+.toast-content strong {
+    display: block;
+
+    color: #344054;
+
+    font-size: 10.5px;
+
+    margin-bottom: 3px;
+}
+
+
+.toast-content span {
+    color: #7c8798;
+
+    font-size: 9.5px;
+
+    line-height: 1.5;
+}
+
+
+.toast.success
+.toast-icon {
+    background: #e6f7ee;
+
+    color: #14875a;
+}
+
+
+.toast.warning
+.toast-icon {
+    background: #fff2d8;
+
+    color: #966713;
+}
+
+
+.toast.error
+.toast-icon {
+    background: #fdeaea;
+
+    color: #bd3e3e;
+}
+
+
+@keyframes toastEntry {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal-backdrop {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 4000;
+
+    padding: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(8, 18, 34, 0.56);
+
+    backdrop-filter:
+        blur(3px);
+}
+
+
+.modal {
+    width: min(620px, 100%);
+
+    max-height: 88vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 25px 80px
+        rgba(0, 0, 0, 0.25);
+
+    animation:
+        modalEntry 0.22s ease;
+}
+
+
+.modal-header {
+    padding: 20px 22px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom:
+        1px solid #edf0f4;
+}
+
+
+.modal-header h3 {
+    color: #263246;
+
+    font-size: 16px;
+
+    margin-bottom: 4px;
+}
+
+
+.modal-header p {
+    color: #7d8899;
+
+    font-size: 10.5px;
+}
+
+
+.modal-close {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #e0e5ed;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #697589;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.modal-close:hover {
+    background: #f4f6f9;
+}
+
+
+.modal-close svg {
+    width: 16px;
+    height: 16px;
+}
+
+
+.modal-body {
+    padding: 22px;
+}
+
+
+.modal-footer {
+    padding: 16px 22px;
+
+    border-top:
+        1px solid #edf0f4;
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 8px;
+}
+
+
+@keyframes modalEntry {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.97)
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   DETALLE DE OPORTUNIDAD
+========================================================= */
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+}
+
+
+.detail-item {
+    padding: 13px;
+
+    border-radius: 9px;
+
+    background: #f7f9fc;
+
+    border: 1px solid #e9edf3;
+}
+
+
+.detail-item span {
+    display: block;
+
+    color: #8994a5;
+
+    font-size: 9px;
+
+    margin-bottom: 4px;
+}
+
+
+.detail-item strong {
+    color: #344054;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+
+.detail-item.full {
+    grid-column:
+        1 / -1;
+}
+
+
+/* =========================================================
+   SKELETON
+========================================================= */
+
+.skeleton {
+    overflow: hidden;
+
+    position: relative;
+
+    background: #edf1f5;
+
+    border-radius: 6px;
+}
+
+
+.skeleton::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    transform:
+        translateX(-100%);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.6),
+            transparent
+        );
+
+    animation:
+        skeletonMove 1.3s infinite;
+}
+
+
+@keyframes skeletonMove {
+
+    100% {
+        transform:
+            translateX(100%);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE INTERMEDIO
+========================================================= */
+
+@media (max-width: 1400px) {
+
+    .kpi-grid {
+        grid-template-columns:
+            repeat(
+                3,
+                minmax(0, 1fr)
+            );
+    }
+
+}
+
+
+@media (max-width: 1100px) {
+
+    .dashboard-columns {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .quick-actions-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    .analytics-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .kpi-grid {
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0, 1fr)
+            );
+    }
+
+
+    .opportunity-card {
+        grid-template-columns:
+            42px
+            minmax(0, 1fr);
+    }
+
+
+    .opportunity-actions {
+        grid-column:
+            1 / -1;
+
+        padding-left:
+            56px;
+    }
+
+
+    .detail-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .detail-item.full {
+        grid-column:
+            auto;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .kpi-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .quick-actions-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .dashboard-filter-bar {
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+    }
+
+}

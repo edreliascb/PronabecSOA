@@ -1,0 +1,24 @@
+{
+  "name": "pronabecsoa",
+  "version": "1.0.0",
+  "description": "Plataforma SOA basada en APIs de PRONABEC",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.0.0",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.0.0",
+    "dotenv": "^17.0.0",
+    "express": "^5.0.0",
+    "jsonwebtoken": "^9.0.3",
+    "mssql": "^12.7.2",
+    "swagger-ui-express": "^5.0.1"
+  }
+}

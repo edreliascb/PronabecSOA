@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Instituciones | EduPerú SOA
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/app.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/instituciones.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/responsive.css"
+    >
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+
+    <!-- ==================================================
+         SIDEBAR
+    =================================================== -->
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>
+                    EduPerú
+                </h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a
+                href="/"
+                class="nav-item"
+            >
+
+                <i data-lucide="layout-dashboard"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="search"></i>
+
+                <span>
+                    Oportunidades
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="graduation-cap"></i>
+
+                <span>
+                    Carreras
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item active"
+            >
+
+                <i data-lucide="building-2"></i>
+
+                <span>
+                    Instituciones
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="handshake"></i>
+
+                <span>
+                    Convenios
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="files"></i>
+
+                <span>
+                    Requisitos
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="heart"></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="bell"></i>
+
+                <span>
+                    Alertas
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="chart-no-axes-combined"></i>
+
+                <span>
+                    Estadísticas
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="activity"></i>
+
+                <span>
+                    Estado del sistema
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/admin.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="shield-check"></i>
+
+                <span>
+                    Administración
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTENIDO
+    =================================================== -->
+
+    <div class="main-wrapper">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar instituciones..."
+                    >
+
+                    <kbd>
+                        Ctrl K
+                    </kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+
+                <a
+                    href="/pages/convenios.html"
+                    class="icon-button"
+                    title="Convenios"
+                >
+                    <i data-lucide="handshake"></i>
+                </a>
+
+
+                <div class="user-menu">
+
+                    <div class="user-avatar">
+                        EC
+                    </div>
+
+                    <div class="user-info">
+
+                        <strong>
+                            Usuario
+                        </strong>
+
+                        <span>
+                            Estudiante
+                        </span>
+
+                    </div>
+
+                    <i
+                        data-lucide="chevron-down"
+                        class="user-chevron"
+                    ></i>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==================================================
+             MAIN
+        =================================================== -->
+
+        <main class="main-content">
+
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Instituciones
+                </span>
+
+            </div>
+
+
+            <!-- CABECERA -->
+
+            <section class="institution-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Catálogo institucional
+                    </span>
+
+                    <h2>
+                        Instituciones educativas
+                    </h2>
+
+                    <p>
+                        Explora instituciones identificadas
+                        mediante los servicios de integración
+                        de EduPerú.
+                    </p>
+
+                </div>
+
+
+                <div class="heading-actions">
+
+                    <a
+                        href="/pages/convenios.html"
+                        class="btn btn-secondary"
+                    >
+
+                        <i data-lucide="handshake"></i>
+
+                        Ver convenios
+
+                    </a>
+
+
+                    <button
+                        class="btn btn-primary"
+                        id="exploreButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="map"></i>
+
+                        Explorar Perú
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 HERO INSTITUCIONES
+            =================================================== -->
+
+            <section class="institution-hero">
+
+                <div>
+
+                    <span class="institution-hero-label">
+                        Red educativa nacional
+                    </span>
+
+                    <h3>
+                        Descubre instituciones y sus convenios
+                        educativos
+                    </h3>
+
+                    <p>
+                        El catálogo se construye utilizando
+                        información disponible en los servicios
+                        conectados a EduPerú.
+                    </p>
+
+
+                    <div class="institution-main-search">
+
+                        <i data-lucide="search"></i>
+
+                        <input
+                            type="search"
+                            id="institutionSearch"
+                            placeholder="Buscar universidad, instituto, región..."
+                        >
+
+                        <button
+                            id="institutionSearchButton"
+                            type="button"
+                        >
+                            Buscar
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="institution-hero-graphic">
+
+                    <div class="institution-hero-icon">
+
+                        <i data-lucide="landmark"></i>
+
+                    </div>
+
+                    <strong>
+                        EduPerú
+                    </strong>
+
+                    <span>
+                        Ecosistema educativo
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 INDICADORES
+            =================================================== -->
+
+            <section class="institution-kpis">
+
+
+                <article class="institution-kpi">
+
+                    <div class="institution-kpi-icon">
+
+                        <i data-lucide="building-2"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Instituciones
+                        </span>
+
+                        <strong id="totalInstituciones">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="institution-kpi">
+
+                    <div class="institution-kpi-icon green">
+
+                        <i data-lucide="map-pin"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Ubicaciones
+                        </span>
+
+                        <strong id="totalUbicaciones">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="institution-kpi">
+
+                    <div class="institution-kpi-icon purple">
+
+                        <i data-lucide="tags"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Tipos
+                        </span>
+
+                        <strong id="totalTipos">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="institution-kpi">
+
+                    <div class="institution-kpi-icon orange">
+
+                        <i data-lucide="handshake"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Convenios
+                        </span>
+
+                        <strong id="totalConveniosInstitucion">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- ==================================================
+                 FILTROS
+            =================================================== -->
+
+            <section class="institution-filter-panel">
+
+                <div class="institution-filter-header">
+
+                    <div>
+
+                        <h3>
+                            Filtrar instituciones
+                        </h3>
+
+                        <p>
+                            Refina el catálogo según los datos
+                            actualmente disponibles.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        id="clearInstitutionFilters"
+                        class="btn btn-secondary"
+                        type="button"
+                    >
+
+                        <i data-lucide="rotate-ccw"></i>
+
+                        Limpiar
+
+                    </button>
+
+                </div>
+
+
+                <div class="institution-filters">
+
+
+                    <div class="institution-filter-field">
+
+                        <label>
+                            Tipo de institución
+                        </label>
+
+                        <select id="institutionTypeFilter">
+
+                            <option value="">
+                                Todos los tipos
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="institution-filter-field">
+
+                        <label>
+                            Región / ubicación
+                        </label>
+
+                        <select id="institutionRegionFilter">
+
+                            <option value="">
+                                Todo el Perú
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="institution-filter-field">
+
+                        <label>
+                            Estado
+                        </label>
+
+                        <select id="institutionStatusFilter">
+
+                            <option value="">
+                                Todos
+                            </option>
+
+                            <option value="vigente">
+                                Vigente
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="institution-filter-field">
+
+                        <label>
+                            Fuente
+                        </label>
+
+                        <select id="institutionSourceFilter">
+
+                            <option value="">
+                                Todas
+                            </option>
+
+                            <option value="api">
+                                API
+                            </option>
+
+                            <option value="respaldo">
+                                Respaldo
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==================================================
+                 TOOLBAR
+            =================================================== -->
+
+            <section class="institution-toolbar">
+
+                <div>
+
+                    <strong>
+                        Catálogo institucional
+                    </strong>
+
+                    <span id="institutionResultText">
+                        Consultando instituciones...
+                    </span>
+
+                </div>
+
+
+                <select id="institutionSort">
+
+                    <option value="nombre">
+                        Nombre A-Z
+                    </option>
+
+                    <option value="ubicacion">
+                        Ubicación
+                    </option>
+
+                    <option value="tipo">
+                        Tipo
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <!-- ==================================================
+                 TARJETAS
+            =================================================== -->
+
+            <section
+                class="institution-grid"
+                id="institutionContainer"
+            >
+
+                <div class="loading-state">
+
+                    <div class="spinner"></div>
+
+                    <span>
+                        Consultando InstitucionService...
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section
+                class="pagination-container"
+                id="institutionPagination"
+            >
+            </section>
+
+
+            <!-- FUENTE -->
+
+            <section class="institution-source">
+
+                <i data-lucide="info"></i>
+
+                <div>
+
+                    <strong>
+                        Acerca de este catálogo
+                    </strong>
+
+                    <p>
+                        Actualmente InstitucionService construye el
+                        catálogo a partir de la información disponible
+                        en ConvenioService. Por ello, los registros
+                        mostrados no deben interpretarse como un padrón
+                        nacional completo de instituciones educativas.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú SOA
+                </strong>
+
+                <span>
+                    Catálogo Institucional
+                </span>
+
+            </div>
+
+            <div>
+                Perú
+            </div>
+
+        </footer>
+
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/instituciones.js"></script>
+
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+
+    }
+);
+
+</script>
+
+
+</body>
+</html>

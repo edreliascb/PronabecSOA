@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Carreras | EduPerú</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/app.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/carreras.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/responsive.css"
+    >
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>EduPerú</h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>Perú</strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a href="/" class="nav-item">
+
+                <i data-lucide="layout-dashboard"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="search"></i>
+
+                <span>Oportunidades</span>
+
+            </a>
+
+
+            <a
+                href="/pages/explorar-peru.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="map"></i>
+
+                <span>Explorar Perú</span>
+
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item active"
+            >
+
+                <i data-lucide="graduation-cap"></i>
+
+                <span>Carreras</span>
+
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="building-2"></i>
+
+                <span>Instituciones</span>
+
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="handshake"></i>
+
+                <span>Convenios</span>
+
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="files"></i>
+
+                <span>Requisitos</span>
+
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="heart"></i>
+
+                <span>Favoritos</span>
+
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="bell"></i>
+
+                <span>Alertas</span>
+
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/arquitectura.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="network"></i>
+
+                <span>Arquitectura SOA</span>
+
+            </a>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="chart-no-axes-combined"></i>
+
+                <span>Estadísticas</span>
+
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="activity"></i>
+
+                <span>Estado del sistema</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar carrera..."
+                    >
+
+                    <kbd>Ctrl K</kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar"
+                >
+
+                    <i data-lucide="refresh-cw"></i>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Carreras
+                </span>
+
+            </div>
+
+
+            <section class="career-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Catálogo académico
+                    </span>
+
+                    <h2>
+                        Carreras disponibles
+                    </h2>
+
+                    <p>
+                        Explora las carreras detectadas en las
+                        oportunidades educativas disponibles en EduPerú.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="career-hero">
+
+                <div>
+
+                    <span class="career-tag">
+                        Educación superior
+                    </span>
+
+                    <h3>
+                        Encuentra una carrera y sus oportunidades
+                    </h3>
+
+                    <p>
+                        EduPerú analiza los registros disponibles de
+                        convocatorias y postulaciones para construir
+                        este catálogo.
+                    </p>
+
+                </div>
+
+
+                <div class="career-hero-icon">
+
+                    <i data-lucide="graduation-cap"></i>
+
+                    <strong id="heroCareerCount">
+                        --
+                    </strong>
+
+                    <span>
+                        carreras detectadas
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="career-kpis">
+
+                <article class="career-kpi">
+
+                    <div class="career-kpi-icon">
+
+                        <i data-lucide="graduation-cap"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Carreras detectadas
+                        </span>
+
+                        <strong id="careerCount">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="career-kpi">
+
+                    <div class="career-kpi-icon green">
+
+                        <i data-lucide="book-open"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Oportunidades analizadas
+                        </span>
+
+                        <strong id="opportunityCount">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="career-kpi">
+
+                    <div class="career-kpi-icon purple">
+
+                        <i data-lucide="database"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Fuente principal
+                        </span>
+
+                        <strong class="career-source">
+                            Convocatorias
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="career-toolbar">
+
+                <div class="career-search">
+
+                    <i data-lucide="search"></i>
+
+                    <input
+                        type="search"
+                        id="careerSearch"
+                        placeholder="Ej. Ingeniería de Sistemas..."
+                    >
+
+                </div>
+
+
+                <select id="careerOrder">
+
+                    <option value="az">
+                        Nombre A - Z
+                    </option>
+
+                    <option value="za">
+                        Nombre Z - A
+                    </option>
+
+                    <option value="opportunities">
+                        Más oportunidades
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <section>
+
+                <div class="career-section-header">
+
+                    <div>
+
+                        <h3>
+                            Catálogo de carreras
+                        </h3>
+
+                        <p id="careerResultText">
+                            Cargando carreras...
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="careerGrid"
+                    class="career-grid"
+                >
+
+                    <div class="loading-state">
+
+                        <div class="spinner"></div>
+
+                        <span>
+                            Analizando información educativa...
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="career-notice">
+
+                <i data-lucide="info"></i>
+
+                <div>
+
+                    <strong>
+                        Acerca del catálogo
+                    </strong>
+
+                    <p>
+                        Las carreras mostradas se generan a partir de
+                        los registros recuperados por los servicios de
+                        EduPerú. No representan necesariamente el total
+                        nacional de carreras existentes.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú
+                </strong>
+
+                <span>
+                    Catálogo de Carreras
+                </span>
+
+            </div>
+
+            <div>
+                Plataforma Educativa SOA
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+
+<script src="/js/app.js"></script>
+
+<script src="/js/carreras.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Estadísticas | EduPerú</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/estadisticas.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+                <h1>EduPerú</h1>
+                <span>Plataforma Nacional</span>
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+                <strong>Perú</strong>
+                <small>Analítica educativa</small>
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+            <a href="/" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/pages/oportunidades.html" class="nav-item">
+                <i data-lucide="search"></i>
+                <span>Oportunidades</span>
+            </a>
+
+            <a href="/pages/explorar-peru.html" class="nav-item">
+                <i data-lucide="map"></i>
+                <span>Explorar Perú</span>
+            </a>
+
+            <a href="/pages/carreras.html" class="nav-item">
+                <i data-lucide="graduation-cap"></i>
+                <span>Carreras</span>
+            </a>
+
+            <a href="/pages/instituciones.html" class="nav-item">
+                <i data-lucide="building-2"></i>
+                <span>Instituciones</span>
+            </a>
+
+            <a href="/pages/convenios.html" class="nav-item">
+                <i data-lucide="handshake"></i>
+                <span>Convenios</span>
+            </a>
+
+            <a href="/pages/requisitos.html" class="nav-item">
+                <i data-lucide="files"></i>
+                <span>Requisitos</span>
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+            <a href="/pages/favoritos.html" class="nav-item">
+                <i data-lucide="heart"></i>
+                <span>Favoritos</span>
+            </a>
+
+            <a href="/pages/alertas.html" class="nav-item">
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+            <a href="/pages/arquitectura.html" class="nav-item">
+                <i data-lucide="network"></i>
+                <span>Arquitectura SOA</span>
+            </a>
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item active"
+            >
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Estadísticas</span>
+            </a>
+
+            <a href="/pages/estado.html" class="nav-item">
+                <i data-lucide="activity"></i>
+                <span>Estado del sistema</span>
+            </a>
+
+
+            <span class="nav-title">
+                SISTEMA
+            </span>
+
+            <a href="/pages/admin.html" class="nav-item">
+                <i data-lucide="shield"></i>
+                <span>Administración</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong>SOA 40/40</strong>
+                    <small>EduPerú v1.9.0</small>
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                    aria-label="Abrir menú"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+                <div>
+                    <span class="page-eyebrow">
+                        Analítica
+                    </span>
+                    <h2>
+                        Estadísticas educativas
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshStats"
+                    type="button"
+                    title="Actualizar estadísticas"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content stats-page">
+
+            <div class="breadcrumbs">
+                <a href="/">Inicio</a>
+                <i data-lucide="chevron-right"></i>
+                <span>Estadísticas</span>
+            </div>
+
+
+            <section class="stats-hero">
+
+                <div>
+
+                    <span class="stats-badge">
+                        Datos oficiales disponibles
+                    </span>
+
+                    <h1>
+                        Indicadores construidos desde los servicios
+                        empresariales de EduPerú
+                    </h1>
+
+                    <p>
+                        Esta vista consulta CarreraService, RegionService,
+                        EstadisticaService y HealthCheckService para mostrar
+                        indicadores actualizados sin generar datos ficticios.
+                    </p>
+
+                </div>
+
+
+                <div class="stats-hero-status">
+
+                    <i data-lucide="chart-spline"></i>
+
+                    <div>
+                        <span>Estado de consulta</span>
+                        <strong id="statsStatus">
+                            Cargando...
+                        </strong>
+                        <small id="statsStatusDetail">
+                            Consultando servicios
+                        </small>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="stats-kpis">
+
+                <article class="stats-kpi">
+
+                    <div class="stats-kpi-icon blue">
+                        <i data-lucide="graduation-cap"></i>
+                    </div>
+
+                    <div>
+                        <span>Carreras detectadas</span>
+                        <strong id="statsCareers">--</strong>
+                        <small id="statsCareersSource">
+                            CarreraService
+                        </small>
+                    </div>
+
+                </article>
+
+
+                <article class="stats-kpi">
+
+                    <div class="stats-kpi-icon green">
+                        <i data-lucide="map"></i>
+                    </div>
+
+                    <div>
+                        <span>Regiones detectadas</span>
+                        <strong id="statsRegions">--</strong>
+                        <small>
+                            RegionService
+                        </small>
+                    </div>
+
+                </article>
+
+
+                <article class="stats-kpi">
+
+                    <div class="stats-kpi-icon purple">
+                        <i data-lucide="network"></i>
+                    </div>
+
+                    <div>
+                        <span>Servicios analizados</span>
+                        <strong id="statsServices">--</strong>
+                        <small>
+                            Respuestas correctas
+                        </small>
+                    </div>
+
+                </article>
+
+
+                <article class="stats-kpi">
+
+                    <div class="stats-kpi-icon orange">
+                        <i data-lucide="badge-check"></i>
+                    </div>
+
+                    <div>
+                        <span>Fuentes oficiales activas</span>
+                        <strong id="statsOfficialSources">--</strong>
+                        <small>
+                            Fuentes disponibles
+                        </small>
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="stats-grid">
+
+                <article class="stats-panel">
+
+                    <div class="stats-panel-header">
+
+                        <div>
+                            <h3>Carreras detectadas</h3>
+                            <p id="statsCareersLabel">
+                                Consultando CarreraService...
+                            </p>
+                        </div>
+
+                        <i data-lucide="graduation-cap"></i>
+
+                    </div>
+
+
+                    <div
+                        id="statsCareersList"
+                        class="stats-list"
+                    >
+                        <div class="stats-loading">
+                            <div class="stats-spinner"></div>
+                            <span>Cargando carreras...</span>
+                        </div>
+                    </div>
+
+                </article>
+
+
+                <article class="stats-panel">
+
+                    <div class="stats-panel-header">
+
+                        <div>
+                            <h3>Regiones detectadas</h3>
+                            <p id="statsRegionsLabel">
+                                Consultando RegionService...
+                            </p>
+                        </div>
+
+                        <i data-lucide="map"></i>
+
+                    </div>
+
+
+                    <div
+                        id="statsRegionsList"
+                        class="stats-list stats-region-list"
+                    >
+                        <div class="stats-loading">
+                            <div class="stats-spinner"></div>
+                            <span>Cargando regiones...</span>
+                        </div>
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="stats-summary">
+
+                <div class="stats-summary-icon">
+                    <i data-lucide="activity"></i>
+                </div>
+
+                <div>
+                    <span>Resumen de la consulta</span>
+                    <h3 id="statsSummaryTitle">
+                        Analizando servicios...
+                    </h3>
+                    <p id="statsSummaryText">
+                        Esperando respuesta de los servicios.
+                    </p>
+                </div>
+
+            </section>
+
+
+            <section class="stats-interpretation">
+
+                <i data-lucide="triangle-alert"></i>
+
+                <div>
+
+                    <strong>
+                        Interpretación de los indicadores
+                    </strong>
+
+                    <p>
+                        Los valores corresponden a registros recuperados
+                        desde fuentes oficiales y catálogos propios de
+                        EduPerú durante la consulta actual. No deben
+                        interpretarse automáticamente como cifras oficiales
+                        nacionales. Si una fuente oficial no se encuentra
+                        disponible, EduPerú lo indicará sin generar
+                        información ficticia.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="stats-links">
+
+                <a href="/api/carreras" target="_blank">
+                    <i data-lucide="graduation-cap"></i>
+                    <div>
+                        <strong>CarreraService</strong>
+                        <span>Ver respuesta JSON</span>
+                    </div>
+                </a>
+
+                <a href="/api/regiones" target="_blank">
+                    <i data-lucide="map-pinned"></i>
+                    <div>
+                        <strong>RegionService</strong>
+                        <span>Ver catálogo territorial</span>
+                    </div>
+                </a>
+
+                <a href="/api/estadisticas" target="_blank">
+                    <i data-lucide="chart-no-axes-combined"></i>
+                    <div>
+                        <strong>EstadisticaService</strong>
+                        <span>Ver indicadores originales</span>
+                    </div>
+                </a>
+
+                <a href="/api/health" target="_blank">
+                    <i data-lucide="activity"></i>
+                    <div>
+                        <strong>HealthCheckService</strong>
+                        <span>Ver disponibilidad</span>
+                    </div>
+                </a>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+                <strong>EduPerú SOA</strong>
+                <span>Analítica educativa</span>
+            </div>
+
+            <div id="statsLastUpdate">
+                Última actualización: --
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/estadisticas.js"></script>
+
+</body>
+
+</html>

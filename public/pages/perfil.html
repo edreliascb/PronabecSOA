@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Mi Perfil | EduPerú</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/perfil.css"
+    >
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+<body>
+
+<div class="profile-page">
+
+    <!-- HEADER -->
+
+    <header class="profile-header">
+
+        <a
+            href="/"
+            class="brand"
+        >
+
+            <div class="brand-icon">
+                EP
+            </div>
+
+            <div>
+
+                <strong>
+                    EduPerú
+                </strong>
+
+                <span>
+                    Mi Perfil
+                </span>
+
+            </div>
+
+        </a>
+
+
+        <div class="header-actions">
+
+            <a
+                href="/"
+                class="back-button"
+            >
+
+                <i data-lucide="arrow-left"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <button
+                id="logoutButton"
+                class="logout-button"
+                type="button"
+            >
+
+                <i data-lucide="log-out"></i>
+
+                Cerrar sesión
+
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO -->
+
+    <main class="profile-container">
+
+
+        <!-- CABECERA PERFIL -->
+
+        <section class="profile-hero">
+
+            <div
+                id="profileAvatar"
+                class="profile-avatar"
+            >
+                EP
+            </div>
+
+
+            <div class="profile-identity">
+
+                <span class="profile-eyebrow">
+                    CUENTA EDUPERÚ
+                </span>
+
+                <h1 id="profileName">
+                    Cargando usuario...
+                </h1>
+
+                <p id="profileEmail">
+                    ...
+                </p>
+
+
+                <span
+                    id="profileRole"
+                    class="role-badge"
+                >
+                    USUARIO
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ALERTA -->
+
+        <div
+            id="profileAlert"
+            class="profile-alert"
+            hidden
+        >
+        </div>
+
+
+        <!-- FORMULARIO -->
+
+        <form
+            id="profileForm"
+            class="profile-form"
+        >
+
+
+            <!-- DATOS DE CUENTA -->
+
+            <section class="profile-card">
+
+                <div class="card-title">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="user-round"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Datos de la cuenta
+                        </h2>
+
+                        <p>
+                            Información asociada a tu inicio de sesión.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label>
+                            Nombres
+                        </label>
+
+                        <input
+                            id="nombres"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Apellidos
+                        </label>
+
+                        <input
+                            id="apellidos"
+                            type="text"
+                            disabled
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Correo electrónico
+                        </label>
+
+                        <input
+                            id="email"
+                            type="email"
+                            disabled
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- UBICACIÓN -->
+
+            <section class="profile-card">
+
+                <div class="card-title">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="map-pin"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Ubicación
+                        </h2>
+
+                        <p>
+                            Indica tu ubicación principal.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="departamento">
+                            Departamento
+                        </label>
+
+                        <input
+                            id="departamento"
+                            type="text"
+                            placeholder="Ej. San Martín"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="provincia">
+                            Provincia
+                        </label>
+
+                        <input
+                            id="provincia"
+                            type="text"
+                            placeholder="Ej. Moyobamba"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label for="distrito">
+                            Distrito
+                        </label>
+
+                        <input
+                            id="distrito"
+                            type="text"
+                            placeholder="Ej. Moyobamba"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ACADÉMICO -->
+
+            <section class="profile-card">
+
+                <div class="card-title">
+
+                    <div class="card-icon">
+
+                        <i data-lucide="graduation-cap"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Información académica
+                        </h2>
+
+                        <p>
+                            Estos datos ayudarán a personalizar EduPerú.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full">
+
+                        <label for="carrera_interes">
+                            Carrera de interés
+                        </label>
+
+                        <input
+                            id="carrera_interes"
+                            type="text"
+                            placeholder="Ej. Ingeniería de Sistemas"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="nivel_estudio">
+                            Nivel de estudios
+                        </label>
+
+                        <select id="nivel_estudio">
+
+                            <option value="">
+                                Seleccionar
+                            </option>
+
+                            <option value="Secundaria">
+                                Secundaria
+                            </option>
+
+                            <option value="Técnico">
+                                Técnico
+                            </option>
+
+                            <option value="Universitario">
+                                Universitario
+                            </option>
+
+                            <option value="Egresado">
+                                Egresado
+                            </option>
+
+                            <option value="Posgrado">
+                                Posgrado
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="institucion">
+                            Institución
+                        </label>
+
+                        <input
+                            id="institucion"
+                            type="text"
+                            placeholder="Ej. UTP"
+                        >
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- BOTONES -->
+
+            <div class="profile-actions">
+
+                <a
+                    href="/"
+                    class="secondary-button"
+                >
+
+                    Cancelar
+
+                </a>
+
+
+                <button
+                    id="saveButton"
+                    type="submit"
+                    class="save-button"
+                >
+
+                    <i data-lucide="save"></i>
+
+                    <span id="saveButtonText">
+                        Guardar cambios
+                    </span>
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+</div>
+
+
+<script src="/js/auth-client.js"></script>
+<script src="/js/perfil.js"></script>
+
+</body>
+
+</html>

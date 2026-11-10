@@ -1,0 +1,665 @@
+/* =========================================================
+   CARRERAS - EDUPERÚ
+========================================================= */
+
+.breadcrumb {
+    margin-bottom: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: #8b96a7;
+
+    font-size: 10px;
+}
+
+
+.breadcrumb svg {
+    width: 12px;
+    height: 12px;
+}
+
+
+.career-heading {
+    margin-bottom: 21px;
+}
+
+
+.career-heading h2 {
+    margin-bottom: 5px;
+
+    color: #172033;
+
+    font-size: 28px;
+
+    letter-spacing: -0.5px;
+}
+
+
+.career-heading p {
+    color: #687487;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.career-hero {
+    min-height: 200px;
+
+    margin-bottom: 20px;
+
+    padding: 30px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        230px;
+
+    align-items: center;
+
+    gap: 25px;
+
+    border-radius: 17px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            125deg,
+            #144b89,
+            #0d67c7,
+            #368be5
+        );
+
+    box-shadow:
+        0 12px 35px
+        rgba(13,91,215,0.17);
+}
+
+
+.career-tag {
+    display: inline-flex;
+
+    margin-bottom: 10px;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255,255,255,0.12);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+
+.career-hero h3 {
+    margin-bottom: 7px;
+
+    font-size: 25px;
+}
+
+
+.career-hero p {
+    max-width: 650px;
+
+    color:
+        rgba(255,255,255,0.78);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+.career-hero-icon {
+    min-height: 135px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.15);
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,255,255,0.08);
+}
+
+
+.career-hero-icon svg {
+    width: 35px;
+    height: 35px;
+
+    margin-bottom: 7px;
+}
+
+
+.career-hero-icon strong {
+    font-size: 25px;
+}
+
+
+.career-hero-icon span {
+    font-size: 8.5px;
+
+    opacity: 0.78;
+}
+
+
+/* =========================================================
+   KPI
+========================================================= */
+
+.career-kpis {
+    margin-bottom: 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 13px;
+}
+
+
+.career-kpi {
+    padding: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 12px;
+
+    background: white;
+}
+
+
+.career-kpi-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    color: #0d5bd7;
+
+    background: #eaf2ff;
+}
+
+
+.career-kpi-icon.green {
+    color: #17875d;
+
+    background: #e8f8f1;
+}
+
+
+.career-kpi-icon.purple {
+    color: #7049c7;
+
+    background: #f0eafe;
+}
+
+
+.career-kpi-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+
+.career-kpi div:last-child {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.career-kpi span {
+    color: #8792a3;
+
+    font-size: 9px;
+}
+
+
+.career-kpi strong {
+    margin-top: 3px;
+
+    color: #29354a;
+
+    font-size: 20px;
+}
+
+
+.career-kpi .career-source {
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.career-toolbar {
+    margin-bottom: 17px;
+
+    padding: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    border: 1px solid #e4e9f1;
+
+    border-radius: 11px;
+
+    background: white;
+}
+
+
+.career-search {
+    flex: 1;
+
+    max-width: 500px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 0 11px;
+
+    border: 1px solid #dfe5ed;
+
+    border-radius: 8px;
+}
+
+
+.career-search svg {
+    width: 15px;
+    height: 15px;
+
+    color: #8d98a8;
+}
+
+
+.career-search input {
+    width: 100%;
+
+    min-height: 36px;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 10px;
+}
+
+
+.career-toolbar select {
+    min-height: 37px;
+
+    padding: 0 10px;
+
+    border: 1px solid #dfe5ed;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #606d80;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.career-section-header {
+    margin-bottom: 13px;
+}
+
+
+.career-section-header h3 {
+    color: #344054;
+
+    font-size: 14px;
+}
+
+
+.career-section-header p {
+    margin-top: 3px;
+
+    color: #8b96a7;
+
+    font-size: 9px;
+}
+
+
+.career-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0,1fr));
+
+    gap: 15px;
+}
+
+
+.career-card {
+    min-height: 200px;
+
+    padding: 18px;
+
+    position: relative;
+
+    border: 1px solid #e3e8f0;
+
+    border-radius: 13px;
+
+    background: white;
+
+    box-shadow:
+        0 4px 16px
+        rgba(27,42,70,0.04);
+}
+
+
+.career-card:hover {
+    border-color: #b9d1ef;
+
+    transform: translateY(-2px);
+
+    transition: 0.2s ease;
+}
+
+
+.career-card-icon {
+    width: 42px;
+    height: 42px;
+
+    margin-bottom: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    color: #0d5bd7;
+
+    background: #eaf2ff;
+}
+
+
+.career-card-icon svg {
+    width: 19px;
+    height: 19px;
+}
+
+
+.career-card h4 {
+    margin-bottom: 6px;
+
+    color: #2d394d;
+
+    font-size: 12px;
+
+    line-height: 1.45;
+}
+
+
+.career-card p {
+    min-height: 38px;
+
+    color: #7c8798;
+
+    font-size: 9px;
+
+    line-height: 1.55;
+}
+
+
+.career-card-meta {
+    margin-top: 13px;
+
+    padding-top: 12px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+
+    border-top: 1px solid #edf0f4;
+}
+
+
+.career-opportunity-count {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: #627087;
+
+    font-size: 8.5px;
+
+    font-weight: 650;
+}
+
+
+.career-opportunity-count svg {
+    width: 13px;
+    height: 13px;
+}
+
+
+.career-view-button {
+    min-height: 30px;
+
+    padding: 0 10px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #0d5bd7;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   VACÍO
+========================================================= */
+
+.career-empty {
+    min-height: 250px;
+
+    grid-column: 1 / -1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: #8b96a7;
+}
+
+
+.career-empty svg {
+    width: 31px;
+    height: 31px;
+
+    margin-bottom: 10px;
+}
+
+
+.career-empty strong {
+    color: #596678;
+
+    font-size: 11px;
+}
+
+
+.career-empty span {
+    margin-top: 5px;
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.career-notice {
+    margin-top: 22px;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    border: 1px solid #d9e6f5;
+
+    border-radius: 11px;
+
+    background: #f5f9fe;
+}
+
+
+.career-notice > svg {
+    width: 17px;
+    height: 17px;
+
+    flex-shrink: 0;
+
+    color: #0d5bd7;
+}
+
+
+.career-notice strong {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #355071;
+
+    font-size: 10px;
+}
+
+
+.career-notice p {
+    color: #697a90;
+
+    font-size: 9px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .career-grid {
+        grid-template-columns:
+            repeat(2, minmax(0,1fr));
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .career-hero {
+        grid-template-columns: 1fr;
+    }
+
+
+    .career-hero-icon {
+        display: none;
+    }
+
+
+    .career-kpis {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .career-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    .career-toolbar {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+
+    .career-search {
+        max-width: none;
+    }
+
+}

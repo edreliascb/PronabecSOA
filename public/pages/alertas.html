@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Alertas | EduPerú</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/alertas.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>EduPerú</h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a href="/" class="nav-item">
+
+                <i data-lucide="layout-dashboard"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="search"></i>
+
+                <span>
+                    Oportunidades
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/explorar-peru.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="map"></i>
+
+                <span>
+                    Explorar Perú
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="graduation-cap"></i>
+
+                <span>
+                    Carreras
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="building-2"></i>
+
+                <span>
+                    Instituciones
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="handshake"></i>
+
+                <span>
+                    Convenios
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="files"></i>
+
+                <span>
+                    Requisitos
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="heart"></i>
+
+                <span>
+                    Favoritos
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item active"
+            >
+
+                <i data-lucide="bell"></i>
+
+                <span>
+                    Alertas
+                </span>
+
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/arquitectura.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="network"></i>
+
+                <span>
+                    Arquitectura SOA
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="chart-no-axes-combined"></i>
+
+                <span>
+                    Estadísticas
+                </span>
+
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+
+                <i data-lucide="activity"></i>
+
+                <span>
+                    Estado del sistema
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+
+                    <i data-lucide="menu"></i>
+
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar alerta..."
+                    >
+
+                    <kbd>Ctrl K</kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar coincidencias"
+                >
+
+                    <i data-lucide="refresh-cw"></i>
+
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Alertas
+                </span>
+
+            </div>
+
+
+            <section class="alerts-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Mi espacio
+                    </span>
+
+                    <h2>
+                        Alertas educativas
+                    </h2>
+
+                    <p>
+                        Define criterios y revisa si existen
+                        oportunidades que coincidan.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="alerts-hero">
+
+                <div>
+
+                    <span class="alerts-tag">
+                        Alertas sincronizadas
+                    </span>
+
+                    <h3>
+                        Sigue las oportunidades que te interesan
+                    </h3>
+
+                    <p>
+                        Crea reglas por carrera, beca, palabra clave
+                        o ubicación. EduPerú comprobará las coincidencias
+                        cuando abras o actualices esta página.
+                    </p>
+
+                </div>
+
+
+                <div class="alerts-hero-icon">
+
+                    <i data-lucide="bell-ring"></i>
+
+                    <strong id="heroAlertCount">
+                        0
+                    </strong>
+
+                    <span>
+                        alertas activas
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="alerts-kpis">
+
+                <article class="alerts-kpi">
+
+                    <div class="alerts-kpi-icon">
+
+                        <i data-lucide="bell"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Total alertas
+                        </span>
+
+                        <strong id="alertsTotal">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="alerts-kpi">
+
+                    <div class="alerts-kpi-icon green">
+
+                        <i data-lucide="circle-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Activas
+                        </span>
+
+                        <strong id="alertsActive">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="alerts-kpi">
+
+                    <div class="alerts-kpi-icon purple">
+
+                        <i data-lucide="search-check"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Coincidencias actuales
+                        </span>
+
+                        <strong id="alertsMatches">
+                            0
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section class="alert-creator">
+
+                <div class="alert-creator-header">
+
+                    <div>
+
+                        <h3>
+                            Crear nueva alerta
+                        </h3>
+
+                        <p>
+                            Puedes combinar palabra clave y ubicación.
+                        </p>
+
+                    </div>
+
+                    <div class="creator-icon">
+
+                        <i data-lucide="plus"></i>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    id="alertForm"
+                    class="alert-form"
+                >
+
+                    <div class="alert-field">
+
+                        <label for="alertName">
+                            Nombre de la alerta
+                        </label>
+
+                        <input
+                            id="alertName"
+                            type="text"
+                            maxlength="100"
+                            required
+                            placeholder="Ej. Becas para Sistemas"
+                        >
+
+                    </div>
+
+
+                    <div class="alert-field">
+
+                        <label for="alertKeyword">
+                            Palabra clave o carrera
+                        </label>
+
+                        <input
+                            id="alertKeyword"
+                            type="text"
+                            maxlength="150"
+                            placeholder="Ej. Ingeniería de Sistemas"
+                        >
+
+                    </div>
+
+
+                    <div class="alert-field">
+
+                        <label for="alertRegion">
+                            Región o ubicación
+                        </label>
+
+                        <input
+                            id="alertRegion"
+                            type="text"
+                            maxlength="100"
+                            placeholder="Ej. San Martín"
+                        >
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-primary alert-create-button"
+                        type="submit"
+                    >
+
+                        <i data-lucide="bell-plus"></i>
+
+                        Crear alerta
+
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <section class="alerts-toolbar">
+
+                <div class="alerts-search">
+
+                    <i data-lucide="search"></i>
+
+                    <input
+                        id="alertsSearch"
+                        type="search"
+                        placeholder="Buscar en mis alertas..."
+                    >
+
+                </div>
+
+
+                <select id="alertsFilter">
+
+                    <option value="">
+                        Todas
+                    </option>
+
+                    <option value="active">
+                        Activas
+                    </option>
+
+                    <option value="inactive">
+                        Desactivadas
+                    </option>
+
+                    <option value="matches">
+                        Con coincidencias
+                    </option>
+
+                </select>
+
+            </section>
+
+
+            <section>
+
+                <div class="alerts-section-header">
+
+                    <div>
+
+                        <h3>
+                            Mis alertas
+                        </h3>
+
+                        <p id="alertsResultText">
+                            0 alertas
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="alertsGrid"
+                    class="alerts-grid"
+                >
+                </div>
+
+            </section>
+
+
+            <section class="alerts-notice">
+
+                <i data-lucide="info"></i>
+
+                <div>
+
+                    <strong>
+                        Sincronización con tu cuenta
+                    </strong>
+
+                    <p>
+                        Las alertas se guardan en SQL Server y quedan asociadas a tu cuenta mediante JWT.
+                        Las coincidencias se calculan con las oportunidades disponibles cuando visitas
+                        o actualizas el módulo. Actualmente no envían correos, SMS ni notificaciones push.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú
+                </strong>
+
+                <span>
+                    Alertas Educativas
+                </span>
+
+            </div>
+
+            <div>
+                SQL Server + AlertaService + ConvocatoriaService
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/alertas.js"></script>
+
+</body>
+
+</html>

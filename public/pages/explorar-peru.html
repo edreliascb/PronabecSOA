@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Explorar Perú | EduPerú SOA</title>
+
+    <link
+        rel="stylesheet"
+        href="/css/app.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/explorar-peru.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/css/responsive.css"
+    >
+
+    <script
+        src="https://unpkg.com/lucide@latest"
+        defer
+    ></script>
+
+</head>
+
+
+<body>
+
+<div class="app-shell">
+
+    <aside
+        class="sidebar"
+        id="sidebar"
+    >
+
+        <div class="sidebar-brand">
+
+            <div class="brand-logo">
+                EP
+            </div>
+
+            <div class="brand-text">
+
+                <h1>EduPerú</h1>
+
+                <span>
+                    Plataforma Nacional
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sidebar-country">
+
+            <span class="country-flag">
+                🇵🇪
+            </span>
+
+            <div>
+
+                <strong>
+                    Perú
+                </strong>
+
+                <small>
+                    Cobertura nacional
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-nav">
+
+            <span class="nav-title">
+                GENERAL
+            </span>
+
+
+            <a
+                href="/"
+                class="nav-item"
+            >
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+
+            <a
+                href="/pages/oportunidades.html"
+                class="nav-item"
+            >
+                <i data-lucide="search"></i>
+                <span>Oportunidades</span>
+            </a>
+
+
+            <a
+                href="/pages/explorar-peru.html"
+                class="nav-item active"
+            >
+                <i data-lucide="map"></i>
+                <span>Explorar Perú</span>
+            </a>
+
+
+            <a
+                href="/pages/carreras.html"
+                class="nav-item"
+            >
+                <i data-lucide="graduation-cap"></i>
+                <span>Carreras</span>
+            </a>
+
+
+            <a
+                href="/pages/instituciones.html"
+                class="nav-item"
+            >
+                <i data-lucide="building-2"></i>
+                <span>Instituciones</span>
+            </a>
+
+
+            <a
+                href="/pages/convenios.html"
+                class="nav-item"
+            >
+                <i data-lucide="handshake"></i>
+                <span>Convenios</span>
+            </a>
+
+
+            <a
+                href="/pages/requisitos.html"
+                class="nav-item"
+            >
+                <i data-lucide="files"></i>
+                <span>Requisitos</span>
+            </a>
+
+
+            <span class="nav-title">
+                MI ESPACIO
+            </span>
+
+
+            <a
+                href="/pages/favoritos.html"
+                class="nav-item"
+            >
+                <i data-lucide="heart"></i>
+                <span>Favoritos</span>
+            </a>
+
+
+            <a
+                href="/pages/alertas.html"
+                class="nav-item"
+            >
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
+            </a>
+
+
+            <span class="nav-title">
+                INFORMACIÓN
+            </span>
+
+
+            <a
+                href="/pages/estadisticas.html"
+                class="nav-item"
+            >
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Estadísticas</span>
+            </a>
+
+
+            <a
+                href="/pages/estado.html"
+                class="nav-item"
+            >
+                <i data-lucide="activity"></i>
+                <span>Estado del sistema</span>
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-footer">
+
+            <div class="sidebar-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+
+                    <strong>
+                        Sistema operativo
+                    </strong>
+
+                    <small>
+                        Arquitectura SOA
+                    </small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <div class="main-wrapper">
+
+        <header class="topbar">
+
+            <div class="topbar-left">
+
+                <button
+                    class="icon-button menu-button"
+                    id="menuButton"
+                    type="button"
+                >
+                    <i data-lucide="menu"></i>
+                </button>
+
+
+                <div class="global-search">
+
+                    <i
+                        data-lucide="search"
+                        class="search-icon"
+                    ></i>
+
+                    <input
+                        id="globalSearch"
+                        type="search"
+                        placeholder="Buscar territorio..."
+                    >
+
+                    <kbd>Ctrl K</kbd>
+
+                </div>
+
+            </div>
+
+
+            <div class="topbar-actions">
+
+                <button
+                    class="icon-button"
+                    id="refreshButton"
+                    type="button"
+                    title="Actualizar"
+                >
+                    <i data-lucide="refresh-cw"></i>
+                </button>
+
+            </div>
+
+        </header>
+
+
+        <main class="main-content">
+
+            <div class="breadcrumb">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <i data-lucide="chevron-right"></i>
+
+                <span>
+                    Explorar Perú
+                </span>
+
+            </div>
+
+
+            <section class="territory-heading">
+
+                <div>
+
+                    <span class="page-eyebrow">
+                        Exploración territorial
+                    </span>
+
+                    <h2>
+                        Explorar oportunidades por territorio
+                    </h2>
+
+                    <p>
+                        Selecciona departamento, provincia y distrito
+                        para analizar la información educativa disponible.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="peru-hero">
+
+                <div>
+
+                    <span class="peru-hero-tag">
+                        🇵🇪 EduPerú Territorial
+                    </span>
+
+                    <h3>
+                        Educación conectada con el territorio
+                    </h3>
+
+                    <p>
+                        RegionService y UbigeoService permiten organizar
+                        los servicios educativos utilizando una estructura
+                        territorial común.
+                    </p>
+
+                </div>
+
+
+                <div class="peru-hero-symbol">
+
+                    <i data-lucide="map-pinned"></i>
+
+                    <strong>
+                        Perú
+                    </strong>
+
+                    <span>
+                        Exploración nacional
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="territory-selector">
+
+                <div class="territory-selector-header">
+
+                    <div>
+
+                        <h3>
+                            Selecciona un territorio
+                        </h3>
+
+                        <p>
+                            Los selectores se cargan mediante servicios SOA.
+                        </p>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-secondary"
+                        id="clearTerritoryButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="rotate-ccw"></i>
+
+                        Limpiar
+
+                    </button>
+
+                </div>
+
+
+                <div class="territory-selector-grid">
+
+
+                    <div class="territory-field">
+
+                        <label for="departmentSelect">
+                            Departamento
+                        </label>
+
+                        <select id="departmentSelect">
+
+                            <option value="">
+                                Selecciona departamento
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="territory-field">
+
+                        <label for="provinceSelect">
+                            Provincia
+                        </label>
+
+                        <select
+                            id="provinceSelect"
+                            disabled
+                        >
+
+                            <option value="">
+                                Selecciona provincia
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="territory-field">
+
+                        <label for="districtSelect">
+                            Distrito
+                        </label>
+
+                        <select
+                            id="districtSelect"
+                            disabled
+                        >
+
+                            <option value="">
+                                Selecciona distrito
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        class="btn btn-primary territory-search-button"
+                        id="territorySearchButton"
+                        type="button"
+                    >
+
+                        <i data-lucide="search"></i>
+
+                        Explorar territorio
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    class="territory-coverage"
+                    id="territoryCoverage"
+                >
+
+                    <i data-lucide="info"></i>
+
+                    <span>
+                        Selecciona un departamento.
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <section class="territory-kpis">
+
+
+                <article class="territory-kpi">
+
+                    <div class="territory-kpi-icon">
+
+                        <i data-lucide="map"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Departamentos
+                        </span>
+
+                        <strong id="kpiDepartments">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="territory-kpi">
+
+                    <div class="territory-kpi-icon green">
+
+                        <i data-lucide="signpost"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Provincias cargadas
+                        </span>
+
+                        <strong id="kpiProvinces">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="territory-kpi">
+
+                    <div class="territory-kpi-icon purple">
+
+                        <i data-lucide="map-pin"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Distritos cargados
+                        </span>
+
+                        <strong id="kpiDistricts">
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+
+                <article class="territory-kpi">
+
+                    <div class="territory-kpi-icon orange">
+
+                        <i data-lucide="database"></i>
+
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Cobertura Ubigeo
+                        </span>
+
+                        <strong
+                            id="kpiCoverage"
+                            class="coverage-value"
+                        >
+                            --
+                        </strong>
+
+                    </div>
+
+                </article>
+
+            </section>
+
+
+            <section
+                class="selected-territory-card"
+                id="selectedTerritoryCard"
+            >
+
+                <div class="selected-territory-icon">
+
+                    <i data-lucide="navigation"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        Territorio actual
+                    </span>
+
+                    <h3 id="selectedTerritoryName">
+                        Todo el Perú
+                    </h3>
+
+                    <p id="selectedTerritoryCode">
+                        Sin filtro territorial
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <section class="territory-results">
+
+
+                <article class="territory-result-panel">
+
+                    <div class="territory-panel-header">
+
+                        <div>
+
+                            <span class="territory-panel-icon blue">
+
+                                <i data-lucide="graduation-cap"></i>
+
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Oportunidades
+                                </h3>
+
+                                <p id="opportunityTerritoryCount">
+                                    --
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="/pages/oportunidades.html"
+                            class="text-link"
+                        >
+                            Ver módulo
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        id="territoryOpportunities"
+                        class="territory-items"
+                    >
+
+                        <div class="loading-state">
+
+                            <div class="spinner"></div>
+
+                            <span>
+                                Cargando...
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <article class="territory-result-panel">
+
+                    <div class="territory-panel-header">
+
+                        <div>
+
+                            <span class="territory-panel-icon green">
+
+                                <i data-lucide="building-2"></i>
+
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Instituciones
+                                </h3>
+
+                                <p id="institutionTerritoryCount">
+                                    --
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="/pages/instituciones.html"
+                            class="text-link"
+                        >
+                            Ver módulo
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        id="territoryInstitutions"
+                        class="territory-items"
+                    >
+                    </div>
+
+                </article>
+
+
+                <article class="territory-result-panel">
+
+                    <div class="territory-panel-header">
+
+                        <div>
+
+                            <span class="territory-panel-icon purple">
+
+                                <i data-lucide="handshake"></i>
+
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Convenios
+                                </h3>
+
+                                <p id="agreementTerritoryCount">
+                                    --
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <a
+                            href="/pages/convenios.html"
+                            class="text-link"
+                        >
+                            Ver módulo
+                        </a>
+
+                    </div>
+
+
+                    <div
+                        id="territoryAgreements"
+                        class="territory-items"
+                    >
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <section class="territory-notice">
+
+                <i data-lucide="triangle-alert"></i>
+
+                <div>
+
+                    <strong>
+                        Cobertura territorial actual
+                    </strong>
+
+                    <p>
+                        RegionService contiene el catálogo departamental.
+                        UbigeoService aún tiene cobertura parcial de
+                        provincias y distritos. Además, un resultado solo
+                        se considera territorialmente relacionado cuando
+                        el registro disponible contiene información que
+                        coincide con el territorio seleccionado.
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+
+        <footer class="app-footer">
+
+            <div>
+
+                <strong>
+                    EduPerú SOA
+                </strong>
+
+                <span>
+                    Exploración Territorial
+                </span>
+
+            </div>
+
+            <div>
+                Perú
+            </div>
+
+        </footer>
+
+    </div>
+
+</div>
+
+
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+></div>
+
+
+<script src="/js/api.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/explorar-peru.js"></script>
+
+</body>
+
+</html>
