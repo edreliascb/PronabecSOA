@@ -490,6 +490,32 @@ app.get(
 );
 
 
+
+/* =========================================================
+   RENDER HEALTH CHECK LIGERO
+========================================================= */
+
+app.get(
+    "/healthz",
+    (req, res) => {
+
+        return res
+            .status(200)
+            .json({
+                status:
+                    "ok",
+                service:
+                    "EduPeruSOA",
+                databaseCheck:
+                    false,
+                externalChecks:
+                    false
+            });
+
+    }
+);
+
+
 /* =========================================================
    DATABASE SERVICE
 ========================================================= */
