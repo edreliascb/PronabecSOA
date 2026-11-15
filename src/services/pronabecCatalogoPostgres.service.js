@@ -83,6 +83,276 @@ function obtenerPool() {
 }
 
 
+
+/* =========================================================
+   EDUPERU_NORMALIZAR_FILAS_PRONABEC_V2
+========================================================= */
+
+function normalizarClave(
+    valor
+) {
+
+    return String(
+        valor ||
+        ""
+    )
+        .normalize(
+            "NFD"
+        )
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .toLowerCase()
+        .replace(
+            /[^a-z0-9]+/g,
+            ""
+        );
+
+}
+
+
+function buscarCampo(
+    fila,
+    grupos
+) {
+
+    if (
+        !fila ||
+        typeof fila !==
+            "object"
+    ) {
+
+        return null;
+
+    }
+
+
+    const entradas =
+        Object.entries(
+            fila
+        )
+            .filter(
+                ([, valor]) =>
+                    valor !==
+                        null &&
+                    valor !==
+                        undefined &&
+                    String(valor)
+                        .trim() !==
+                        ""
+            )
+            .map(
+                (
+                    [clave, valor]
+                ) => ({
+                    clave,
+                    normalizada:
+                        normalizarClave(
+                            clave
+                        ),
+                    valor
+                })
+            );
+
+
+    for (
+        const grupo
+        of grupos
+    ) {
+
+        const tokens =
+            grupo.map(
+                normalizarClave
+            );
+
+
+        const candidatos =
+            entradas
+                .filter(
+                    item =>
+                        tokens.every(
+                            token =>
+                                item.normalizada
+                                    .includes(
+                                        token
+                                    )
+                        )
+                )
+                .sort(
+                    (a, b) => {
+
+                        const aNombre =
+                            a.normalizada
+                                .includes(
+                                    "nombre"
+                                )
+                                ? 1
+                                : 0;
+
+                        const bNombre =
+                            b.normalizada
+                                .includes(
+                                    "nombre"
+                                )
+                                ? 1
+                                : 0;
+
+
+                        return (
+                            bNombre -
+                            aNombre
+                        );
+
+                    }
+                );
+
+
+        if (
+            candidatos.length
+        ) {
+
+            return candidatos[0]
+                .valor;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+function normalizarFila(
+    recurso,
+    fila
+) {
+
+    if (
+        !fila ||
+        typeof fila !==
+            "object"
+    ) {
+
+        return fila;
+
+    }
+
+
+    const salida = {
+        ...fila
+    };
+
+
+    if (
+        recurso ===
+        "ConvocatoriaCarreraVigentes"
+    ) {
+
+        salida.convocatoria =
+            salida.convocatoria ||
+            salida.CONVOCATORIA ||
+            buscarCampo(
+                fila,
+                [
+                    [
+                        "nombre",
+                        "convocatoria"
+                    ],
+                    [
+                        "convocatoria"
+                    ],
+                    [
+                        "nombre",
+                        "beca"
+                    ],
+                    [
+                        "beca"
+                    ],
+                    [
+                        "programa"
+                    ]
+                ]
+            ) ||
+            "Convocatoria PRONABEC";
+
+
+        salida.carrera =
+            salida.carrera ||
+            salida.CARRERA ||
+            buscarCampo(
+                fila,
+                [
+                    [
+                        "nombre",
+                        "carrera"
+                    ],
+                    [
+                        "carrera"
+                    ],
+                    [
+                        "programa",
+                        "estudio"
+                    ]
+                ]
+            ) ||
+            "Oferta educativa nacional";
+
+
+        salida.region =
+            salida.region ||
+            salida.REGION ||
+            buscarCampo(
+                fila,
+                [
+                    [
+                        "departamento"
+                    ],
+                    [
+                        "region"
+                    ],
+                    [
+                        "sede"
+                    ],
+                    [
+                        "ubicacion"
+                    ]
+                ]
+            ) ||
+            "Nacional";
+
+
+        salida.sede =
+            salida.sede ||
+            salida.region;
+
+
+        salida.estado =
+            salida.estado ||
+            salida.ESTADO ||
+            buscarCampo(
+                fila,
+                [
+                    [
+                        "estado"
+                    ],
+                    [
+                        "vigencia"
+                    ]
+                ]
+            ) ||
+            "Vigente";
+
+    }
+
+
+    return salida;
+
+}
+
+
 async function obtenerMetadata(
     recurso
 ) {
@@ -384,7 +654,10 @@ async function consultarPaginado(
             resultado.rows
                 .map(
                     fila =>
-                        fila.fila_json
+                        normalizarFila(
+                            recurso,
+                            fila.fila_json
+                        )
                 ),
 
         fechaConsulta:
