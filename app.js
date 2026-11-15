@@ -866,6 +866,42 @@ app.get(
 );
 
 
+
+/* EDUPERU_PORTAL_TERRITORIO_V3 */
+app.get(
+    "/api/portal/territorio",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+
+                resultado:
+                    await portalDatos
+                        .listarTerritorio(
+                            req.query
+                        )
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
 app.get(
     "/api/portal/instituciones",
     async (req, res) => {

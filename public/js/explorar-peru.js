@@ -203,7 +203,7 @@ async function cargarExplorador() {
         await Promise.allSettled([
 
             obtenerJsonTerritorial(
-                "/api/carreras"
+                "/api/portal/territorio"
             ),
 
             EduPeruAPI
