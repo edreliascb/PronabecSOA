@@ -240,12 +240,10 @@ app.use(
 ========================================================= */
 
 app.use(
-    express.static(
-        path.join(
+    express.static(path.join(
             __dirname,
             "public"
-        )
-    )
+        ), { index: false })
 );
 
 
@@ -853,15 +851,10 @@ app.use(
 app.get(
     "/",
     (req, res) => {
-
-        res.sendFile(
-            path.join(
-                __dirname,
-                "public",
-                "index.html"
-            )
+        return res.redirect(
+            302,
+            "/pages/login.html"
         );
-
     }
 );
 

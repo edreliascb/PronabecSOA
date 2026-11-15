@@ -48,8 +48,7 @@ async function comprobarSesionExistente() {
             .obtenerUsuarioActual();
 
 
-        window.location.href =
-            "/";
+        window.location.href = "/index.html";
 
     } catch {
 
@@ -159,8 +158,7 @@ function configurarLogin() {
 
                             } else {
 
-                                window.location.href =
-                                    "/";
+                                window.location.href = "/index.html";
 
                             }
 

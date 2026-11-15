@@ -25,7 +25,8 @@
     "postgres:verificar-datos": "node scripts/postgres-verificar-datos.js",
     "postgres:compat-schema": "node scripts/postgres-aplicar-compat.js",
     "postgres:compat-smoke": "node scripts/postgres-compat-smoke.js",
-    "render:verificar": "node scripts/verificar-render.js"
+    "render:verificar": "node scripts/verificar-render.js",
+    "auth-nav:verificar": "node scripts/verificar-fix-login-logout.js"
   },
   "keywords": [],
   "author": "",
