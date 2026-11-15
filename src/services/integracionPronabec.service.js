@@ -29,7 +29,7 @@ const TIMEOUT_API_MS =
 
 
 const TIMEOUT_PORTAL_MS =
-    120000;
+    15000;
 
 
 const CACHE_TTL_MS =
@@ -38,6 +38,33 @@ const CACHE_TTL_MS =
 
 const API_COOLDOWN_MS =
     5 * 60 * 1000;
+
+
+/*
+   Protección para instancias pequeñas de Render.
+   El fallback web puede descargar CSV/HTML grandes y
+   mantenerlos temporalmente en memoria.
+*/
+const MAX_PORTAL_BYTES =
+    8 * 1024 * 1024;
+
+const CACHE_MAX_ENTRIES =
+    2;
+
+const CACHE_MAX_ROWS =
+    1000;
+
+const PORTAL_FALLBACK_ENABLED =
+    String(
+        process.env.PRONABEC_PORTAL_FALLBACK ??
+        (
+            process.env.NODE_ENV === "production"
+                ? "false"
+                : "true"
+        )
+    )
+        .toLowerCase()
+        .trim() === "true";
 
 
 /*
@@ -213,10 +240,10 @@ const clientePortal =
             TIMEOUT_PORTAL_MS,
 
         maxContentLength:
-            150 * 1024 * 1024,
+            MAX_PORTAL_BYTES,
 
         maxBodyLength:
-            150 * 1024 * 1024,
+            MAX_PORTAL_BYTES,
 
         headers: {
 
@@ -439,6 +466,22 @@ async function consultarFuenteOficial(
 
         console.warn(
             `[PRONABEC] API en pausa temporal por error de red. Se consultará una publicación oficial alterna para ${recurso}.`
+        );
+
+    }
+
+
+    /*
+       En producción el fallback de portal queda desactivado
+       por defecto para evitar OOM en instancias de 512 MB.
+       Si más adelante se necesita, se puede activar con:
+       PRONABEC_PORTAL_FALLBACK=true
+    */
+    if (!PORTAL_FALLBACK_ENABLED) {
+
+        throw crearErrorFuente(
+            "PRONABEC_FALLBACK_DESACTIVADO",
+            "La fuente alterna de PRONABEC está desactivada en producción para proteger la memoria del servidor."
         );
 
     }
@@ -1459,6 +1502,12 @@ async function descargarTexto(
                 responseType:
                     "arraybuffer",
 
+                maxContentLength:
+                    MAX_PORTAL_BYTES,
+
+                maxBodyLength:
+                    MAX_PORTAL_BYTES,
+
                 transformResponse:
                     [
                         data =>
@@ -1476,6 +1525,19 @@ async function descargarTexto(
             : Buffer.from(
                 respuesta.data
             );
+
+
+    if (
+        buffer.length >
+        MAX_PORTAL_BYTES
+    ) {
+
+        throw crearErrorFuente(
+            "RESPUESTA_PRONABEC_DEMASIADO_GRANDE",
+            "La publicación oficial supera el límite seguro de memoria configurado para el servidor."
+        );
+
+    }
 
 
     return decodificarBuffer(
@@ -2605,6 +2667,47 @@ function guardarCache(
     datos
 ) {
 
+    /*
+       No guardar datasets masivos en RAM.
+       Para listados muy grandes es preferible volver a consultar
+       que mantener cientos de MB vivos dentro del proceso.
+    */
+    if (
+        !Array.isArray(datos) ||
+        datos.length === 0 ||
+        datos.length >
+        CACHE_MAX_ROWS
+    ) {
+
+        return;
+
+    }
+
+
+    while (
+        cache.size >=
+        CACHE_MAX_ENTRIES
+    ) {
+
+        const primeraClave =
+            cache.keys()
+                .next()
+                .value;
+
+        if (
+            primeraClave ===
+            undefined
+        ) {
+            break;
+        }
+
+        cache.delete(
+            primeraClave
+        );
+
+    }
+
+
     cache.set(
         clave,
         {
@@ -2827,6 +2930,25 @@ function decodificarEntidades(
    EXPORTAR
 ========================================================= */
 
+function obtenerConfiguracionMemoria() {
+
+    return {
+        portalFallbackEnabled:
+            PORTAL_FALLBACK_ENABLED,
+
+        maxPortalBytes:
+            MAX_PORTAL_BYTES,
+
+        cacheMaxEntries:
+            CACHE_MAX_ENTRIES,
+
+        cacheMaxRows:
+            CACHE_MAX_ROWS
+    };
+
+}
+
+
 module.exports = {
 
     consultarRecurso,
@@ -2846,6 +2968,8 @@ module.exports = {
     /*
        Se exporta solo para pruebas/diagnóstico local.
     */
-    descubrirDatasetEnGrupoPronabec
+    descubrirDatasetEnGrupoPronabec,
+
+    obtenerConfiguracionMemoria
 
 };
