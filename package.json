@@ -28,7 +28,8 @@
     "render:verificar": "node scripts/verificar-render.js",
     "auth-nav:verificar": "node scripts/verificar-fix-login-logout.js",
     "email:provider-verificar": "node scripts/verificar-email-provider.js",
-    "pronabec:sincronizar": "node scripts/sincronizar-pronabec-postgres.js"
+    "pronabec:sincronizar": "node scripts/sincronizar-pronabec-postgres.js",
+    "pronabec:portal:construir": "node scripts/construir-catalogo-portal.js"
   },
   "keywords": [],
   "author": "",

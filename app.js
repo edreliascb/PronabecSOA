@@ -6,6 +6,13 @@
 require("dotenv").config();
 
 /* EDUPERU_PRONABEC_SYNC_REPO_V3 */
+/* EDUPERU_PORTAL_DATOS_TODAS_PESTANAS_V1 */
+const portalDatos =
+    require(
+        "./src/services/portalDatos.service"
+    );
+
+
 const pronabecSyncRepoV3 =
     require(
         "./src/services/pronabecCatalogoPostgres.service"
@@ -555,6 +562,294 @@ app.get(
 
                     mensaje:
                         "No fue posible consultar el resumen sincronizado."
+                });
+
+        }
+
+    }
+);
+
+
+
+/* EDUPERU_PORTAL_RUTAS_TODAS_PESTANAS_V1 */
+
+app.get(
+    "/api/portal/resumen",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+                resultado:
+                    await portalDatos
+                        .resumen()
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/estadisticas",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+                resultado:
+                    await portalDatos
+                        .estadisticas()
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/consulta-general",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+                resultado:
+                    await portalDatos
+                        .consultaGeneral()
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/oportunidades",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+                resultado:
+                    await portalDatos
+                        .listarRegistros(
+                            "CarrerasElegiblesNacional",
+                            req.query,
+                            {
+                                rowsDefecto:
+                                    50,
+                                rowsMax:
+                                    500
+                            }
+                        )
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/postulaciones",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+                resultado:
+                    await portalDatos
+                        .listarRegistros(
+                            "PostulacionesVigentes",
+                            req.query,
+                            {
+                                rowsDefecto:
+                                    50,
+                                rowsMax:
+                                    500
+                            }
+                        )
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/convenios",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+                resultado: {
+                    modo:
+                        "POSTGRES_SINCRONIZADO",
+                    fuente:
+                        "PRONABEC - PostgreSQL",
+                    disponible:
+                        true,
+                    datos:
+                        await portalDatos
+                            .listarRegistros(
+                                "Convenio",
+                                req.query,
+                                {
+                                    rowsDefecto:
+                                        5000,
+                                    rowsMax:
+                                        5000
+                                }
+                            )
+                }
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/carreras",
+    async (req, res) => {
+
+        try {
+
+            const resultado =
+                await portalDatos
+                    .listarCarreras(
+                        req.query
+                    );
+
+
+            res.json({
+                success:
+                    true,
+                resultado
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
+app.get(
+    "/api/portal/instituciones",
+    async (req, res) => {
+
+        try {
+
+            const resultado =
+                await portalDatos
+                    .listarInstituciones(
+                        req.query
+                    );
+
+
+            res.json({
+                success:
+                    true,
+                resultado
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+                    mensaje:
+                        error.message
                 });
 
         }
