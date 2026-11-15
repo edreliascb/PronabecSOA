@@ -1,58 +1,34 @@
 const service =
     require("../services/calendarioEducativo.service");
 
-function responderError(
-    res,
-    error,
-    servicio
-) {
+function responderError(res, error, servicio) {
+    const status = Number(error?.statusCode) || 500;
 
-    const status =
-        Number(
-            error?.statusCode
-        ) ||
-        500;
-
-
-    if (
-        status >=
-        500
-    ) {
-
-        console.error(
-            `[${servicio}]`,
-            error
-        );
-
+    if (status >= 500) {
+        console.error(`[${servicio}]`, error);
     }
 
-
     return res
-        .status(
-            status
-        )
+        .status(status)
         .json({
-
-            success:
-                false,
-
+            success: false,
             servicio,
-
             mensaje:
                 status >= 500
                     ? "No se pudo completar la operación."
                     : error.message
-
         });
-
 }
-
 
 async function listar(req, res) {
     try {
         const resultado =
             await service.obtenerCalendario(
-                req.usuario.id
+                req.usuario.id,
+                {
+                    anio: req.query.anio,
+                    mes: req.query.mes
+                }
             );
 
         return res.json({
@@ -68,7 +44,6 @@ async function listar(req, res) {
         );
     }
 }
-
 
 module.exports = {
     listar

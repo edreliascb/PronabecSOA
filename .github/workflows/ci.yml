@@ -1,0 +1,50 @@
+name: EduPeru SOA - CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+    branches: ["main", "master"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Validacion Node.js
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Node.js 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+
+      - name: Instalar dependencias
+        run: npm ci
+
+      - name: Verificar sintaxis JavaScript
+        shell: bash
+        run: |
+          set -euo pipefail
+          while IFS= read -r -d '' file; do
+            node --check "$file"
+          done < <(find . -type f -name '*.js' -not -path './node_modules/*' -print0)
+
+      - name: Verificar infraestructura Docker/CI
+        run: npm run --if-present infra:verificar
+
+      - name: Prueba resiliencia (si existe)
+        run: npm run --if-present resiliencia:probar
+
+      - name: Prueba arquitectura hexagonal (si existe)
+        run: npm run --if-present hexagonal:probar
+
+      - name: Prueba Hermes/eventos (si existe)
+        run: npm run --if-present hermes:probar

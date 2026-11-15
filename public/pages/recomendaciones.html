@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recomendaciones | EduPerú</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/recomendaciones.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand"><div class="brand-logo">EP</div><div class="brand-text"><h1>EduPerú</h1><span>Plataforma Nacional</span></div></div>
+    <div class="sidebar-country"><span class="country-flag">🇵🇪</span><div><strong>Perú</strong><small>Cobertura nacional</small></div></div>
+    <nav class="sidebar-nav">
+      <span class="nav-title">GENERAL</span>
+      <a href="/" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+      <a href="/pages/oportunidades.html" class="nav-item"><i data-lucide="search"></i><span>Oportunidades</span></a>
+      <a href="/pages/carreras.html" class="nav-item"><i data-lucide="graduation-cap"></i><span>Carreras</span></a>
+      <span class="nav-title">MI ESPACIO</span>
+      <a href="/pages/recomendaciones.html" class="nav-item active"><i data-lucide="sparkles"></i><span>Recomendaciones</span></a>
+      <a href="/pages/favoritos.html" class="nav-item"><i data-lucide="heart"></i><span>Favoritos</span></a>
+      <a href="/pages/perfil.html" class="nav-item"><i data-lucide="user-round"></i><span>Mi perfil</span></a>
+      <a href="/pages/notificaciones.html" class="nav-item"><i data-lucide="bell"></i><span>Notificaciones</span></a>
+    </nav>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <button class="menu-button" id="menuButton" type="button"><i data-lucide="menu"></i></button>
+      <div><strong>Recomendaciones personalizadas</strong><span>Basadas en tu perfil educativo y datos disponibles</span></div>
+      <div class="topbar-actions"><button id="refreshButton" class="icon-button" title="Actualizar"><i data-lucide="refresh-cw"></i></button></div>
+    </header>
+
+    <main class="rec-main">
+      <section class="rec-hero">
+        <div>
+          <span class="rec-eyebrow">ORIENTACIÓN PERSONALIZADA</span>
+          <h1>Oportunidades que podrían interesarte</h1>
+          <p>EduPerú compara tu perfil con convocatorias y carreras disponibles y explica las coincidencias encontradas.</p>
+        </div>
+        <a href="/pages/perfil.html" class="rec-profile-link"><i data-lucide="settings-2"></i> Mejorar mi perfil</a>
+      </section>
+
+      <section class="rec-kpis">
+        <article><span>Recomendaciones</span><strong id="kpiTotal">0</strong></article>
+        <article><span>Convocatorias</span><strong id="kpiConvocatorias">0</strong></article>
+        <article><span>Carreras</span><strong id="kpiCarreras">0</strong></article>
+        <article><span>Mayor coincidencia</span><strong id="kpiScore">0</strong></article>
+      </section>
+
+      <section class="rec-profile" id="profilePanel">
+        <div class="rec-section-title"><div><h2>Perfil utilizado</h2><p>Estos datos participan en el cálculo de coincidencia.</p></div></div>
+        <div id="profileChips" class="profile-chips"></div>
+      </section>
+
+      <section class="rec-toolbar">
+        <div class="rec-tabs" id="typeTabs">
+          <button class="active" data-type="TODOS">Todas</button>
+          <button data-type="CONVOCATORIA">Convocatorias</button>
+          <button data-type="CARRERA">Carreras</button>
+        </div>
+        <input id="searchInput" type="search" placeholder="Buscar recomendación...">
+      </section>
+
+      <div id="recAlert" class="rec-alert" hidden></div>
+      <section id="recommendationGrid" class="rec-grid"></section>
+
+      <section class="rec-disclaimer">
+        <i data-lucide="shield-check"></i>
+        <div><strong>Orientación, no decisión oficial</strong><p id="disclaimerText">Las recomendaciones se generan con información disponible en EduPerú y no constituyen una decisión de PRONABEC.</p></div>
+      </section>
+    </main>
+  </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<script src="/js/api.js"></script>
+<script src="/js/auth-client.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/recomendaciones.js"></script>
+    <script src="/js/sidebar-global.js" defer></script>
+</body>
+</html>

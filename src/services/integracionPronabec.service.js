@@ -1,5 +1,8 @@
 const axios = require("axios");
 
+const resilienciaHttp =
+    require("./resilienciaHttp.service");
+
 
 /* =========================================================
    EDUPERÚ - INTEGRACIÓN OFICIAL PRONABEC
@@ -258,15 +261,36 @@ async function consultarRecurso(
     try {
 
         const respuesta =
-            await clienteApi.get(
-                `/${recurso}`,
-                {
-                    params: {
-                        apiKey,
-                        ...parametros
+            await resilienciaHttp
+                .ejecutarConResiliencia(
+                    "PRONABEC_API",
+                    () =>
+                        clienteApi.get(
+                            `/${recurso}`,
+                            {
+                                params: {
+                                    apiKey,
+                                    ...parametros
+                                }
+                            }
+                        ),
+                    {
+                        timeoutMs:
+                            TIMEOUT_API_MS,
+
+                        reintentos:
+                            2,
+
+                        esperaBaseMs:
+                            300,
+
+                        umbralFallos:
+                            3,
+
+                        tiempoAbiertoMs:
+                            60 * 1000
                     }
-                }
-            );
+                );
 
 
         return respuesta.data;
@@ -387,7 +411,8 @@ async function consultarFuenteOficial(
                     "EAI_AGAIN",
                     "ECONNREFUSED",
                     "ECONNABORTED",
-                    "ETIMEDOUT"
+                    "ETIMEDOUT",
+                    "CIRCUIT_OPEN"
                 ].includes(
                     error.codigoTecnico
                 )

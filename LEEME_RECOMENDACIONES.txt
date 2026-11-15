@@ -1,0 +1,17 @@
+EDUPERÚ - RECOMENDACIONES PERSONALIZADAS V1
+
+Incluye:
+- public/pages/recomendaciones.html
+- public/css/recomendaciones.css
+- public/js/recomendaciones.js
+- scripts/probar-recomendaciones.js
+- package.json con el script recomendaciones:probar
+
+No reemplaza el servicio de recomendaciones actual. Usa /api/recomendaciones y /api/favoritos ya existentes.
+
+Prueba:
+  npm start
+  npm run recomendaciones:probar
+
+Pantalla:
+  http://localhost:3000/pages/recomendaciones.html

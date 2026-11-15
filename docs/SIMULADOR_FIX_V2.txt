@@ -1,0 +1,13 @@
+EDUPERU - SIMULADOR FIX V2
+
+Correccion principal:
+- ConvocatoriaService: timeout independiente de 12 s.
+- RequisitoElegibilidadService: timeout independiente de 8 s.
+- Si requisitos no responden, el simulador continua con las oportunidades oficiales y marca la evaluacion como NO_DETERMINABLE cuando corresponda.
+- No se generan datos ficticios.
+- El script npm run simulador:probar ahora muestra tiempos y diagnostico de fuentes.
+
+Despues de reemplazar los archivos:
+1. Reiniciar npm start.
+2. Ejecutar npm run simulador:probar.
+3. Abrir /pages/simulador.html y probar Analizar oportunidades.

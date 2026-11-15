@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduPerú - Seguimiento visual de postulaciones">
+    <title>EduPerú | Seguimiento de postulaciones</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/seguimiento.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo">EP</div>
+            <div class="brand-text"><h1>EduPerú</h1><span>Plataforma Nacional</span></div>
+        </div>
+        <div class="sidebar-country"><span class="country-flag">🇵🇪</span><div><strong>Perú</strong><small>Cobertura nacional</small></div></div>
+        <nav class="sidebar-nav">
+            <span class="nav-title">GENERAL</span>
+            <a href="/" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+            <a href="/pages/oportunidades.html" class="nav-item"><i data-lucide="search"></i><span>Oportunidades</span></a>
+            <a href="/pages/carreras.html" class="nav-item"><i data-lucide="graduation-cap"></i><span>Carreras</span></a>
+            <a href="/pages/instituciones.html" class="nav-item"><i data-lucide="building-2"></i><span>Instituciones</span></a>
+            <a href="/pages/convenios.html" class="nav-item"><i data-lucide="handshake"></i><span>Convenios</span></a>
+            <a href="/pages/requisitos.html" class="nav-item"><i data-lucide="files"></i><span>Requisitos</span></a>
+            <a href="/pages/simulador.html" class="nav-item"><i data-lucide="clipboard-check"></i><span>Simulador de becas</span></a>
+            <a href="/pages/calendario.html" class="nav-item"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+            <span class="nav-title">MI ESPACIO</span>
+            <a href="/pages/favoritos.html" class="nav-item"><i data-lucide="heart"></i><span>Favoritos</span></a>
+            <a href="/pages/alertas.html" class="nav-item"><i data-lucide="bell"></i><span>Alertas</span></a>
+            <a href="/pages/seguimiento.html" class="nav-item active"><i data-lucide="route"></i><span>Seguimiento</span></a>
+            <a href="/pages/documentos.html" class="nav-item"><i data-lucide="folder-check"></i><span>Mis documentos</span></a>
+            <a href="/pages/perfil.html" class="nav-item"><i data-lucide="user"></i><span>Mi perfil</span></a>
+            <span class="nav-title">INFORMACIÓN</span>
+            <a href="/pages/estadisticas.html" class="nav-item"><i data-lucide="chart-no-axes-combined"></i><span>Estadísticas</span></a>
+            <a href="/pages/estado.html" class="nav-item"><i data-lucide="activity"></i><span>Estado del sistema</span></a>
+        </nav>
+    </aside>
+
+    <div class="app-main">
+        <header class="topbar">
+            <button class="topbar-menu" id="menuButton" type="button"><i data-lucide="menu"></i></button>
+            <div class="topbar-title"><strong>Seguimiento de postulaciones</strong><span>Controla el avance de tus oportunidades educativas</span></div>
+            <a class="btn btn-secondary" href="/pages/calendario.html"><i data-lucide="calendar-days"></i> Calendario</a>
+        </header>
+
+        <main class="seguimiento-main">
+            <section class="seguimiento-hero">
+                <div>
+                    <span class="eyebrow">MI ESPACIO</span>
+                    <h2>Tu proceso, paso a paso</h2>
+                    <p>Registra una oportunidad y actualiza su avance desde la identificación hasta el resultado. Este seguimiento es personal y no modifica procesos oficiales de PRONABEC.</p>
+                </div>
+                <button class="btn btn-primary" id="newTrackingButton" type="button"><i data-lucide="plus"></i> Nuevo seguimiento</button>
+            </section>
+
+            <section class="tracking-kpis">
+                <article><span>Total</span><strong id="kpiTotal">0</strong><small>seguimientos</small></article>
+                <article><span>Activos</span><strong id="kpiActivos">0</strong><small>en proceso</small></article>
+                <article><span>Postulados</span><strong id="kpiPostulados">0</strong><small>ya enviados</small></article>
+                <article><span>Progreso promedio</span><strong id="kpiProgreso">0%</strong><small>de tus procesos</small></article>
+            </section>
+
+            <section class="tracking-toolbar">
+                <div class="tracking-search"><i data-lucide="search"></i><input id="trackingSearch" type="search" placeholder="Buscar por beca, convocatoria o referencia..."></div>
+                <select id="trackingFilter">
+                    <option value="TODOS">Todos los estados</option>
+                    <option value="ACTIVOS">Activos</option>
+                    <option value="POSTULADOS">Postulados</option>
+                    <option value="FINALIZADOS">Finalizados</option>
+                </select>
+                <button class="btn btn-secondary" id="refreshButton" type="button"><i data-lucide="refresh-cw"></i> Actualizar</button>
+            </section>
+
+            <div id="trackingStatus" class="tracking-status" role="status">Cargando tus seguimientos...</div>
+            <section id="trackingGrid" class="tracking-grid"></section>
+            <section id="trackingEmpty" class="tracking-empty" hidden>
+                <i data-lucide="route"></i>
+                <h3>Aún no tienes seguimientos</h3>
+                <p>Crea el primero para visualizar el avance de una beca o convocatoria.</p>
+                <button class="btn btn-primary" type="button" data-open-create>Crear seguimiento</button>
+            </section>
+        </main>
+    </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="tracking-modal" id="trackingModal" hidden>
+    <div class="tracking-modal-backdrop" data-close-modal></div>
+    <section class="tracking-modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar"><i data-lucide="x"></i></button>
+        <div id="modalContent"></div>
+    </section>
+</div>
+
+<script src="/js/auth-client.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/seguimiento.js"></script>
+    <script src="/js/sidebar-global.js" defer></script>
+</body>
+</html>

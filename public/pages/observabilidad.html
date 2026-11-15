@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Observabilidad | EduPerú</title>
+  <style>
+    body{font-family:Arial,sans-serif;margin:0;background:#f4f7fb;color:#172033}.wrap{max-width:1200px;margin:36px auto;padding:0 20px}.top{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin:22px 0}.card,.panel{background:white;border-radius:16px;padding:18px;box-shadow:0 6px 24px rgba(0,0,0,.06)}.n{font-size:28px;font-weight:800}.muted{color:#667085}.ok{color:#137333}.bad{color:#b42318}table{width:100%;border-collapse:collapse}th,td{padding:11px 8px;border-bottom:1px solid #e8ecf2;text-align:left;font-size:14px}.trace{font-family:Consolas,monospace;font-size:12px}button{border:0;border-radius:10px;padding:10px 14px;background:#155EEF;color:white;cursor:pointer}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><div><h1>Observabilidad técnica</h1><div class="muted">TraceId, latencia, errores y actividad reciente de la API.</div></div><button id="recargar">Actualizar</button></div>
+  <div class="cards">
+    <div class="card"><div class="muted">Peticiones</div><div class="n" id="peticiones">-</div></div>
+    <div class="card"><div class="muted">Errores</div><div class="n" id="errores">-</div></div>
+    <div class="card"><div class="muted">Tasa de error</div><div class="n" id="tasa">-</div></div>
+    <div class="card"><div class="muted">Servicios observados</div><div class="n" id="servicios">-</div></div>
+  </div>
+  <div class="panel"><h2>Servicios / rutas API</h2><div style="overflow:auto"><table><thead><tr><th>Servicio</th><th>Peticiones</th><th>Errores</th><th>Promedio</th><th>Máximo</th><th>Último HTTP</th></tr></thead><tbody id="metricas"></tbody></table></div></div>
+  <div class="panel" style="margin-top:18px"><h2>Últimas trazas</h2><div style="overflow:auto"><table><thead><tr><th>TraceId</th><th>Método</th><th>Ruta</th><th>HTTP</th><th>Tiempo</th><th>Fecha</th></tr></thead><tbody id="eventos"></tbody></table></div><p class="muted">Las métricas están en memoria y se reinician al reiniciar Node.js.</p></div>
+</div>
+<script src="/js/observabilidad.js"></script>
+</body>
+</html>

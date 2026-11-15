@@ -1,0 +1,24 @@
+EDUPERÚ - OBSERVABILIDAD + TRACEID V1
+
+Archivos nuevos:
+- src/middleware/trace.middleware.js
+- src/services/observabilidad.service.js
+- src/controllers/observabilidad.controller.js
+- src/routes/observabilidad.routes.js
+- public/pages/observabilidad.html
+- public/js/observabilidad.js
+- scripts/probar-observabilidad.js
+
+Archivos actualizados:
+- app.js
+- package.json
+
+No crea ni altera tablas SQL Server.
+No cambia los 40 servicios empresariales.
+Las métricas se guardan solo en memoria y se reinician al reiniciar el servidor.
+
+Prueba:
+  npm run observabilidad:probar
+
+Pantalla:
+  http://localhost:3000/pages/observabilidad.html

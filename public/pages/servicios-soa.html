@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Servicios SOA | EduPerú</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/dashboard.css">
+  <link rel="stylesheet" href="/css/responsive.css">
+  <script src="https://unpkg.com/lucide@latest" defer></script>
+  <style>
+    .soa-wrap { padding-bottom: 48px; }
+    .soa-hero { border:1px solid rgba(148,163,184,.22);border-radius:20px;padding:26px;margin-bottom:22px; }
+    .soa-hero h1 { margin:.4rem 0 .7rem;font-size:clamp(1.7rem,3vw,2.4rem); }
+    .soa-hero p { max-width:850px;line-height:1.65; }
+    .soa-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px; }
+    .soa-card { border:1px solid rgba(148,163,184,.22);border-radius:18px;padding:20px;background:var(--surface,#fff); }
+    .soa-head { display:flex;align-items:center;gap:11px;margin-bottom:12px; }
+    .soa-icon { width:42px;height:42px;border-radius:12px;display:grid;place-items:center;background:rgba(37,99,235,.1); }
+    .soa-card h3 { margin:0;font-size:1rem; }
+    .soa-card p { margin:0 0 13px;line-height:1.55;font-size:.9rem; }
+    .soa-ok { font-size:.78rem;font-weight:700;display:inline-flex;align-items:center;gap:7px; }
+    .soa-ok:before { content:"";width:8px;height:8px;border-radius:50%;background:#22c55e; }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-logo">EP</div>
+      <div class="brand-text"><h1>EduPerú</h1><span>Plataforma Nacional</span></div>
+    </div>
+    <div class="sidebar-country">
+      <span class="country-flag">🇵🇪</span>
+      <div><strong>Perú</strong><small>Cobertura nacional</small></div>
+    </div>
+    <nav class="sidebar-nav"></nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-status">
+        <span class="status-dot"></span>
+        <div><strong>Sistema operativo</strong><small>EduPerú SOA · Integrado</small></div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="main-wrapper">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-button menu-button" id="menuButton" type="button"><i data-lucide="menu"></i></button>
+        <div><span class="page-eyebrow">Arquitectura técnica</span><h2>Servicios SOA</h2></div>
+      </div>
+    </header>
+
+    <main class="main-content soa-wrap">
+      <section class="soa-hero">
+        <span class="page-eyebrow">EDUPERÚ SOA</span>
+        <h1>Servicios y componentes integrados</h1>
+        <p>Componentes técnicos que sostienen las funciones visibles de EduPerú y aportan coordinación, resiliencia, trazabilidad, desacoplamiento, eventos, despliegue y seguridad.</p>
+      </section>
+
+      <section class="soa-grid">
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="git-branch"></i></div><h3>SAGA</h3></div><p>Coordinación de operaciones distribuidas y compensaciones.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="workflow"></i></div><h3>Orquestación</h3></div><p>Coordinación de múltiples servicios educativos.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="shield-check"></i></div><h3>Resiliencia</h3></div><p>Circuit Breaker, Retry, Timeout y fallback.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="scan-search"></i></div><h3>Observabilidad</h3></div><p>TraceId y registros para diagnóstico de solicitudes.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="hexagon"></i></div><h3>Arquitectura Hexagonal</h3></div><p>Puertos y adaptadores desacoplados de fuentes externas.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="radio-tower"></i></div><h3>Hermes / Event Bus</h3></div><p>Eventos internos, suscriptores y aislamiento de fallos.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="container"></i></div><h3>Docker + CI</h3></div><p>Contenerización, healthcheck e integración continua.</p><span class="soa-ok">Integrado</span></article>
+        <article class="soa-card"><div class="soa-head"><div class="soa-icon"><i data-lucide="mail-check"></i></div><h3>Correo + Auth</h3></div><p>Verificación, recuperación de contraseña y correo real.</p><span class="soa-ok">Integrado</span></article>
+      </section>
+    </main>
+  </div>
+</div>
+
+<script src="/js/sidebar-global.js"></script>
+<script>
+window.addEventListener("load", () => {
+  if (window.lucide) window.lucide.createIcons();
+  const b=document.getElementById("menuButton"), s=document.getElementById("sidebar");
+  if(b&&s)b.addEventListener("click",()=>s.classList.toggle("open"));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+EDUPERÚ SOA - RESILIENCIA PRONABEC V1
+
+Incluye:
+- Timeout controlado para API PRONABEC.
+- Retry con backoff (2 reintentos).
+- Circuit Breaker (abre tras 3 fallos consecutivos).
+- Rechazo rápido mientras el circuito está abierto.
+- Mantiene la caída hacia la fuente oficial alterna ya existente.
+- Prueba automática: npm run resiliencia:probar
+
+Instalar copiando el contenido de esta carpeta encima de C:\PronabecSOA.
+No modifica SQL Server ni requiere tablas nuevas.

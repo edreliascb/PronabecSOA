@@ -16,7 +16,7 @@ async function consultar(req, res) {
                 .realizarConsultaCompleta();
 
 
-        res.json({
+        return res.json({
 
             proyecto:
                 "PronabecSOA",
@@ -25,24 +25,65 @@ async function consultar(req, res) {
                 "Arquitectura Orientada a Servicios",
 
             descripcion:
-                "Consulta integrada de servicios PRONABEC",
+                "Consulta integrada de servicios educativos",
 
-            resultado:
-                resultado
-
+            resultado
         });
 
     } catch (error) {
 
-        res.status(500).json({
+        return res
+            .status(500)
+            .json({
 
-            mensaje:
-                "No se pudo ejecutar el servicio orquestador.",
+                success:
+                    false,
 
-            detalle:
-                error.message
+                servicio:
+                    "ConsultaEducativaService",
 
+                mensaje:
+                    "No se pudo ejecutar el servicio orquestador.",
+
+                detalle:
+                    error.message
+            });
+    }
+}
+
+
+// ======================================================
+// DEMOSTRACIÓN DE ORQUESTACIÓN
+// ======================================================
+
+async function orquestar(req, res) {
+
+    try {
+
+        const resultado =
+            await consultaService
+                .ejecutarOrquestacionDemostrable();
+
+
+        return res.json({
+            success: true,
+            proyecto: "EduPerú SOA",
+            resultado
         });
+
+    } catch (error) {
+
+        return res
+            .status(500)
+            .json({
+                success: false,
+                servicio:
+                    "ConsultaEducativaService",
+                mensaje:
+                    "No se pudo ejecutar la demostración de orquestación.",
+                detalle:
+                    error.message
+            });
     }
 }
 
@@ -52,5 +93,6 @@ async function consultar(req, res) {
 // ======================================================
 
 module.exports = {
-    consultar
+    consultar,
+    orquestar
 };

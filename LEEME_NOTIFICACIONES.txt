@@ -1,0 +1,20 @@
+EDUPERU - CENTRO DE NOTIFICACIONES V1
+
+Este parche agrega:
+- Pantalla /pages/notificaciones.html
+- Listado personal protegido por JWT
+- KPIs de total/no leídas/oportunidades/documentos
+- Filtros por tipo
+- Marcar una notificación como leída
+- Marcar todas como leídas
+- Eliminar notificación
+- Script npm run notificaciones:probar
+
+Instalación (PowerShell):
+1. Detén npm start si está ejecutándose.
+2. Copia el contenido de esta carpeta encima de C:\PronabecSOA conservando las rutas.
+3. Ejecuta npm start.
+4. Abre http://localhost:3000/pages/notificaciones.html
+5. En otra terminal: npm run notificaciones:probar
+
+No modifica SAGA, seguimiento, calendario ni otros módulos ya terminados.

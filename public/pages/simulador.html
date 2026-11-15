@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulador informativo de elegibilidad de EduPerú SOA">
+    <title>EduPerú SOA | Simulador de Becas</title>
+
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/simulador.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+    <style>
+        .simulator-action-status{margin-top:12px;padding:10px 14px;border-radius:10px;font-size:14px;background:#eef4ff;color:#1e4fa3;border:1px solid #cfe0ff}
+        .simulator-action-status[data-tipo="ok"]{background:#edf9f0;color:#176b33;border-color:#ccebd4}
+        .simulator-action-status[data-tipo="error"]{background:#fff1f1;color:#a12a2a;border-color:#f1cccc}
+        .simulator-action-status.hidden{display:none}
+    </style>
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo">EP</div>
+            <div class="brand-text">
+                <h1>EduPerú</h1>
+                <span>Plataforma Nacional</span>
+            </div>
+        </div>
+
+        <div class="sidebar-country">
+            <span class="country-flag">🇵🇪</span>
+            <div>
+                <strong>Perú</strong>
+                <small>Orientación educativa</small>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <span class="nav-title">GENERAL</span>
+
+            <a href="/" class="nav-item">
+                <i data-lucide="layout-dashboard"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/pages/oportunidades.html" class="nav-item">
+                <i data-lucide="search"></i>
+                <span>Oportunidades</span>
+            </a>
+
+            <a href="/pages/carreras.html" class="nav-item">
+                <i data-lucide="graduation-cap"></i>
+                <span>Carreras</span>
+            </a>
+
+            <a href="/pages/instituciones.html" class="nav-item">
+                <i data-lucide="building-2"></i>
+                <span>Instituciones</span>
+            </a>
+
+            <a href="/pages/convenios.html" class="nav-item">
+                <i data-lucide="handshake"></i>
+                <span>Convenios</span>
+            </a>
+
+            <a href="/pages/requisitos.html" class="nav-item">
+                <i data-lucide="files"></i>
+                <span>Requisitos</span>
+            </a>
+
+            <a href="/pages/simulador.html" class="nav-item active">
+                <i data-lucide="clipboard-check"></i>
+                <span>Simulador de becas</span>
+            </a>
+
+            <span class="nav-title">MI ESPACIO</span>
+
+            <a href="/pages/favoritos.html" class="nav-item">
+                <i data-lucide="heart"></i>
+                <span>Favoritos</span>
+            </a>
+
+            <a href="/pages/alertas.html" class="nav-item">
+                <i data-lucide="bell"></i>
+                <span>Alertas</span>
+            </a>
+
+            <span class="nav-title">INFORMACIÓN</span>
+
+            <a href="/pages/estadisticas.html" class="nav-item">
+                <i data-lucide="chart-no-axes-combined"></i>
+                <span>Estadísticas</span>
+            </a>
+
+            <a href="/pages/estado.html" class="nav-item">
+                <i data-lucide="activity"></i>
+                <span>Estado del sistema</span>
+            </a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <div class="sidebar-status">
+                <span class="status-dot"></span>
+                <div>
+                    <strong>Simulación informativa</strong>
+                    <small>No reemplaza a PRONABEC</small>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar simulator-topbar">
+            <div class="topbar-left">
+                <button class="menu-button" id="menuButton" type="button" aria-label="Abrir menú">
+                    <i data-lucide="menu"></i>
+                </button>
+                <div>
+                    <strong>Simulador de elegibilidad</strong>
+                    <span>Pre-evaluación basada únicamente en información oficial disponible</span>
+                </div>
+            </div>
+            <div class="simulator-session" id="sessionBadge">Verificando sesión...</div>
+        </header>
+
+        <main class="main-content simulator-content">
+            <section class="simulator-hero">
+                <div>
+                    <span class="page-eyebrow">ORIENTACIÓN EDUCATIVA</span>
+                    <h1>¿A qué becas podría postular?</h1>
+                    <p>
+                        Completa tus datos y EduPerú revisará las oportunidades oficiales disponibles.
+                        Solo se automatizan criterios que estén publicados de forma estructurada por la fuente oficial.
+                    </p>
+                </div>
+                <div class="hero-shield">
+                    <i data-lucide="shield-check"></i>
+                    <div>
+                        <strong>Sin datos inventados</strong>
+                        <span>Si una regla no puede comprobarse, se marca para revisión.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="login-required hidden" id="loginRequired">
+                <i data-lucide="lock-keyhole"></i>
+                <div>
+                    <h2>Necesitas iniciar sesión</h2>
+                    <p>El simulador utiliza tu perfil de EduPerú y requiere una sesión válida.</p>
+                </div>
+                <a href="/pages/login.html" class="sim-btn sim-btn-primary">Iniciar sesión</a>
+            </section>
+
+            <div class="sim-grid" id="simulatorArea">
+                <section class="sim-card form-card">
+                    <div class="section-heading">
+                        <div>
+                            <span class="section-kicker">PASO 1</span>
+                            <h2>Tus datos</h2>
+                        </div>
+                        <button type="button" class="sim-btn sim-btn-light" id="loadProfileBtn">
+                            <i data-lucide="user-round-check"></i>
+                            Usar mi perfil
+                        </button>
+                    </div>
+
+                    <form id="simulatorForm" autocomplete="off">
+                        <div class="form-grid">
+                            <label class="field">
+                                <span>Edad</span>
+                                <input type="number" name="edad" min="12" max="100" placeholder="Ej. 18">
+                            </label>
+
+                            <label class="field">
+                                <span>Promedio (0 a 20)</span>
+                                <input type="number" name="promedio" min="0" max="20" step="0.01" placeholder="Ej. 16.5">
+                            </label>
+
+                            <label class="field">
+                                <span>Departamento</span>
+                                <input type="text" name="departamento" placeholder="Ej. San Martín">
+                            </label>
+
+                            <label class="field">
+                                <span>Provincia</span>
+                                <input type="text" name="provincia" placeholder="Ej. Moyobamba">
+                            </label>
+
+                            <label class="field">
+                                <span>Distrito</span>
+                                <input type="text" name="distrito" placeholder="Ej. Moyobamba">
+                            </label>
+
+                            <label class="field">
+                                <span>Nivel de estudios</span>
+                                <select name="nivel_estudio">
+                                    <option value="">Seleccionar</option>
+                                    <option value="Secundaria">Secundaria</option>
+                                    <option value="Egresado de secundaria">Egresado de secundaria</option>
+                                    <option value="Técnico">Técnico</option>
+                                    <option value="Universitario">Universitario</option>
+                                    <option value="Egresado universitario">Egresado universitario</option>
+                                </select>
+                            </label>
+
+                            <label class="field field-wide">
+                                <span>Carrera de interés</span>
+                                <input type="text" name="carrera_interes" placeholder="Ej. Ingeniería de Sistemas">
+                            </label>
+
+                            <label class="field field-wide">
+                                <span>Institución</span>
+                                <input type="text" name="institucion" placeholder="Ej. UTP">
+                            </label>
+
+                            <label class="field">
+                                <span>Situación económica / SISFOH</span>
+                                <select name="situacion_economica">
+                                    <option value="">No especificar</option>
+                                    <option value="No pobre">No pobre</option>
+                                    <option value="Pobre">Pobre</option>
+                                    <option value="Pobre extremo">Pobre extremo</option>
+                                </select>
+                            </label>
+
+                            <label class="field">
+                                <span>Filtrar por beca (opcional)</span>
+                                <input type="text" name="texto" placeholder="Ej. Beca 18">
+                            </label>
+                        </div>
+
+                        <div class="form-note">
+                            <i data-lucide="info"></i>
+                            <p>
+                                Estos datos se usan solo para esta simulación. No modifican tu perfil automáticamente.
+                                La evaluación oficial siempre corresponde a PRONABEC y a las bases de cada concurso.
+                            </p>
+                        </div>
+
+                        <button type="button" class="sim-btn sim-btn-primary sim-btn-large" id="simulateBtn">
+                            <i data-lucide="sparkles"></i>
+                            Analizar oportunidades
+                        </button>
+                        <div id="simulatorActionStatus" class="simulator-action-status" data-tipo="info">
+                            Simulador listo para analizar.
+                        </div>
+                    </form>
+                </section>
+
+                <aside class="sim-card guide-card">
+                    <span class="section-kicker">CÓMO SE INTERPRETA</span>
+                    <h2>Estados del resultado</h2>
+
+                    <div class="status-guide">
+                        <div class="guide-row">
+                            <span class="status-pill status-good">Cumple preevaluación</span>
+                            <p>Los criterios estructurados que pudieron evaluarse coinciden con tus datos.</p>
+                        </div>
+                        <div class="guide-row">
+                            <span class="status-pill status-review">Requiere validación</span>
+                            <p>Hay criterios o documentos que necesitan revisión manual.</p>
+                        </div>
+                        <div class="guide-row">
+                            <span class="status-pill status-neutral">No determinable</span>
+                            <p>La fuente oficial no publicó reglas estructuradas suficientes.</p>
+                        </div>
+                        <div class="guide-row">
+                            <span class="status-pill status-bad">No cumple preevaluación</span>
+                            <p>Al menos un criterio estructurado evaluable no coincide.</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="results-section hidden" id="resultsSection">
+                <div class="results-header">
+                    <div>
+                        <span class="section-kicker">PASO 2</span>
+                        <h2>Resultado de la preevaluación</h2>
+                        <p id="resultSummaryText">Resultados oficiales disponibles.</p>
+                    </div>
+                    <div class="source-box" id="sourceBox"></div>
+                </div>
+
+                <div class="summary-grid" id="summaryGrid"></div>
+                <div class="results-list" id="resultsList"></div>
+
+                <div class="official-warning">
+                    <i data-lucide="triangle-alert"></i>
+                    <div>
+                        <strong>Importante</strong>
+                        <p id="officialWarningText">
+                            Esta herramienta es informativa y no representa una decisión oficial de PRONABEC.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sim-card error-card hidden" id="errorCard">
+                <i data-lucide="circle-alert"></i>
+                <div>
+                    <h2>No se pudo completar la simulación</h2>
+                    <p id="errorMessage"></p>
+                </div>
+            </section>
+        </main>
+    </div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<script src="/js/auth-client.js"></script>
+<script src="/js/simulador.js?v=3"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    });
+</script>
+    <script src="/js/sidebar-global.js" defer></script>
+</body>
+</html>

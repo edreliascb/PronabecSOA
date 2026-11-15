@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduPerú - Gestión personal de documentos educativos">
+    <title>EduPerú | Mis documentos</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/documentos.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo">EP</div>
+            <div class="brand-text"><h1>EduPerú</h1><span>Plataforma Nacional</span></div>
+        </div>
+        <div class="sidebar-country"><span class="country-flag">🇵🇪</span><div><strong>Perú</strong><small>Cobertura nacional</small></div></div>
+        <nav class="sidebar-nav">
+            <span class="nav-title">GENERAL</span>
+            <a href="/" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+            <a href="/pages/oportunidades.html" class="nav-item"><i data-lucide="search"></i><span>Oportunidades</span></a>
+            <a href="/pages/carreras.html" class="nav-item"><i data-lucide="graduation-cap"></i><span>Carreras</span></a>
+            <a href="/pages/instituciones.html" class="nav-item"><i data-lucide="building-2"></i><span>Instituciones</span></a>
+            <a href="/pages/convenios.html" class="nav-item"><i data-lucide="handshake"></i><span>Convenios</span></a>
+            <a href="/pages/requisitos.html" class="nav-item"><i data-lucide="files"></i><span>Requisitos</span></a>
+            <a href="/pages/simulador.html" class="nav-item"><i data-lucide="clipboard-check"></i><span>Simulador de becas</span></a>
+            <a href="/pages/calendario.html" class="nav-item"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+            <span class="nav-title">MI ESPACIO</span>
+            <a href="/pages/favoritos.html" class="nav-item"><i data-lucide="heart"></i><span>Favoritos</span></a>
+            <a href="/pages/alertas.html" class="nav-item"><i data-lucide="bell"></i><span>Alertas</span></a>
+            <a href="/pages/seguimiento.html" class="nav-item"><i data-lucide="route"></i><span>Seguimiento</span></a>
+            <a href="/pages/documentos.html" class="nav-item active"><i data-lucide="folder-check"></i><span>Mis documentos</span></a>
+            <a href="/pages/perfil.html" class="nav-item"><i data-lucide="user"></i><span>Mi perfil</span></a>
+            <span class="nav-title">INFORMACIÓN</span>
+            <a href="/pages/estadisticas.html" class="nav-item"><i data-lucide="chart-no-axes-combined"></i><span>Estadísticas</span></a>
+            <a href="/pages/estado.html" class="nav-item"><i data-lucide="activity"></i><span>Estado del sistema</span></a>
+        </nav>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-button" id="menuButton" type="button"><i data-lucide="menu"></i></button>
+                <div><strong>Mis documentos</strong><span class="topbar-subtitle">Checklist documental personal</span></div>
+            </div>
+            <div class="topbar-actions">
+                <button class="icon-button" id="refreshButton" title="Actualizar" type="button"><i data-lucide="refresh-cw"></i></button>
+            </div>
+        </header>
+
+        <main class="main-content documents-main">
+            <section class="documents-hero">
+                <div>
+                    <span class="eyebrow">MI ESPACIO</span>
+                    <h2>Organiza tus documentos</h2>
+                    <p>Registra y valida los documentos que preparas para tus oportunidades. Este módulo es personal y no envía archivos ni modifica postulaciones oficiales de PRONABEC.</p>
+                </div>
+                <button class="btn btn-primary" id="newDocumentButton" type="button"><i data-lucide="file-plus-2"></i> Registrar documento</button>
+            </section>
+
+            <section class="document-kpis">
+                <article><span>Total</span><strong id="kpiTotal">0</strong><small>documentos registrados</small></article>
+                <article><span>Válidos</span><strong id="kpiValidos">0</strong><small>revisión básica correcta</small></article>
+                <article><span>Pendientes</span><strong id="kpiPendientes">0</strong><small>por validar</small></article>
+                <article><span>Progreso</span><strong id="kpiProgreso">0%</strong><small>documentación revisada</small></article>
+            </section>
+
+            <section class="document-progress-card">
+                <div class="progress-copy"><div><span>AVANCE DOCUMENTAL</span><strong id="progressText">0 de 0 revisados</strong></div><small id="progressDetail">Registra tus documentos para comenzar.</small></div>
+                <div class="progress-track"><div id="progressBar" class="progress-bar" style="width:0%"></div></div>
+            </section>
+
+            <section class="document-toolbar">
+                <div class="document-search"><i data-lucide="search"></i><input id="documentSearch" type="search" placeholder="Buscar por tipo, archivo o descripción..."></div>
+                <select id="documentFilter">
+                    <option value="TODOS">Todos los estados</option>
+                    <option value="PENDIENTE">Pendientes</option>
+                    <option value="VALIDO">Válidos</option>
+                    <option value="OBSERVADOS">Observados</option>
+                </select>
+            </section>
+
+            <div id="documentStatus" class="document-status" role="status">Cargando documentos...</div>
+            <section id="documentGrid" class="document-grid"></section>
+            <section id="documentEmpty" class="document-empty" hidden>
+                <i data-lucide="folder-open"></i>
+                <h3>Aún no tienes documentos registrados</h3>
+                <p>Agrega el primero para comenzar tu checklist personal.</p>
+                <button class="btn btn-primary" type="button" data-open-create>Registrar documento</button>
+            </section>
+        </main>
+
+        <footer class="app-footer"><div><strong>EduPerú SOA</strong><span>Gestión documental personal</span></div><div>No modifica postulaciones oficiales</div></footer>
+    </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="document-modal" id="documentModal" hidden>
+    <div class="document-modal-backdrop" data-close-modal></div>
+    <section class="document-modal-card" role="dialog" aria-modal="true" aria-labelledby="documentModalTitle">
+        <button class="modal-close" type="button" data-close-modal aria-label="Cerrar"><i data-lucide="x"></i></button>
+        <div id="documentModalContent"></div>
+    </section>
+</div>
+
+<script src="/js/api.js"></script>
+<script src="/js/auth-client.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/documentos.js"></script>
+    <script src="/js/sidebar-global.js" defer></script>
+</body>
+</html>

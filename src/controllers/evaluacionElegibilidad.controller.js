@@ -49,36 +49,116 @@ function responderError(
 }
 
 
-async function evaluar(req, res) {
+async function evaluar(
+    req,
+    res
+) {
+
     try {
+
         const oportunidadId =
             req.body?.oportunidadId ??
             req.body?.oportunidad_id;
 
+
         if (!oportunidadId) {
-            return res.status(400).json({
-                success: false,
-                servicio: "EvaluacionElegibilidadService",
-                mensaje: "oportunidadId es obligatorio."
-            });
+
+            return res
+                .status(400)
+                .json({
+
+                    success:
+                        false,
+
+                    servicio:
+                        "EvaluacionElegibilidadService",
+
+                    mensaje:
+                        "oportunidadId es obligatorio."
+
+                });
+
         }
 
+
         const resultado =
-            await service.evaluarElegibilidad(
-                req.usuario.id,
-                oportunidadId
-            );
+            await service
+                .evaluarElegibilidad(
+                    req.usuario.id,
+                    oportunidadId
+                );
+
 
         return res.json({
-            success: true,
-            servicio: "EvaluacionElegibilidadService",
+
+            success:
+                true,
+
+            servicio:
+                "EvaluacionElegibilidadService",
+
             resultado
+
         });
+
     } catch (error) {
-        return responderError(res, error, "EvaluacionElegibilidadService");
+
+        return responderError(
+            res,
+            error,
+            "EvaluacionElegibilidadService"
+        );
+
     }
+
 }
 
+
+async function simular(
+    req,
+    res
+) {
+
+    try {
+
+        const resultado =
+            await service
+                .simularElegibilidad(
+                    req.usuario.id,
+                    req.body ||
+                    {}
+                );
+
+
+        return res.json({
+
+            success:
+                true,
+
+            servicio:
+                "EvaluacionElegibilidadService",
+
+            resultado
+
+        });
+
+    } catch (error) {
+
+        return responderError(
+            res,
+            error,
+            "EvaluacionElegibilidadService"
+        );
+
+    }
+
+}
+
+
 module.exports = {
-    evaluar
+
+    evaluar,
+
+    simular
+
 };

@@ -1951,13 +1951,12 @@ function alternarComparacion(
 }
 
 
-function mostrarComparacion() {
+async function mostrarComparacion() {
 
     if (
         oportunidadesState
             .comparacion
-            .length <
-        2
+            .length < 2
     ) {
 
         EduPeruUI
@@ -1967,9 +1966,7 @@ function mostrarComparacion() {
                 "warning"
             );
 
-
         return;
-
     }
 
 
@@ -1977,100 +1974,361 @@ function mostrarComparacion() {
         oportunidadesState
             .comparacion
             .map(
-                indice =>
-                    oportunidadesState
-                        .todos[
-                            indice
-                        ]
+                indice => ({
+                    indice,
+                    registro:
+                        oportunidadesState
+                            .todos[indice]
+                })
             )
             .filter(
-                Boolean
+                item => Boolean(item.registro)
             );
 
 
-    const encabezados =
-        registros
+    const selecciones =
+        registros.map(
+            item => ({
+                idCliente:
+                    item.indice,
+                carrera:
+                    obtenerCarrera(
+                        item.registro
+                    ) ||
+                    "Carrera no especificada",
+                institucion:
+                    obtenerInstitucion(
+                        item.registro
+                    ) ||
+                    "N/D",
+                region:
+                    obtenerRegion(
+                        item.registro
+                    ) ||
+                    "N/D",
+                convocatoria:
+                    obtenerConvocatoria(
+                        item.registro
+                    ) ||
+                    "",
+                estado:
+                    obtenerEstado(
+                        item.registro
+                    ) ||
+                    "No publicado",
+                fuente:
+                    oportunidadesState
+                        .servicio
+                        ?.fuente ||
+                    "CarreraService"
+            })
+        );
+
+
+    EduPeruUI
+        ?.mostrarToast?.(
+            "Comparador",
+            "Consultando información oficial para comparar...",
+            "info"
+        );
+
+
+    try {
+
+        const respuesta =
+            await fetch(
+                "/api/comparador-oportunidades",
+                {
+                    method:
+                        "POST",
+                    headers: {
+                        "Content-Type":
+                            "application/json",
+                        Accept:
+                            "application/json"
+                    },
+                    body:
+                        JSON.stringify({
+                            selecciones
+                        })
+                }
+            );
+
+
+        const json =
+            await respuesta.json();
+
+
+        if (!respuesta.ok) {
+            throw new Error(
+                json?.mensaje ||
+                `HTTP ${respuesta.status}`
+            );
+        }
+
+
+        renderizarComparacionOficial(
+            json.resultado
+        );
+
+    } catch (error) {
+
+        console.error(
+            "[Comparador]",
+            error
+        );
+
+        EduPeruUI
+            ?.mostrarToast?.(
+                "No se pudo comparar",
+                error.message,
+                "error"
+            );
+
+    }
+
+}
+
+
+function renderizarComparacionOficial(
+    resultado
+) {
+
+    const items =
+        resultado?.comparacion ||
+        [];
+
+
+    if (!items.length) {
+        throw new Error(
+            "El comparador no devolvió resultados."
+        );
+    }
+
+
+    const columnas =
+        items
             .map(
-                registro =>
+                item =>
                     `<th>${escapar(
-                        obtenerCarrera(
-                            registro
-                        ) ||
-                        "Carrera"
+                        item.carrera ||
+                        "Oportunidad"
                     )}</th>`
             )
             .join("");
 
 
-    const instituciones =
-        registros
-            .map(
-                registro =>
-                    `<td>${escapar(
-                        obtenerInstitucion(
-                            registro
-                        ) ||
-                        "No especificada"
-                    )}</td>`
-            )
-            .join("");
+    const fila =
+        (
+            titulo,
+            render
+        ) => `
+            <tr>
+                <th>${escapar(titulo)}</th>
+                ${items
+                    .map(
+                        item =>
+                            `<td>${render(item)}</td>`
+                    )
+                    .join("")}
+            </tr>
+        `;
 
 
-    const regiones =
-        registros
-            .map(
-                registro =>
-                    `<td>${escapar(
-                        obtenerRegion(
-                            registro
-                        ) ||
-                        "No especificada"
-                    )}</td>`
-            )
-            .join("");
+    const textoCelda =
+        valor =>
+            escapar(
+                valor ||
+                "N/D"
+            );
+
+
+    const listaCelda =
+        valores => {
+
+            if (
+                !Array.isArray(valores) ||
+                !valores.length
+            ) {
+                return `<span class="comparison-nd">N/D</span>`;
+            }
+
+            return `
+                <ul class="comparison-list">
+                    ${valores
+                        .slice(0, 6)
+                        .map(
+                            valor =>
+                                `<li>${escapar(
+                                    typeof valor === "string"
+                                        ? valor
+                                        : valor?.nombre ||
+                                          "N/D"
+                                )}</li>`
+                        )
+                        .join("")}
+                </ul>
+            `;
+        };
+
+
+    const fechasCelda =
+        item => {
+
+            const fechas =
+                item?.becaRelacionada
+                    ?.fechas ||
+                [];
+
+            if (!fechas.length) {
+                return `<span class="comparison-nd">N/D</span>`;
+            }
+
+            return `
+                <ul class="comparison-list">
+                    ${fechas
+                        .slice(0, 5)
+                        .map(
+                            fecha => `
+                                <li>
+                                    <strong>${escapar(
+                                        fecha.momento ||
+                                        "Etapa"
+                                    )}</strong><br>
+                                    ${escapar(
+                                        fecha.fechaInicio ||
+                                        "N/D"
+                                    )}
+                                    →
+                                    ${escapar(
+                                        fecha.fechaFin ||
+                                        "N/D"
+                                    )}
+                                </li>
+                            `
+                        )
+                        .join("")}
+                </ul>
+            `;
+        };
+
+
+    const tabla = `
+        <div class="comparison-summary">
+            <span class="comparison-status ${
+                resultado.estado === "COMPLETADA"
+                    ? "ok"
+                    : "warning"
+            }">
+                ${escapar(
+                    resultado.estado ||
+                    "COMPLETADA"
+                )}
+            </span>
+            <span>
+                ${escapar(
+                    String(
+                        resultado.totalComparadas ||
+                        items.length
+                    )
+                )} oportunidades ·
+                ${escapar(
+                    String(
+                        resultado.tiempoMs ||
+                        0
+                    )
+                )} ms
+            </span>
+        </div>
+
+        <div class="comparison-scroll">
+            <table class="comparison-table comparison-table-rich">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        ${columnas}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    ${fila(
+                        "Institución",
+                        item => textoCelda(item.institucion)
+                    )}
+
+                    ${fila(
+                        "Región / sede",
+                        item => textoCelda(item.region)
+                    )}
+
+                    ${fila(
+                        "Convocatoria",
+                        item => textoCelda(
+                            item.convocatoria ||
+                            item.becaRelacionada?.nombre
+                        )
+                    )}
+
+                    ${fila(
+                        "Estado publicado",
+                        item => textoCelda(item.estado)
+                    )}
+
+                    ${fila(
+                        "Fechas oficiales",
+                        fechasCelda
+                    )}
+
+                    ${fila(
+                        "Beneficios oficiales",
+                        item => listaCelda(item.beneficios)
+                    )}
+
+                    ${fila(
+                        "Requisitos oficiales",
+                        item => listaCelda(item.requisitos)
+                    )}
+
+                    ${fila(
+                        "Institución verificada",
+                        item => item.institucionVerificada
+                            ? `<span class="comparison-verified">Sí</span><br>${escapar(
+                                item.institucionVerificada.tipo ||
+                                ""
+                              )}`
+                            : `<span class="comparison-nd">No verificable</span>`
+                    )}
+
+                    ${fila(
+                        "Fuentes",
+                        item => listaCelda(item.fuentes)
+                    )}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="comparison-disclaimer">
+            <i data-lucide="info"></i>
+            <p>${escapar(
+                resultado.advertencia ||
+                "N/D indica información no verificable automáticamente en la fuente oficial."
+            )}</p>
+        </div>
+    `;
 
 
     EduPeruUI.abrirModal({
-
         titulo:
             "Comparador de oportunidades",
-
         subtitulo:
-            "Comparación de registros educativos recuperados por CarreraService.",
-
+            "Comparación enriquecida con servicios oficiales de EduPerú.",
         contenido:
-            `
-            <div style="overflow-x:auto">
-
-                <table class="comparison-table">
-
-                    <thead>
-                        <tr>
-                            <th>Característica</th>
-                            ${encabezados}
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-                            <th>Institución</th>
-                            ${instituciones}
-                        </tr>
-
-                        <tr>
-                            <th>Región / sede</th>
-                            ${regiones}
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-            `
-
+            tabla
     });
+
+
+    EduPeruUI
+        ?.actualizarIconos?.();
 
 }
 

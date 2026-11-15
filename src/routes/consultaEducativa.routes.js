@@ -7,10 +7,17 @@ const consultaController = require(
 );
 
 
-// CONSULTA ORQUESTADA
+// CONSULTA ORQUESTADA ORIGINAL
 router.get(
     "/",
     consultaController.consultar
+);
+
+
+// DEMOSTRACIÓN TÉCNICA DE ORQUESTACIÓN
+router.get(
+    "/orquestacion",
+    consultaController.orquestar
 );
 
 

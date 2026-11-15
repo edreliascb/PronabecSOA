@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log*
+.env
+.env.*
+!.env.docker.example
+.git
+.github
+*.zip
+*.log
+coverage
+.tmp
+tmp
+ORQUESTACION_REVISION
+SEGUIMIENTO_VISUAL_REVISION

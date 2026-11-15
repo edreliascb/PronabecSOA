@@ -1,5 +1,5 @@
-/* =========================================================
-   EDUPERÚ
+﻿/* =========================================================
+   EDUPERÃš
    REGISTRO
 ========================================================= */
 
@@ -93,7 +93,7 @@ function configurarRegistro() {
                 ) {
 
                     mostrarAlertaRegistro(
-                        "Las contraseñas no coinciden.",
+                        "Las contraseÃ±as no coinciden.",
                         "error"
                     );
 
@@ -108,7 +108,7 @@ function configurarRegistro() {
                 ) {
 
                     mostrarAlertaRegistro(
-                        "La contraseña debe tener al menos 8 caracteres.",
+                        "La contraseÃ±a debe tener al menos 8 caracteres.",
                         "error"
                     );
 
@@ -139,14 +139,11 @@ function configurarRegistro() {
                             });
 
 
-                    EduPeruAuth
-                        .guardarSesion(
-                            respuesta.resultado
-                        );
+                    
 
 
                     mostrarAlertaRegistro(
-                        "Cuenta creada correctamente.",
+                        respuesta.mensaje || "Cuenta creada. Revisa tu correo para verificarla.",
                         "success"
                     );
 
@@ -154,8 +151,7 @@ function configurarRegistro() {
                     setTimeout(
                         () => {
 
-                            window.location.href =
-                                "/";
+                            window.location.href = "/pages/login.html";
 
                         },
                         700

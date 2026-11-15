@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificaciones | EduPerú</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/notificaciones.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand"><div class="brand-logo">EP</div><div class="brand-text"><h1>EduPerú</h1><span>Plataforma Nacional</span></div></div>
+        <div class="sidebar-country"><span class="country-flag">🇵🇪</span><div><strong>Perú</strong><small>Cobertura nacional</small></div></div>
+        <nav class="sidebar-nav">
+            <span class="nav-title">GENERAL</span>
+            <a href="/" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+            <a href="/pages/oportunidades.html" class="nav-item"><i data-lucide="search"></i><span>Oportunidades</span></a>
+            <a href="/pages/carreras.html" class="nav-item"><i data-lucide="graduation-cap"></i><span>Carreras</span></a>
+            <a href="/pages/instituciones.html" class="nav-item"><i data-lucide="building-2"></i><span>Instituciones</span></a>
+            <a href="/pages/convenios.html" class="nav-item"><i data-lucide="handshake"></i><span>Convenios</span></a>
+            <a href="/pages/simulador.html" class="nav-item"><i data-lucide="clipboard-check"></i><span>Simulador de becas</span></a>
+            <a href="/pages/calendario.html" class="nav-item"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+            <a href="/pages/seguimiento.html" class="nav-item"><i data-lucide="route"></i><span>Seguimiento</span></a>
+            <span class="nav-title">MI ESPACIO</span>
+            <a href="/pages/favoritos.html" class="nav-item"><i data-lucide="heart"></i><span>Favoritos</span></a>
+            <a href="/pages/alertas.html" class="nav-item"><i data-lucide="bell-ring"></i><span>Alertas</span></a>
+            <a href="/pages/notificaciones.html" class="nav-item active"><i data-lucide="inbox"></i><span>Notificaciones</span></a>
+            <a href="/pages/perfil.html" class="nav-item"><i data-lucide="user-round"></i><span>Mi perfil</span></a>
+            <span class="nav-title">INFORMACIÓN</span>
+            <a href="/pages/estadisticas.html" class="nav-item"><i data-lucide="chart-no-axes-combined"></i><span>Estadísticas</span></a>
+            <a href="/pages/estado.html" class="nav-item"><i data-lucide="activity"></i><span>Estado del sistema</span></a>
+        </nav>
+        <div class="sidebar-footer"><div class="sidebar-status"><span class="status-dot"></span><div><strong>Sistema operativo</strong><small>Arquitectura SOA</small></div></div></div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left"><button class="icon-button menu-button" id="menuButton" type="button"><i data-lucide="menu"></i></button><div class="notification-title-mini"><i data-lucide="inbox"></i><span>Centro de notificaciones</span></div></div>
+            <div class="topbar-actions"><button class="icon-button" id="refreshButton" title="Actualizar" type="button"><i data-lucide="refresh-cw"></i></button></div>
+        </header>
+
+        <main class="main-content notifications-main">
+            <section class="notifications-hero">
+                <div><span class="eyebrow">MI ESPACIO</span><h2>Centro de notificaciones</h2><p>Revisa avisos generados por EduPerú sobre oportunidades, fechas, documentos y procesos personales. Estas notificaciones son informativas y no modifican una postulación oficial de PRONABEC.</p></div>
+                <div class="hero-counter"><i data-lucide="bell"></i><strong id="heroUnread">0</strong><span>sin leer</span></div>
+            </section>
+
+            <section class="notification-kpis">
+                <article><span>Total</span><strong id="kpiTotal">0</strong><small>notificaciones</small></article>
+                <article><span>No leídas</span><strong id="kpiUnread">0</strong><small>requieren revisión</small></article>
+                <article><span>Oportunidades</span><strong id="kpiOpportunities">0</strong><small>becas y convocatorias</small></article>
+                <article><span>Documentos</span><strong id="kpiDocuments">0</strong><small>validaciones y avisos</small></article>
+            </section>
+
+            <section class="notification-toolbar">
+                <div class="filter-group" id="filterGroup">
+                    <button class="filter-chip active" data-filter="TODAS" type="button">Todas</button>
+                    <button class="filter-chip" data-filter="NO_LEIDAS" type="button">No leídas</button>
+                    <button class="filter-chip" data-filter="OPORTUNIDAD" type="button">Oportunidades</button>
+                    <button class="filter-chip" data-filter="FECHA" type="button">Fechas</button>
+                    <button class="filter-chip" data-filter="DOCUMENTO" type="button">Documentos</button>
+                </div>
+                <button class="mark-all-btn" id="markAllButton" type="button"><i data-lucide="check-check"></i> Marcar todas como leídas</button>
+            </section>
+
+            <div id="notificationMessage" class="notification-message info">Cargando notificaciones...</div>
+            <section class="notification-list" id="notificationList"></section>
+        </main>
+
+        <footer class="app-footer"><div><strong>EduPerú SOA</strong><span>Centro de notificaciones</span></div><div>Datos personales + servicios internos</div></footer>
+    </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<script src="/js/api.js"></script>
+<script src="/js/auth-client.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/notificaciones.js"></script>
+    <script src="/js/sidebar-global.js" defer></script>
+</body>
+</html>

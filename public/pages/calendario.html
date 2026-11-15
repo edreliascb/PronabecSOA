@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Calendario educativo de EduPerú con fechas oficiales, alertas y seguimiento personal.">
+    <title>Calendario educativo | EduPerú</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/calendario.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <script src="https://unpkg.com/lucide@latest" defer></script>
+</head>
+<body>
+<div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <div class="brand-logo">EP</div>
+            <div class="brand-text"><h1>EduPerú</h1><span>Plataforma Nacional</span></div>
+        </div>
+        <div class="sidebar-country">
+            <span class="country-flag">🇵🇪</span>
+            <div><strong>Perú</strong><small>Cobertura nacional</small></div>
+        </div>
+        <nav class="sidebar-nav">
+            <span class="nav-title">GENERAL</span>
+            <a href="/" class="nav-item"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+            <a href="/pages/oportunidades.html" class="nav-item"><i data-lucide="search"></i><span>Oportunidades</span></a>
+            <a href="/pages/carreras.html" class="nav-item"><i data-lucide="graduation-cap"></i><span>Carreras</span></a>
+            <a href="/pages/instituciones.html" class="nav-item"><i data-lucide="building-2"></i><span>Instituciones</span></a>
+            <a href="/pages/convenios.html" class="nav-item"><i data-lucide="handshake"></i><span>Convenios</span></a>
+            <a href="/pages/requisitos.html" class="nav-item"><i data-lucide="files"></i><span>Requisitos</span></a>
+            <a href="/pages/simulador.html" class="nav-item"><i data-lucide="clipboard-check"></i><span>Simulador de becas</span></a>
+            <a href="/pages/calendario.html" class="nav-item active"><i data-lucide="calendar-days"></i><span>Calendario</span></a>
+            <span class="nav-title">MI ESPACIO</span>
+            <a href="/pages/favoritos.html" class="nav-item"><i data-lucide="heart"></i><span>Favoritos</span></a>
+            <a href="/pages/alertas.html" class="nav-item"><i data-lucide="bell"></i><span>Alertas</span></a>
+            <span class="nav-title">INFORMACIÓN</span>
+            <a href="/pages/estadisticas.html" class="nav-item"><i data-lucide="chart-no-axes-combined"></i><span>Estadísticas</span></a>
+            <a href="/pages/estado.html" class="nav-item"><i data-lucide="activity"></i><span>Estado del sistema</span></a>
+            <a href="/pages/admin.html" class="nav-item"><i data-lucide="shield-check"></i><span>Administración</span></a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-status"><span class="status-dot"></span><div><strong>Sistema operativo</strong><small>Arquitectura SOA</small></div></div>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="icon-button menu-button" id="menuButton" type="button"><i data-lucide="menu"></i></button>
+                <div class="calendar-title-mini"><i data-lucide="calendar-days"></i><span>Calendario educativo</span></div>
+            </div>
+            <div class="topbar-actions">
+                <button class="icon-button" id="refreshButton" title="Actualizar" type="button"><i data-lucide="refresh-cw"></i></button>
+            </div>
+        </header>
+
+        <main class="main-content calendar-main">
+            <section class="calendar-hero">
+                <div>
+                    <span class="eyebrow">CALENDARIO EDUCATIVO</span>
+                    <h2>Fechas importantes en un solo lugar</h2>
+                    <p>Combina cronogramas oficiales disponibles con tus alertas y seguimientos personales. Si una fecha no está publicada oficialmente, EduPerú no la inventa.</p>
+                </div>
+                <div class="calendar-hero-badge"><i data-lucide="calendar-check-2"></i><strong id="heroTotal">0</strong><span>eventos visibles</span></div>
+            </section>
+
+            <section class="calendar-kpis">
+                <article><span>Oficiales</span><strong id="kpiOficiales">0</strong><small>PRONABEC / fuente oficial</small></article>
+                <article><span>Personales</span><strong id="kpiPersonales">0</strong><small>alertas y seguimientos</small></article>
+                <article><span>Próximos</span><strong id="kpiProximos">0</strong><small>desde hoy</small></article>
+                <article><span>Fuente oficial</span><strong id="kpiFuente">...</strong><small id="kpiFuenteDetalle">verificando</small></article>
+            </section>
+
+            <section class="calendar-toolbar-card">
+                <div class="month-navigation">
+                    <button id="prevMonth" class="calendar-icon-btn" type="button" aria-label="Mes anterior"><i data-lucide="chevron-left"></i></button>
+                    <div><span>Mes seleccionado</span><strong id="monthLabel">—</strong></div>
+                    <button id="nextMonth" class="calendar-icon-btn" type="button" aria-label="Mes siguiente"><i data-lucide="chevron-right"></i></button>
+                    <button id="todayButton" class="today-button" type="button">Hoy</button>
+                </div>
+                <div class="calendar-filters" role="group" aria-label="Filtrar eventos">
+                    <button class="filter-chip active" data-filter="TODOS" type="button">Todos</button>
+                    <button class="filter-chip" data-filter="OFICIAL" type="button">Oficiales</button>
+                    <button class="filter-chip" data-filter="PERSONAL" type="button">Mi espacio</button>
+                </div>
+            </section>
+
+            <div id="calendarMessage" class="calendar-message info">Cargando calendario...</div>
+
+            <div class="calendar-layout">
+                <section class="calendar-card">
+                    <div class="weekday-row">
+                        <span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span>
+                    </div>
+                    <div class="calendar-grid" id="calendarGrid"></div>
+                    <div class="calendar-legend">
+                        <span><i class="legend-dot official"></i> Fecha oficial</span>
+                        <span><i class="legend-dot personal"></i> Mi espacio</span>
+                        <span><i class="legend-dot today"></i> Hoy</span>
+                    </div>
+                </section>
+
+                <aside class="upcoming-card">
+                    <div class="upcoming-heading"><div><span>AGENDA</span><h3>Próximos eventos</h3></div><i data-lucide="clock-3"></i></div>
+                    <div id="upcomingList" class="upcoming-list"></div>
+                    <div class="source-note" id="sourceNote"></div>
+                </aside>
+            </div>
+
+            <section class="month-events-card">
+                <div class="section-heading"><div><span>DETALLE DEL MES</span><h3 id="eventsTitle">Eventos</h3></div><strong id="eventsCount">0</strong></div>
+                <div id="monthEvents" class="month-events"></div>
+            </section>
+        </main>
+
+        <footer class="app-footer"><div><strong>EduPerú SOA</strong><span>Calendario educativo</span></div><div>Fechas oficiales + datos personales</div></footer>
+    </div>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<script src="/js/api.js"></script>
+<script src="/js/auth-client.js"></script>
+<script src="/js/app.js"></script>
+<script src="/js/calendario.js"></script>
+    <script src="/js/sidebar-global.js" defer></script>
+</body>
+</html>

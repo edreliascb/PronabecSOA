@@ -1,5 +1,5 @@
 /* =========================================================
-   EDUPERÚ SOA
+   EDUPERÃš SOA
    SERVIDOR PRINCIPAL
 ========================================================= */
 
@@ -19,6 +19,12 @@ const swaggerUi =
 
 const swaggerSpec =
     require("./src/config/swagger");
+
+const traceMiddleware =
+    require("./src/middleware/trace.middleware");
+
+const observabilidadRoutes =
+    require("./src/routes/observabilidad.routes");
 
 
 /* =========================================================
@@ -67,6 +73,9 @@ const estadisticaRoutes =
 
 const oportunidadDetalleRoutes =
     require("./src/routes/oportunidadDetalle.routes");
+
+const comparadorOportunidadesRoutes =
+    require("./src/routes/comparadorOportunidades.routes");
 
 const healthCheckRoutes =
     require("./src/routes/healthCheck.routes");
@@ -171,9 +180,15 @@ const calendarioEducativoRoutes =
 
 const orientacionEducativaRoutes =
     require("./src/routes/orientacionEducativa.routes");
+const hexagonalPronabecRoutes =
+    require("./src/routes/hexagonalPronabec.routes");
 
 
-/* =========================================================
+
+/*const hermesRoutes =
+    require("./src/routes/hermes.routes");
+
+ =========================================================
    CREAR APP
 ========================================================= */
 
@@ -208,6 +223,15 @@ app.use(
         extended:
             true
     })
+);
+
+
+/* =========================================================
+   TRACEID + OBSERVABILIDAD TECNICA
+========================================================= */
+
+app.use(
+    traceMiddleware
 );
 
 
@@ -250,7 +274,7 @@ app.use(
         swaggerSpec,
         {
             customSiteTitle:
-                "EduPerú SOA API",
+                "EduPerÃº SOA API",
 
             explorer:
                 true,
@@ -292,7 +316,7 @@ app.get(
                 "EduPeruSOA",
 
             nombrePublico:
-                "EduPerú",
+                "EduPerÃº",
 
             descripcion:
                 "Plataforma de consulta de oportunidades educativas",
@@ -333,6 +357,9 @@ app.get(
             },
 
             servicios: {
+
+                observabilidad:
+                    "/api/observabilidad/resumen",
 
                 health:
                     "/api/health",
@@ -387,6 +414,9 @@ app.get(
 
                 oportunidadDetalle:
                     "/api/oportunidades/:indice",
+
+                comparadorOportunidades:
+                    "/api/comparador-oportunidades",
 
                 becas:
                     "/api/becas",
@@ -539,7 +569,7 @@ app.get(
 
 
 /* =========================================================
-   RUTAS DE APLICACIÓN
+   RUTAS DE APLICACIÃ“N
 ========================================================= */
 
 app.use(
@@ -635,6 +665,12 @@ app.use(
 app.use(
     "/api/oportunidades",
     oportunidadDetalleRoutes
+);
+
+
+app.use(
+    "/api/comparador-oportunidades",
+    comparadorOportunidadesRoutes
 );
 
 
@@ -787,12 +823,30 @@ app.use(
 
 
 app.use(
+    "/api/observabilidad",
+    observabilidadRoutes
+);
+
+
+
+
+app.use(
+    "/api/hexagonal/pronabec",
+    hexagonalPronabecRoutes
+);
+
+app.use(
     "/api/health",
     healthCheckRoutes
 );
 
 
-/* =========================================================
+/*app.use(
+    "/api/hermes",
+    hermesRoutes
+);
+
+ =========================================================
    HOME
 ========================================================= */
 
@@ -859,7 +913,7 @@ app.use(
         console.error("==============================================");
 
         console.error(
-            "Método:",
+            "MÃ©todo:",
             req.method
         );
 
@@ -892,7 +946,7 @@ app.use(
 
                 mensaje:
                     error.message ||
-                    "Ocurrió un error interno en el servidor."
+                    "OcurriÃ³ un error interno en el servidor."
 
             });
 
@@ -906,11 +960,12 @@ app.use(
 
 app.listen(
     PORT,
+    "0.0.0.0",
     async () => {
 
         console.log("");
         console.log("==============================================");
-        console.log("               EDUPERÚ SOA");
+        console.log("               EDUPERÃš SOA");
         console.log("==============================================");
         console.log("");
 
@@ -955,7 +1010,11 @@ app.listen(
         );
 
         console.log(
-            `Administración:  http://localhost:${PORT}/api/admin/resumen`
+            `AdministraciÃ³n:  http://localhost:${PORT}/api/admin/resumen`
+        );
+
+        console.log(
+            `Observabilidad:  http://localhost:${PORT}/api/observabilidad/resumen`
         );
 
         console.log(
@@ -1026,7 +1085,7 @@ app.listen(
 
         console.log("");
         console.log("----------------------------------------------");
-        console.log("SERVICIOS EDUPERÚ SOA");
+        console.log("SERVICIOS EDUPERÃš SOA");
         console.log("----------------------------------------------");
 
         console.log("01. ConvocatoriaService");
@@ -1073,7 +1132,7 @@ app.listen(
 
         console.log("");
         console.log("----------------------------------------------");
-        console.log("CONFIGURACIÓN");
+        console.log("CONFIGURACIÃ“N");
         console.log("----------------------------------------------");
 
         console.log(
@@ -1085,7 +1144,7 @@ app.listen(
         );
 
         console.log(
-            "Autenticación JWT habilitada"
+            "AutenticaciÃ³n JWT habilitada"
         );
 
         console.log(
@@ -1105,13 +1164,13 @@ app.listen(
         );
 
         console.log(
-            "Documentación OpenAPI disponible"
+            "DocumentaciÃ³n OpenAPI disponible"
         );
 
 
         console.log("");
         console.log("==============================================");
-        console.log("              EDUPERÚ LISTO");
+        console.log("              EDUPERÃš LISTO");
         console.log("==============================================");
         console.log("");
 
@@ -1125,3 +1184,5 @@ app.listen(
 
 module.exports =
     app;
+
+

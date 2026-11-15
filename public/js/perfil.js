@@ -149,6 +149,9 @@ async function cargarPerfil() {
         .value =
             perfil.institucion || "";
 
+
+    actualizarResumenEducativo(perfil);
+
 }
 
 
@@ -300,6 +303,51 @@ async function guardarPerfil(
 
     }
 
+}
+
+
+/* =========================================================
+   RESUMEN / COMPLETITUD DEL PERFIL
+========================================================= */
+
+function actualizarResumenEducativo(perfil) {
+
+    const campos = [
+        perfil.departamento,
+        perfil.provincia,
+        perfil.distrito,
+        perfil.carrera_interes,
+        perfil.nivel_estudio,
+        perfil.institucion
+    ];
+
+    const completos = campos.filter(valor => String(valor || "").trim()).length;
+    const porcentaje = Math.round((completos / campos.length) * 100);
+
+    const porcentajeEl = document.getElementById("profileCompletion");
+    const barraEl = document.getElementById("profileCompletionBar");
+    const textoEl = document.getElementById("profileCompletionText");
+    const regionEl = document.getElementById("summaryRegion");
+    const carreraEl = document.getElementById("summaryCareer");
+
+    if (porcentajeEl) porcentajeEl.textContent = `${porcentaje}%`;
+    if (barraEl) barraEl.style.width = `${porcentaje}%`;
+
+    if (textoEl) {
+        textoEl.textContent = porcentaje === 100
+            ? "Perfil completo. EduPerú puede personalizar mejor tus resultados."
+            : `Tienes ${completos} de ${campos.length} datos educativos completados.`;
+    }
+
+    if (regionEl) {
+        regionEl.textContent = [perfil.departamento, perfil.provincia]
+            .filter(Boolean)
+            .join(" · ") || "Sin registrar";
+    }
+
+    if (carreraEl) {
+        carreraEl.textContent = perfil.carrera_interes || "Sin registrar";
+    }
 }
 
 

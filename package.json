@@ -5,7 +5,27 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "node app.js"
+    "dev": "node app.js",
+    "saga:probar": "node scripts/probar-saga.js",
+    "orquestacion:probar": "node scripts/probar-orquestacion.js",
+    "simulador:probar": "node scripts/probar-simulador.js",
+    "comparador:probar": "node scripts/probar-comparador.js",
+    "calendario:probar": "node scripts/probar-calendario.js",
+    "seguimiento:probar": "node scripts/probar-seguimiento.js",
+    "observabilidad:probar": "node scripts/probar-observabilidad.js",
+    "hexagonal:probar": "node scripts/probar-hexagonal.js",
+    "hermes:probar": "node scripts/probar-hermes.js",
+    "infra:verificar": "node scripts/verificar-infra.js",
+    "correo:probar": "node scripts/probar-correo-auth.js",
+    "validar:final": "node scripts/validar-final.js",
+    "menu:verificar": "node scripts/verificar-menu-v3.js",
+    "postgres:schema": "node scripts/postgres-aplicar-schema.js",
+    "postgres:verificar": "node scripts/postgres-verificar-schema.js",
+    "postgres:migrar": "node scripts/migrar-sqlserver-postgres.js",
+    "postgres:verificar-datos": "node scripts/postgres-verificar-datos.js",
+    "postgres:compat-schema": "node scripts/postgres-aplicar-compat.js",
+    "postgres:compat-smoke": "node scripts/postgres-compat-smoke.js",
+    "render:verificar": "node scripts/verificar-render.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +39,7 @@
     "express": "^5.0.0",
     "jsonwebtoken": "^9.0.3",
     "mssql": "^12.7.2",
+    "pg": "^8.23.1",
     "swagger-ui-express": "^5.0.1"
   }
 }

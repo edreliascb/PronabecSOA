@@ -1,2 +1,14 @@
 node_modules
 .env
+.env.docker
+.env.*
+!.env.example
+!.env.render.example
+node_modules/
+backup_*/
+*.log
+*_REVISION/
+*.bak
+*.bak-*
+*.hexagonal-v2.bak
+estructura_eduperu.txt

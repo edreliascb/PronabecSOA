@@ -4,8 +4,10 @@ const { autenticarToken } = require("../middleware/auth.middleware");
 const router = express.Router();
 
 router.use(autenticarToken);
+router.get("/resumen", controller.resumen);
 router.get("/", controller.listar);
 router.post("/", controller.crear);
+router.patch("/marcar-todas", controller.marcarTodasLeidas);
 router.patch("/:id/leida", controller.marcarLeida);
 router.delete("/:id", controller.eliminar);
 

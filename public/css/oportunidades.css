@@ -1402,3 +1402,103 @@
     }
 
 }
+
+/* =========================================================
+   COMPARADOR ENRIQUECIDO
+========================================================= */
+
+.comparison-scroll {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.comparison-table-rich {
+    min-width: 820px;
+}
+
+.comparison-table-rich th:first-child {
+    width: 150px;
+    min-width: 150px;
+}
+
+.comparison-summary {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #718096;
+    font-size: 9.5px;
+}
+
+.comparison-status {
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 8.5px;
+    font-weight: 800;
+}
+
+.comparison-status.ok {
+    background: #e6f7ef;
+    color: #147a52;
+}
+
+.comparison-status.warning {
+    background: #fff4db;
+    color: #8a6214;
+}
+
+.comparison-list {
+    margin: 0;
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.comparison-list li {
+    line-height: 1.45;
+}
+
+.comparison-nd {
+    display: inline-flex;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #f1f4f8;
+    color: #7c8798;
+    font-size: 8.5px;
+    font-weight: 700;
+}
+
+.comparison-verified {
+    display: inline-flex;
+    padding: 3px 7px;
+    border-radius: 999px;
+    background: #e6f7ef;
+    color: #147a52;
+    font-size: 8.5px;
+    font-weight: 800;
+}
+
+.comparison-disclaimer {
+    margin-top: 14px;
+    padding: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    border: 1px solid #dce7f6;
+    border-radius: 10px;
+    background: #f5f9ff;
+    color: #617089;
+}
+
+.comparison-disclaimer svg {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+}
+
+.comparison-disclaimer p {
+    margin: 0;
+    font-size: 8.8px;
+    line-height: 1.55;
+}
