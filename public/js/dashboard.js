@@ -537,7 +537,11 @@ function calcularEstadisticasLocales() {
                 "carrera",
                 "CARRERA",
                 "nombreCarrera",
-                "NOMBRE_CARRERA"
+                            "NOMBRE_CARRERA",
+                            "carreraNombre",
+                            "CARRERA_NOMBRE",
+                            "programaEstudio",
+                            "PROGRAMA_ESTUDIO"
             ]
 
         );
@@ -677,12 +681,24 @@ function extraerRegistros(
    VALORES
 ========================================================= */
 
+/* EDUPERU_CAMPOS_OFICIALES_FLEXIBLES_V1 */
 function obtenerValor(
     objeto,
     campos,
     defecto = "No especificado"
 ) {
 
+    if (
+        !objeto ||
+        typeof objeto !== "object"
+    ) {
+
+        return defecto;
+
+    }
+
+
+    /* 1. Coincidencia exacta */
     for (
         const campo
         of campos
@@ -697,6 +713,106 @@ function obtenerValor(
         ) {
 
             return objeto[campo];
+
+        }
+
+    }
+
+
+    /*
+       2. Coincidencia flexible.
+       Permite reconocer como equivalentes:
+       NOMBRE_CONVOCATORIA
+       Nombre Convocatoria
+       nombreConvocatoria
+       CONVOCATORIA_NOMBRE
+    */
+    const tokenizarCampo =
+        valor =>
+            String(valor || "")
+                .replace(
+                    /([a-záéíóúñ])([A-ZÁÉÍÓÚÑ])/g,
+                    "$1 $2"
+                )
+                .normalize("NFD")
+                .replace(
+                    /[\u0300-\u036f]/g,
+                    ""
+                )
+                .toLowerCase()
+                .replace(
+                    /[^a-z0-9]+/g,
+                    " "
+                )
+                .trim()
+                .split(/\s+/)
+                .filter(Boolean);
+
+
+    const entradas =
+        Object.entries(
+            objeto
+        );
+
+
+    for (
+        const campo
+        of campos
+    ) {
+
+        const tokensBuscados =
+            tokenizarCampo(
+                campo
+            );
+
+
+        if (
+            tokensBuscados.length === 0
+        ) {
+
+            continue;
+
+        }
+
+
+        for (
+            const [clave, valor]
+            of entradas
+        ) {
+
+            if (
+                valor === undefined ||
+                valor === null ||
+                String(valor).trim() === ""
+            ) {
+
+                continue;
+
+            }
+
+
+            const tokensClave =
+                tokenizarCampo(
+                    clave
+                );
+
+
+            const todosCoinciden =
+                tokensBuscados.every(
+                    token =>
+                        tokensClave.includes(
+                            token
+                        )
+                );
+
+
+            if (
+                todosCoinciden
+            ) {
+
+                return valor;
+
+            }
 
         }
 
@@ -913,6 +1029,12 @@ function renderizarOportunidades(
                             "CONVOCATORIA",
                             "nombreConvocatoria",
                             "NOMBRE_CONVOCATORIA",
+                            "convocatoriaNombre",
+                            "CONVOCATORIA_NOMBRE",
+                            "programa",
+                            "PROGRAMA",
+                            "beca",
+                            "BECA",
                             "nombre",
                             "NOMBRE"
                         ],
@@ -930,7 +1052,11 @@ function renderizarOportunidades(
                             "carrera",
                             "CARRERA",
                             "nombreCarrera",
-                            "NOMBRE_CARRERA"
+                            "NOMBRE_CARRERA",
+                            "carreraNombre",
+                            "CARRERA_NOMBRE",
+                            "programaEstudio",
+                            "PROGRAMA_ESTUDIO"
                         ]
                     );
 
@@ -1221,7 +1347,11 @@ function mostrarDetalleOportunidad(
                 "carrera",
                 "CARRERA",
                 "nombreCarrera",
-                "NOMBRE_CARRERA"
+                            "NOMBRE_CARRERA",
+                            "carreraNombre",
+                            "CARRERA_NOMBRE",
+                            "programaEstudio",
+                            "PROGRAMA_ESTUDIO"
             ]
         );
 

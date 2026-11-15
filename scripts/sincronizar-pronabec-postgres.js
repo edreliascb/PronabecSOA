@@ -137,6 +137,17 @@ const BATCH_SIZE =
     );
 
 
+
+const STREAM_TIMEOUT_MS =
+    Math.max(
+        5 * 60 * 1000,
+        Number(
+            process.env.PRONABEC_SYNC_STREAM_TIMEOUT_MS ||
+            60 * 60 * 1000
+        )
+    );
+
+
 const USER_AGENT =
     "EduPeruSOA-Sync/1.0";
 
@@ -989,7 +1000,7 @@ async function importarCsv(
                 accept:
                     "text/csv,*/*",
                 timeout:
-                    120000
+                    STREAM_TIMEOUT_MS
             }
         );
 
@@ -1634,6 +1645,10 @@ async function main() {
     console.log("");
     console.log(
         `Lote: ${BATCH_SIZE} registros`
+    );
+
+    console.log(
+        `Timeout stream: ${Math.round(STREAM_TIMEOUT_MS / 60000)} minutos`
     );
 
 

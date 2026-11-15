@@ -180,6 +180,7 @@ function extraerRegistros(
    EXTRAER TOTAL
 ========================================================= */
 
+/* EDUPERU_TOTAL_ANIDADO_POSTGRES_V1 */
 function extraerTotal(
     servicio,
     defecto = 0
@@ -189,13 +190,27 @@ function extraerTotal(
 
         servicio?.total,
 
+        servicio?.datos?.total,
+
+        servicio?.datos?.paginacion?.total,
+
+        servicio?.datos?.resultado?.total,
+
+        servicio?.datos?.result?.total,
+
         servicio?.resultado?.total,
 
-        servicio?.paginacion?.total,
+        servicio?.resultado?.datos?.total,
+
+        servicio?.resultado?.datos?.paginacion?.total,
 
         servicio?.resultado?.paginacion?.total,
 
+        servicio?.paginacion?.total,
+
         servicio?.cantidad,
+
+        servicio?.datos?.cantidad,
 
         servicio?.resultado?.cantidad
 
@@ -206,6 +221,17 @@ function extraerTotal(
         const candidato
         of candidatos
     ) {
+
+        if (
+            candidato === null ||
+            candidato === undefined ||
+            candidato === ""
+        ) {
+
+            continue;
+
+        }
+
 
         const numero =
             Number(

@@ -1,4 +1,4 @@
-﻿$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Stop"
 
 $project = "C:\PronabecSOA"
 
@@ -29,6 +29,8 @@ try {
 
     $env:PRONABEC_SYNC_DATABASE_URL = $plainUrl
     $env:NODE_OPTIONS = "--max-old-space-size=768"
+    $env:PRONABEC_SYNC_BATCH_SIZE = "500"
+    $env:PRONABEC_SYNC_STREAM_TIMEOUT_MS = "3600000"
 
     node "$project\scripts\sincronizar-pronabec-postgres.js"
 
@@ -39,6 +41,8 @@ try {
 finally {
     $env:PRONABEC_SYNC_DATABASE_URL = $null
     $env:NODE_OPTIONS = $null
+    $env:PRONABEC_SYNC_BATCH_SIZE = $null
+    $env:PRONABEC_SYNC_STREAM_TIMEOUT_MS = $null
 
     if ($ptr -ne [IntPtr]::Zero) {
         [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr)
