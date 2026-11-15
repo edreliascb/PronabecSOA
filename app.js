@@ -239,6 +239,21 @@ app.use(
    FRONTEND
 ========================================================= */
 
+
+/* EDUPERU_ROOT_LOGIN_ENTRY_V1 */
+app.get(
+    "/",
+    (req, res) => {
+
+        return res.redirect(
+            302,
+            "/pages/login.html?entry=1"
+        );
+
+    }
+);
+
+
 app.use(
     express.static(path.join(
             __dirname,
