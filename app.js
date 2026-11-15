@@ -5,6 +5,13 @@
 
 require("dotenv").config();
 
+/* EDUPERU_PRONABEC_SYNC_REPO_V3 */
+const pronabecSyncRepoV3 =
+    require(
+        "./src/services/pronabecCatalogoPostgres.service"
+    );
+
+
 const express =
     require("express");
 
@@ -509,6 +516,52 @@ app.get(
 /* =========================================================
    RENDER HEALTH CHECK LIGERO
 ========================================================= */
+
+
+/* EDUPERU_PRONABEC_SYNC_RESUMEN_V3 */
+app.get(
+    "/api/pronabec-sync/resumen",
+    async (req, res) => {
+
+        try {
+
+            const resultado =
+                await pronabecSyncRepoV3
+                    .obtenerResumen();
+
+
+            return res
+                .status(200)
+                .json({
+                    success:
+                        true,
+
+                    resultado
+                });
+
+        } catch (error) {
+
+            console.error(
+                "[PRONABEC-SYNC-RESUMEN]",
+                error.message
+            );
+
+
+            return res
+                .status(500)
+                .json({
+                    success:
+                        false,
+
+                    mensaje:
+                        "No fue posible consultar el resumen sincronizado."
+                });
+
+        }
+
+    }
+);
+
 
 app.get(
     "/healthz",
