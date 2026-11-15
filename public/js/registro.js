@@ -1,5 +1,5 @@
-﻿/* =========================================================
-   EDUPERÃš
+/* =========================================================
+   EDUPERÚ
    REGISTRO
 ========================================================= */
 
@@ -93,7 +93,7 @@ function configurarRegistro() {
                 ) {
 
                     mostrarAlertaRegistro(
-                        "Las contraseÃ±as no coinciden.",
+                        "Las contraseñas no coinciden.",
                         "error"
                     );
 
@@ -108,7 +108,7 @@ function configurarRegistro() {
                 ) {
 
                     mostrarAlertaRegistro(
-                        "La contraseÃ±a debe tener al menos 8 caracteres.",
+                        "La contraseña debe tener al menos 8 caracteres.",
                         "error"
                     );
 
