@@ -663,6 +663,49 @@ app.get(
 );
 
 
+
+/* EDUPERU_PORTAL_CONVOCATORIAS_V2 */
+app.get(
+    "/api/portal/convocatorias",
+    async (req, res) => {
+
+        try {
+
+            res.json({
+                success:
+                    true,
+
+                resultado:
+                    await portalDatos
+                        .listarRegistros(
+                            "ConvocatoriaCarreraVigentes",
+                            req.query,
+                            {
+                                rowsDefecto:
+                                    100,
+                                rowsMax:
+                                    500
+                            }
+                        )
+            });
+
+        } catch (error) {
+
+            res.status(500)
+                .json({
+                    success:
+                        false,
+
+                    mensaje:
+                        error.message
+                });
+
+        }
+
+    }
+);
+
+
 app.get(
     "/api/portal/oportunidades",
     async (req, res) => {
