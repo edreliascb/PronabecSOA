@@ -1,243 +1,109 @@
 /* =========================================================
-   EDUPERÚ - PORTAL DATOS V4 SIN DUPLICAR POSTGRESQL
-
-   Usa directamente:
-   - pronabec_sync
-   - pronabec_catalogo
-
-   NO crea una segunda copia de los 333k+ registros.
+   EDUPERÚ - PORTAL DATOS V5
+   - Registros completos: pronabec_catalogo
+   - Catálogos ligeros: pronabec_dim_*
+   - No duplica 333k filas
 ========================================================= */
 
-const { Pool } =
-    require("pg");
+const { Pool } = require("pg");
 
-
-let pool =
-    null;
-
-
-const mappingCache =
-    new Map();
-
+let pool = null;
 
 function db() {
-
-    if (pool) {
-        return pool;
-    }
-
+    if (pool) return pool;
 
     const connectionString =
-        process.env.DATABASE_URL ||
-        "";
-
+        process.env.DATABASE_URL || "";
 
     if (!connectionString) {
-
-        throw new Error(
-            "DATABASE_URL no está configurada."
-        );
-
+        throw new Error("DATABASE_URL no está configurada.");
     }
 
-
-    pool =
-        new Pool({
-
-            connectionString,
-
-            max:
-                3,
-
-            idleTimeoutMillis:
-                10000,
-
-            connectionTimeoutMillis:
-                5000,
-
-            ssl:
-                connectionString.includes(
-                    "localhost"
-                )
-                    ? false
-                    : {
-                        rejectUnauthorized:
-                            false
-                    }
-
-        });
-
+    pool = new Pool({
+        connectionString,
+        max: 3,
+        idleTimeoutMillis: 10000,
+        connectionTimeoutMillis: 5000,
+        ssl: connectionString.includes("localhost")
+            ? false
+            : { rejectUnauthorized: false }
+    });
 
     return pool;
-
 }
 
-
-function limpiar(
-    valor
-) {
-
-    return String(
-        valor ??
-        ""
-    )
-        .replace(
-            /\s+/g,
-            " "
-        )
+function limpiar(valor) {
+    return String(valor ?? "")
+        .replace(/\s+/g, " ")
         .trim();
-
 }
 
-
-function tokenizar(
-    valor
-) {
-
-    return limpiar(
-        valor
-    )
-        .replace(
-            /([a-záéíóúñ])([A-ZÁÉÍÓÚÑ])/g,
-            "$1 $2"
-        )
-        .normalize(
-            "NFD"
-        )
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
+function norm(valor) {
+    return limpiar(valor)
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase()
-        .replace(
-            /[^a-z0-9]+/g,
-            " "
-        )
+        .replace(/[^a-z0-9]+/g, " ")
         .trim()
-        .split(
-            /\s+/
-        )
-        .filter(
-            Boolean
-        );
-
+        .split(/\s+/)
+        .filter(Boolean);
 }
 
+function pick(fila, grupos) {
+    if (!fila || typeof fila !== "object") return "";
 
-function escapeSqlString(
-    valor
-) {
+    const entradas = Object.entries(fila)
+        .map(([clave, valor]) => ({
+            clave,
+            tokens: norm(clave),
+            valor: limpiar(valor)
+        }))
+        .filter(x => x.valor);
 
-    return String(
-        valor
-    )
-        .replace(
-            /'/g,
-            "''"
-        );
+    for (const grupo of grupos) {
+        const buscados = grupo.map(x => norm(x)[0]).filter(Boolean);
 
-}
+        const encontrados = entradas
+            .filter(item =>
+                buscados.every(token =>
+                    item.tokens.includes(token)
+                )
+            )
+            .sort((a, b) => {
+                const score = item => {
+                    let s = 0;
+                    if (item.tokens.includes("nombre")) s += 3;
+                    if (item.tokens.includes("descripcion")) s -= 1;
+                    return s;
+                };
+                return score(b) - score(a);
+            });
 
-
-function entero(
-    valor,
-    defecto,
-    minimo,
-    maximo
-) {
-
-    const n =
-        Number(
-            valor
-        );
-
-
-    if (
-        !Number.isFinite(
-            n
-        )
-    ) {
-        return defecto;
+        if (encontrados.length) {
+            return encontrados[0].valor;
+        }
     }
 
-
-    return Math.max(
-        minimo,
-        Math.min(
-            maximo,
-            Math.trunc(
-                n
-            )
-        )
-    );
-
+    return "";
 }
 
-
-async function syncActivo(
-    recurso
-) {
-
-    const result =
-        await db()
-            .query(
-                `
-                SELECT
-                    recurso,
-                    active_sync_id,
-                    total_rows,
-                    fuente_url,
-                    synced_at,
-                    status
-                FROM pronabec_sync
-                WHERE
-                    recurso = $1
-                    AND status = 'COMPLETADO'
-                    AND active_sync_id IS NOT NULL
-                LIMIT 1
-                `,
-                [
-                    recurso
-                ]
-            );
-
-
-    return result.rows[0] ||
-        null;
-
-}
-
-
-const gruposCampos = {
-
-    titulo: [
+function normalizarFila(recurso, fila, ordinal = 0) {
+    const convocatoria = pick(fila, [
         ["nombre", "convocatoria"],
         ["convocatoria"],
-        ["nombre", "carrera"],
-        ["carrera"],
-        ["nombre", "convenio"],
-        ["convenio"],
-        ["nombre", "institucion"],
-        ["institucion"]
-    ],
-
-    convocatoria: [
-        ["nombre", "convocatoria"],
-        ["convocatoria"],
-        ["nombre", "beca"],
         ["beca"],
         ["programa"]
-    ],
+    ]);
 
-    carrera: [
+    const carrera = pick(fila, [
         ["nombre", "carrera"],
         ["carrera"],
         ["programa", "estudio"],
         ["programa", "academico"],
         ["especialidad"]
-    ],
+    ]);
 
-    institucion: [
+    const institucion = pick(fila, [
         ["nombre", "institucion"],
         ["institucion"],
         ["nombre", "ies"],
@@ -246,1647 +112,551 @@ const gruposCampos = {
         ["entidad"],
         ["organizacion"],
         ["razon", "social"]
-    ],
+    ]);
 
-    region: [
+    const region = pick(fila, [
         ["departamento"],
         ["region"]
-    ],
+    ]);
 
-    sede: [
+    const sede = pick(fila, [
         ["sede"],
         ["campus"],
         ["provincia"],
         ["distrito"],
         ["ubicacion"]
-    ],
+    ]);
 
-    estado: [
+    const estado = pick(fila, [
         ["estado"],
         ["vigencia"],
         ["situacion"]
-    ],
+    ]);
 
-    modalidad: [
+    const modalidad = pick(fila, [
         ["modalidad"],
         ["tipo", "estudio"]
-    ],
+    ]);
 
-    convenio: [
+    const convenio = pick(fila, [
         ["nombre", "convenio"],
         ["convenio"],
         ["objeto", "convenio"],
         ["objeto"]
-    ],
+    ]);
 
-    tipo_convenio: [
+    const tipoConvenio = pick(fila, [
         ["tipo", "convenio"],
         ["tipo", "entidad"]
-    ],
+    ]);
 
-    descripcion: [
+    const descripcion = pick(fila, [
         ["descripcion"],
         ["detalle"],
         ["observacion"],
         ["beneficio"]
-    ]
-
-};
-
-
-function elegirClave(
-    claves,
-    grupos
-) {
-
-    const candidatos =
-        claves.map(
-            clave => ({
-                clave,
-                tokens:
-                    tokenizar(
-                        clave
-                    )
-            })
-        );
-
-
-    for (
-        const grupo
-        of grupos
-    ) {
-
-        const buscados =
-            grupo.map(
-                token =>
-                    tokenizar(
-                        token
-                    )[0]
-            )
-            .filter(
-                Boolean
-            );
-
-
-        const matches =
-            candidatos
-                .filter(
-                    item =>
-                        buscados.every(
-                            token =>
-                                item.tokens.includes(
-                                    token
-                                )
-                        )
-                )
-                .sort(
-                    (a, b) => {
-
-                        const score =
-                            item => {
-
-                                let s =
-                                    0;
-
-
-                                if (
-                                    item.tokens.includes(
-                                        "nombre"
-                                    )
-                                ) {
-                                    s += 4;
-                                }
-
-
-                                s -=
-                                    item.tokens.length *
-                                    0.1;
-
-
-                                return s;
-
-                            };
-
-
-                        return (
-                            score(b) -
-                            score(a)
-                        );
-
-                    }
-                );
-
-
-        if (
-            matches.length
-        ) {
-
-            return matches[0]
-                .clave;
-
-        }
-
-    }
-
-
-    return null;
-
-}
-
-
-async function mapping(
-    recurso
-) {
-
-    const sync =
-        await syncActivo(
-            recurso
-        );
-
-
-    if (!sync) {
-
-        return {
-            sync:
-                null,
-            campos:
-                {}
-        };
-
-    }
-
-
-    const cacheKey =
-        `${recurso}:${sync.active_sync_id}`;
-
-
-    if (
-        mappingCache.has(
-            cacheKey
-        )
-    ) {
-
-        return {
-            sync,
-            campos:
-                mappingCache.get(
-                    cacheKey
-                )
-        };
-
-    }
-
-
-    /*
-       Solo inspeccionamos hasta 200 filas para descubrir nombres
-       reales de columnas. Esto consume muy poco almacenamiento/RAM.
-    */
-    const result =
-        await db()
-            .query(
-                `
-                SELECT DISTINCT
-                    k.key
-                FROM
-                (
-                    SELECT
-                        fila_json
-                    FROM pronabec_catalogo
-                    WHERE
-                        recurso = $1
-                        AND sync_id = $2
-                    ORDER BY ordinal
-                    LIMIT 200
-                ) muestra
-                CROSS JOIN LATERAL
-                    jsonb_object_keys(
-                        muestra.fila_json
-                    ) AS k(key)
-                `,
-                [
-                    recurso,
-                    sync.active_sync_id
-                ]
-            );
-
-
-    const claves =
-        result.rows
-            .map(
-                fila =>
-                    fila.key
-            )
-            .filter(
-                Boolean
-            );
-
-
-    const campos =
-        {};
-
-
-    for (
-        const [
-            nombre,
-            grupos
-        ]
-        of Object.entries(
-            gruposCampos
-        )
-    ) {
-
-        campos[nombre] =
-            elegirClave(
-                claves,
-                grupos
-            );
-
-    }
-
-
-    mappingCache.set(
-        cacheKey,
-        campos
-    );
-
-
-    console.log(
-        `[PortalDatos V4] ${recurso}:`,
-        campos
-    );
-
-
-    return {
-        sync,
-        campos
-    };
-
-}
-
-
-function expr(
-    campos,
-    nombre,
-    alias = "pc"
-) {
-
-    const clave =
-        campos[
-            nombre
-        ];
-
-
-    if (!clave) {
-
-        return "NULL::text";
-
-    }
-
-
-    return `NULLIF(BTRIM(${alias}.fila_json ->> '${escapeSqlString(clave)}'), '')`;
-
-}
-
-
-function expresiones(
-    campos,
-    alias = "pc"
-) {
-
-    return {
-
-        titulo:
-            expr(
-                campos,
-                "titulo",
-                alias
-            ),
-
-        convocatoria:
-            expr(
-                campos,
-                "convocatoria",
-                alias
-            ),
-
-        carrera:
-            expr(
-                campos,
-                "carrera",
-                alias
-            ),
-
-        institucion:
-            expr(
-                campos,
-                "institucion",
-                alias
-            ),
-
-        region:
-            expr(
-                campos,
-                "region",
-                alias
-            ),
-
-        sede:
-            expr(
-                campos,
-                "sede",
-                alias
-            ),
-
-        estado:
-            expr(
-                campos,
-                "estado",
-                alias
-            ),
-
-        modalidad:
-            expr(
-                campos,
-                "modalidad",
-                alias
-            ),
-
-        convenio:
-            expr(
-                campos,
-                "convenio",
-                alias
-            ),
-
-        tipo_convenio:
-            expr(
-                campos,
-                "tipo_convenio",
-                alias
-            ),
-
-        descripcion:
-            expr(
-                campos,
-                "descripcion",
-                alias
-            )
-
-    };
-
-}
-
-
-function filtroSql(
-    query,
-    valores,
-    e
-) {
-
-    const condiciones =
-        [];
-
-
-    const q =
-        limpiar(
-            query.q ||
-            query.buscar ||
-            query.search ||
-            ""
-        );
-
-
-    if (q) {
-
-        valores.push(
-            `%${q}%`
-        );
-
-
-        const i =
-            valores.length;
-
-
-        const campos =
-            [
-                e.titulo,
-                e.convocatoria,
-                e.carrera,
-                e.institucion,
-                e.region,
-                e.sede,
-                e.convenio,
-                e.descripcion
-            ]
-                .filter(
-                    item =>
-                        !item.startsWith(
-                            "NULL::"
-                        )
-                );
-
-
-        if (
-            campos.length
-        ) {
-
-            condiciones.push(
-                `(${campos
-                    .map(
-                        item =>
-                            `${item} ILIKE $${i}`
-                    )
-                    .join(
-                        " OR "
-                    )})`
-            );
-
-        }
-
-    }
-
-
-    for (
-        const nombre
-        of [
-            "carrera",
-            "region",
-            "estado",
-            "institucion",
-            "convocatoria"
-        ]
-    ) {
-
-        const valor =
-            limpiar(
-                query[nombre]
-            );
-
-
-        if (!valor) {
-            continue;
-        }
-
-
-        const ex =
-            e[nombre];
-
-
-        if (
-            !ex ||
-            ex.startsWith(
-                "NULL::"
-            )
-        ) {
-            continue;
-        }
-
-
-        valores.push(
-            `%${valor}%`
-        );
-
-
-        condiciones.push(
-            `${ex} ILIKE $${valores.length}`
-        );
-
-    }
-
-
-    return condiciones.length
-        ? " AND " +
-          condiciones.join(
-              " AND "
-          )
-        : "";
-
-}
-
-
-function normalizarSalida(
-    recurso,
-    fila
-) {
+    ]);
 
     let titulo =
-        limpiar(
-            fila.titulo
-        );
+        convocatoria ||
+        carrera ||
+        convenio ||
+        institucion ||
+        "Registro PRONABEC";
 
-
-    const convocatoria =
-        limpiar(
-            fila.convocatoria
-        );
-
-    const carrera =
-        limpiar(
-            fila.carrera
-        );
-
-    const institucion =
-        limpiar(
-            fila.institucion
-        );
-
-    const region =
-        limpiar(
-            fila.region
-        );
-
-    const sede =
-        limpiar(
-            fila.sede
-        );
-
-    const convenio =
-        limpiar(
-            fila.convenio
-        );
-
-
-    if (
-        recurso ===
-        "CarrerasElegiblesNacional"
-    ) {
-
-        titulo =
-            carrera ||
-            titulo ||
-            "Carrera elegible";
-
-    } else if (
-        recurso ===
-        "Convenio"
-    ) {
-
-        titulo =
-            convenio ||
-            institucion ||
-            titulo ||
-            "Convenio PRONABEC";
-
-    } else if (
-        recurso ===
-        "PostulacionesVigentes"
-    ) {
-
-        titulo =
-            carrera ||
-            convocatoria ||
-            titulo ||
-            "Postulación vigente";
-
-    } else {
-
-        titulo =
-            convocatoria ||
-            titulo ||
-            "Convocatoria PRONABEC";
-
+    if (recurso === "CarrerasElegiblesNacional") {
+        titulo = carrera || titulo || "Carrera elegible";
+    } else if (recurso === "Convenio") {
+        titulo = convenio || institucion || titulo || "Convenio PRONABEC";
+    } else if (recurso === "PostulacionesVigentes") {
+        titulo = carrera || convocatoria || titulo || "Postulación vigente";
     }
 
-
     return {
-
-        id:
-            `${recurso}-${fila.ordinal}`,
-
-        ordinal:
-            Number(
-                fila.ordinal ||
-                0
-            ),
-
+        id: `${recurso}-${ordinal}`,
+        ordinal: Number(ordinal || 0),
         titulo,
-
         convocatoria,
-
         carrera,
-
         institucion,
-
-        region:
-            region ||
-            sede ||
-            "Nacional",
-
-        sede:
-            sede ||
-            region ||
-            "Nacional",
-
-        estado:
-            limpiar(
-                fila.estado
-            ) ||
-            (
-                recurso ===
-                "ConvocatoriaCarreraVigentes"
-                    ? "Vigente"
-                    : "Disponible"
-            ),
-
-        modalidad:
-            limpiar(
-                fila.modalidad
-            ),
-
+        region: region || sede || "Nacional",
+        sede: sede || region || "Nacional",
+        estado: estado ||
+            (recurso === "ConvocatoriaCarreraVigentes"
+                ? "Vigente"
+                : "Disponible"),
+        modalidad,
         convenio,
-
-        tipo_convenio:
-            limpiar(
-                fila.tipo_convenio
-            ),
-
-        descripcion:
-            limpiar(
-                fila.descripcion
-            ),
-
-        fuente:
-            "PRONABEC - PostgreSQL",
-
-        modo:
-            "POSTGRES_SINCRONIZADO"
-
+        tipo_convenio: tipoConvenio,
+        descripcion,
+        fuente: "PRONABEC - PostgreSQL",
+        modo: "POSTGRES_SINCRONIZADO"
     };
-
 }
 
+async function syncActivo(recurso) {
+    const result = await db().query(
+        `
+        SELECT
+            recurso,
+            active_sync_id,
+            total_rows,
+            fuente_url,
+            synced_at,
+            status
+        FROM pronabec_sync
+        WHERE
+            recurso = $1
+            AND status = 'COMPLETADO'
+            AND active_sync_id IS NOT NULL
+        LIMIT 1
+        `,
+        [recurso]
+    );
+
+    return result.rows[0] || null;
+}
+
+function entero(valor, defecto, minimo, maximo) {
+    const n = Number(valor);
+    if (!Number.isFinite(n)) return defecto;
+    return Math.max(minimo, Math.min(maximo, Math.trunc(n)));
+}
 
 async function listarRegistros(
     recurso,
     query = {},
     opciones = {}
 ) {
+    const sync = await syncActivo(recurso);
 
-    const info =
-        await mapping(
-            recurso
-        );
-
-
-    if (!info.sync) {
-
+    if (!sync) {
         return {
-
             recurso,
-
-            modo:
-                "POSTGRES_SINCRONIZADO",
-
-            disponible:
-                false,
-
-            total:
-                0,
-
-            pagina:
-                1,
-
-            filas:
-                0,
-
-            totalPaginas:
-                1,
-
-            datos:
-                [],
-
-            data:
-                [],
-
-            rows:
-                [],
-
-            records:
-                []
-
+            modo: "POSTGRES_SINCRONIZADO",
+            disponible: false,
+            total: 0,
+            pagina: 1,
+            filas: 0,
+            totalPaginas: 1,
+            datos: [],
+            data: [],
+            rows: [],
+            records: []
         };
-
     }
 
+    const pagina = entero(
+        query.page ?? query.pagina,
+        1,
+        1,
+        10000000
+    );
 
-    const pagina =
-        entero(
-            query.page ??
-            query.pagina,
-            1,
-            1,
-            10000000
-        );
-
-
-    const rows =
-        entero(
-            query.rows ??
-            query.limit ??
-            query.filas,
-            opciones.rowsDefecto ||
-            50,
-            1,
-            opciones.rowsMax ||
-            500
-        );
-
-
-    const e =
-        expresiones(
-            info.campos
-        );
-
-
-    const valoresConteo = [
-        recurso,
-        info.sync.active_sync_id
-    ];
-
-
-    const extraConteo =
-        filtroSql(
-            query,
-            valoresConteo,
-            e
-        );
-
-
-    let total =
-        Number(
-            info.sync.total_rows ||
-            0
-        );
-
-
-    if (extraConteo) {
-
-        const count =
-            await db()
-                .query(
-                    `
-                    SELECT
-                        COUNT(*)::bigint AS total
-                    FROM pronabec_catalogo pc
-                    WHERE
-                        pc.recurso = $1
-                        AND pc.sync_id = $2
-                        ${extraConteo}
-                    `,
-                    valoresConteo
-                );
-
-
-        total =
-            Number(
-                count.rows[0]
-                    ?.total ||
-                0
-            );
-
-    }
-
+    const rows = entero(
+        query.rows ?? query.limit ?? query.filas,
+        opciones.rowsDefecto || 50,
+        1,
+        opciones.rowsMax || 500
+    );
 
     const valores = [
         recurso,
-        info.sync.active_sync_id
+        sync.active_sync_id
     ];
 
+    let filtro = "";
 
-    const extra =
-        filtroSql(
-            query,
-            valores,
-            e
-        );
+    /*
+       Búsqueda segura y general sobre JSONB.
+       Solo se usa cuando el usuario realmente aplica filtros.
+    */
+    const terminos = [];
 
+    for (const valor of [
+        query.q,
+        query.buscar,
+        query.search,
+        query.carrera,
+        query.region,
+        query.estado,
+        query.institucion,
+        query.convocatoria
+    ]) {
+        const v = limpiar(valor);
+        if (v) terminos.push(v);
+    }
 
-    valores.push(
-        rows
-    );
+    if (terminos.length) {
+        const condiciones = [];
 
-    const iLimit =
-        valores.length;
-
-
-    valores.push(
-        (
-            pagina -
-            1
-        ) *
-        rows
-    );
-
-    const iOffset =
-        valores.length;
-
-
-    const result =
-        await db()
-            .query(
-                `
-                SELECT
-                    pc.ordinal,
-
-                    COALESCE(
-                        ${e.titulo},
-                        ${e.convocatoria},
-                        ${e.carrera},
-                        ${e.convenio},
-                        ${e.institucion}
-                    ) AS titulo,
-
-                    ${e.convocatoria} AS convocatoria,
-                    ${e.carrera} AS carrera,
-                    ${e.institucion} AS institucion,
-                    ${e.region} AS region,
-                    ${e.sede} AS sede,
-                    ${e.estado} AS estado,
-                    ${e.modalidad} AS modalidad,
-                    ${e.convenio} AS convenio,
-                    ${e.tipo_convenio} AS tipo_convenio,
-                    ${e.descripcion} AS descripcion
-
-                FROM pronabec_catalogo pc
-
-                WHERE
-                    pc.recurso = $1
-                    AND pc.sync_id = $2
-                    ${extra}
-
-                ORDER BY pc.ordinal
-
-                LIMIT $${iLimit}
-                OFFSET $${iOffset}
-                `,
-                valores
+        for (const termino of terminos) {
+            valores.push(`%${termino}%`);
+            condiciones.push(
+                `pc.fila_json::text ILIKE $${valores.length}`
             );
-
-
-    const datos =
-        result.rows.map(
-            fila =>
-                normalizarSalida(
-                    recurso,
-                    fila
-                )
-        );
-
-
-    return {
-
-        recurso,
-
-        modo:
-            "POSTGRES_SINCRONIZADO",
-
-        fuente:
-            "PRONABEC - PostgreSQL",
-
-        disponible:
-            true,
-
-        total,
-
-        pagina,
-
-        filas:
-            rows,
-
-        totalPaginas:
-            Math.max(
-                1,
-                Math.ceil(
-                    total /
-                    rows
-                )
-            ),
-
-        fechaSincronizacion:
-            info.sync.synced_at,
-
-        datos,
-
-        data:
-            datos,
-
-        rows:
-            datos,
-
-        records:
-            datos
-
-    };
-
-}
-
-
-async function listarCarreras(
-    query = {}
-) {
-
-    const info =
-        await mapping(
-            "CarrerasElegiblesNacional"
-        );
-
-
-    if (!info.sync) {
-
-        return {
-            modo:
-                "POSTGRES_SINCRONIZADO",
-            total:
-                0,
-            totalRegistros:
-                0,
-            datos:
-                []
-        };
-
-    }
-
-
-    const e =
-        expresiones(
-            info.campos
-        );
-
-
-    if (
-        e.carrera.startsWith(
-            "NULL::"
-        )
-    ) {
-
-        return {
-            modo:
-                "POSTGRES_SINCRONIZADO",
-            total:
-                0,
-            totalRegistros:
-                Number(
-                    info.sync.total_rows ||
-                    0
-                ),
-            datos:
-                []
-        };
-
-    }
-
-
-    const valores = [
-        "CarrerasElegiblesNacional",
-        info.sync.active_sync_id
-    ];
-
-
-    let filtro =
-        "";
-
-
-    const q =
-        limpiar(
-            query.q ||
-            query.buscar
-        );
-
-
-    if (q) {
-
-        valores.push(
-            `%${q}%`
-        );
-
-
-        filtro =
-            ` AND ${e.carrera} ILIKE $${valores.length} `;
-
-    }
-
-
-    const result =
-        await db()
-            .query(
-                `
-                SELECT
-                    ${e.carrera} AS nombre,
-
-                    COUNT(*)::bigint AS oportunidades,
-
-                    (
-                        ARRAY_AGG(
-                            DISTINCT ${e.institucion}
-                        )
-                        FILTER (
-                            WHERE ${e.institucion} IS NOT NULL
-                        )
-                    )[1:8] AS instituciones_lista,
-
-                    (
-                        ARRAY_AGG(
-                            DISTINCT COALESCE(
-                                ${e.region},
-                                ${e.sede}
-                            )
-                        )
-                        FILTER (
-                            WHERE COALESCE(
-                                ${e.region},
-                                ${e.sede}
-                            ) IS NOT NULL
-                        )
-                    )[1:8] AS regiones_lista,
-
-                    (
-                        ARRAY_AGG(
-                            DISTINCT ${e.convocatoria}
-                        )
-                        FILTER (
-                            WHERE ${e.convocatoria} IS NOT NULL
-                        )
-                    )[1:8] AS convocatorias_lista
-
-                FROM pronabec_catalogo pc
-
-                WHERE
-                    pc.recurso = $1
-                    AND pc.sync_id = $2
-                    AND ${e.carrera} IS NOT NULL
-                    ${filtro}
-
-                GROUP BY
-                    ${e.carrera}
-
-                ORDER BY
-                    ${e.carrera}
-                `,
-                valores
-            );
-
-
-    const datos =
-        result.rows.map(
-            fila => ({
-
-                nombre:
-                    fila.nombre,
-
-                carrera:
-                    fila.nombre,
-
-                oportunidades:
-                    Number(
-                        fila.oportunidades ||
-                        0
-                    ),
-
-                registros:
-                    Number(
-                        fila.oportunidades ||
-                        0
-                    ),
-
-                institucionesLista:
-                    fila.instituciones_lista ||
-                    [],
-
-                regionesLista:
-                    fila.regiones_lista ||
-                    [],
-
-                convocatoriasLista:
-                    fila.convocatorias_lista ||
-                    []
-
-            })
-        );
-
-
-    return {
-
-        modo:
-            "POSTGRES_SINCRONIZADO",
-
-        fuente:
-            "PRONABEC - PostgreSQL",
-
-        total:
-            datos.length,
-
-        totalRegistros:
-            Number(
-                info.sync.total_rows ||
-                0
-            ),
-
-        datos
-
-    };
-
-}
-
-
-async function institucionesDe(
-    recurso
-) {
-
-    const info =
-        await mapping(
-            recurso
-        );
-
-
-    if (!info.sync) {
-        return [];
-    }
-
-
-    const e =
-        expresiones(
-            info.campos
-        );
-
-
-    if (
-        e.institucion.startsWith(
-            "NULL::"
-        )
-    ) {
-
-        return [];
-
-    }
-
-
-    const result =
-        await db()
-            .query(
-                `
-                SELECT
-                    ${e.institucion} AS nombre,
-
-                    MIN(
-                        COALESCE(
-                            ${e.region},
-                            ${e.sede}
-                        )
-                    ) AS ubicacion,
-
-                    COUNT(*)::bigint AS registros
-
-                FROM pronabec_catalogo pc
-
-                WHERE
-                    pc.recurso = $1
-                    AND pc.sync_id = $2
-                    AND ${e.institucion} IS NOT NULL
-
-                GROUP BY
-                    ${e.institucion}
-
-                ORDER BY
-                    ${e.institucion}
-                `,
-                [
-                    recurso,
-                    info.sync.active_sync_id
-                ]
-            );
-
-
-    return result.rows;
-
-}
-
-
-async function listarInstituciones(
-    query = {}
-) {
-
-    const [
-        carreras,
-        convenios
-    ] =
-        await Promise.all([
-            institucionesDe(
-                "CarrerasElegiblesNacional"
-            ),
-            institucionesDe(
-                "Convenio"
-            )
-        ]);
-
-
-    const mapa =
-        new Map();
-
-
-    for (
-        const fila
-        of [
-            ...carreras,
-            ...convenios
-        ]
-    ) {
-
-        const nombre =
-            limpiar(
-                fila.nombre
-            );
-
-
-        if (!nombre) {
-            continue;
         }
 
-
-        const id =
-            nombre
-                .toLowerCase();
-
-
-        const actual =
-            mapa.get(
-                id
-            ) ||
-            {
-                nombre,
-                institucion:
-                    nombre,
-                ubicacion:
-                    limpiar(
-                        fila.ubicacion
-                    ) ||
-                    "No especificada",
-                region:
-                    limpiar(
-                        fila.ubicacion
-                    ) ||
-                    "No especificada",
-                tipo:
-                    "Institución educativa",
-                convenio:
-                    "PRONABEC",
-                estado:
-                    "Disponible",
-                registros:
-                    0,
-                fuente:
-                    "PRONABEC - PostgreSQL"
-            };
-
-
-        actual.registros +=
-            Number(
-                fila.registros ||
-                0
-            );
-
-
-        mapa.set(
-            id,
-            actual
-        );
-
+        filtro =
+            " AND " +
+            condiciones.join(" AND ");
     }
 
+    let total = Number(sync.total_rows || 0);
 
-    let datos =
-        Array.from(
-            mapa.values()
+    if (filtro) {
+        const count = await db().query(
+            `
+            SELECT COUNT(*)::bigint AS total
+            FROM pronabec_catalogo pc
+            WHERE
+                pc.recurso = $1
+                AND pc.sync_id = $2
+                ${filtro}
+            `,
+            valores
         );
 
-
-    const q =
-        limpiar(
-            query.q ||
-            query.buscar
-        )
-            .toLowerCase();
-
-
-    if (q) {
-
-        datos =
-            datos.filter(
-                item =>
-                    [
-                        item.nombre,
-                        item.ubicacion,
-                        item.tipo
-                    ]
-                        .join(
-                            " "
-                        )
-                        .toLowerCase()
-                        .includes(
-                            q
-                        )
-            );
-
+        total = Number(count.rows[0]?.total || 0);
     }
 
+    const valoresLista = [...valores];
 
-    datos.sort(
-        (
-            a,
-            b
-        ) =>
-            a.nombre.localeCompare(
-                b.nombre,
-                "es"
-            )
+    valoresLista.push(rows);
+    const iLimit = valoresLista.length;
+
+    valoresLista.push((pagina - 1) * rows);
+    const iOffset = valoresLista.length;
+
+    const result = await db().query(
+        `
+        SELECT
+            pc.ordinal,
+            pc.fila_json
+        FROM pronabec_catalogo pc
+        WHERE
+            pc.recurso = $1
+            AND pc.sync_id = $2
+            ${filtro}
+        ORDER BY pc.ordinal
+        LIMIT $${iLimit}
+        OFFSET $${iOffset}
+        `,
+        valoresLista
     );
 
+    const datos = result.rows.map(fila =>
+        normalizarFila(
+            recurso,
+            fila.fila_json,
+            fila.ordinal
+        )
+    );
 
     return {
-
-        modo:
-            "POSTGRES_SINCRONIZADO",
-
-        fuente:
-            "PRONABEC - PostgreSQL",
-
-        total:
-            datos.length,
-
-        datos
-
+        recurso,
+        modo: "POSTGRES_SINCRONIZADO",
+        fuente: "PRONABEC - PostgreSQL",
+        disponible: true,
+        total,
+        pagina,
+        filas: rows,
+        totalPaginas: Math.max(
+            1,
+            Math.ceil(total / rows)
+        ),
+        fechaSincronizacion: sync.synced_at,
+        datos,
+        data: datos,
+        rows: datos,
+        records: datos
     };
-
 }
 
+async function tablaExiste(nombre) {
+    const result = await db().query(
+        `
+        SELECT to_regclass($1) AS tabla
+        `,
+        [`public.${nombre}`]
+    );
 
-async function listarTerritorio() {
+    return Boolean(result.rows[0]?.tabla);
+}
 
-    const info =
-        await mapping(
+async function listarCarreras(query = {}) {
+    if (!(await tablaExiste("pronabec_dim_carreras"))) {
+        return {
+            modo: "POSTGRES_SINCRONIZADO",
+            fuente: "PRONABEC - PostgreSQL",
+            total: 0,
+            totalRegistros: 0,
+            datos: []
+        };
+    }
+
+    const valores = [];
+    let filtro = "";
+
+    const q = limpiar(query.q || query.buscar);
+
+    if (q) {
+        valores.push(`%${q}%`);
+        filtro = `WHERE carrera ILIKE $1`;
+    }
+
+    const result = await db().query(
+        `
+        SELECT
+            carrera,
+            oportunidades,
+            instituciones,
+            regiones,
+            institucion_muestra,
+            region_muestra,
+            convocatoria_muestra
+        FROM pronabec_dim_carreras
+        ${filtro}
+        ORDER BY carrera
+        `,
+        valores
+    );
+
+    const sync =
+        await syncActivo(
             "CarrerasElegiblesNacional"
         );
 
-
-    if (!info.sync) {
-
-        return {
-            modo:
-                "POSTGRES_SINCRONIZADO",
-            total:
-                0,
-            totalRegistros:
-                0,
-            datos:
-                []
-        };
-
-    }
-
-
-    const e =
-        expresiones(
-            info.campos
-        );
-
-
-    if (
-        e.carrera.startsWith(
-            "NULL::"
-        )
-    ) {
-
-        return {
-            modo:
-                "POSTGRES_SINCRONIZADO",
-            total:
-                0,
-            totalRegistros:
-                Number(
-                    info.sync.total_rows ||
-                    0
-                ),
-            datos:
-                []
-        };
-
-    }
-
-
-    const ubicacion =
-        `COALESCE(${e.region}, ${e.sede}, 'Nacional')`;
-
-
-    const result =
-        await db()
-            .query(
-                `
-                SELECT
-                    ${ubicacion} AS region,
-
-                    ${e.carrera} AS carrera,
-
-                    MIN(
-                        ${e.institucion}
-                    ) AS institucion,
-
-                    MIN(
-                        ${e.convocatoria}
-                    ) AS convocatoria,
-
-                    COUNT(*)::bigint AS oportunidades
-
-                FROM pronabec_catalogo pc
-
-                WHERE
-                    pc.recurso = $1
-                    AND pc.sync_id = $2
-                    AND ${e.carrera} IS NOT NULL
-
-                GROUP BY
-                    ${ubicacion},
-                    ${e.carrera}
-
-                ORDER BY
-                    region,
-                    carrera
-                `,
-                [
-                    "CarrerasElegiblesNacional",
-                    info.sync.active_sync_id
-                ]
-            );
-
-
-    const datos =
-        result.rows.map(
-            (
-                fila,
-                indice
-            ) => ({
-
-                id:
-                    `territorio-${indice + 1}`,
-
-                carrera:
-                    fila.carrera,
-
-                nombre:
-                    fila.carrera,
-
-                region:
-                    fila.region,
-
-                sede:
-                    fila.region,
-
-                institucion:
-                    fila.institucion ||
-                    "",
-
-                convocatoria:
-                    fila.convocatoria ||
-                    "",
-
-                oportunidades:
-                    Number(
-                        fila.oportunidades ||
-                        0
-                    ),
-
-                estado:
-                    "Disponible",
-
-                fuente:
-                    "PRONABEC - PostgreSQL"
-
-            })
-        );
-
+    const datos = result.rows.map(fila => ({
+        nombre: fila.carrera,
+        carrera: fila.carrera,
+        oportunidades: Number(
+            fila.oportunidades || 0
+        ),
+        registros: Number(
+            fila.oportunidades || 0
+        ),
+        instituciones: Number(
+            fila.instituciones || 0
+        ),
+        regiones: Number(
+            fila.regiones || 0
+        ),
+        institucionesLista:
+            fila.institucion_muestra
+                ? [fila.institucion_muestra]
+                : [],
+        regionesLista:
+            fila.region_muestra
+                ? [fila.region_muestra]
+                : [],
+        convocatoriasLista:
+            fila.convocatoria_muestra
+                ? [fila.convocatoria_muestra]
+                : []
+    }));
 
     return {
-
-        modo:
-            "POSTGRES_SINCRONIZADO",
-
-        fuente:
-            "PRONABEC - PostgreSQL",
-
-        totalRegistros:
-            Number(
-                info.sync.total_rows ||
-                0
-            ),
-
-        total:
-            datos.length,
-
+        modo: "POSTGRES_SINCRONIZADO",
+        fuente: "PRONABEC - PostgreSQL",
+        total: datos.length,
+        totalRegistros: Number(
+            sync?.total_rows || 0
+        ),
         datos
-
     };
-
 }
 
+async function listarInstituciones(query = {}) {
+    if (!(await tablaExiste("pronabec_dim_instituciones"))) {
+        return {
+            modo: "POSTGRES_SINCRONIZADO",
+            fuente: "PRONABEC - PostgreSQL",
+            total: 0,
+            datos: []
+        };
+    }
 
-async function resumen() {
+    const valores = [];
+    let filtro = "";
 
-    const result =
-        await db()
-            .query(
-                `
-                SELECT
-                    recurso,
-                    total_rows,
-                    synced_at,
-                    status
-                FROM pronabec_sync
-                WHERE
-                    status = 'COMPLETADO'
-                    AND active_sync_id IS NOT NULL
-                ORDER BY recurso
-                `
-            );
+    const q = limpiar(query.q || query.buscar);
 
+    if (q) {
+        valores.push(`%${q}%`);
+        filtro =
+            `WHERE
+                institucion ILIKE $1
+                OR ubicacion ILIKE $1`;
+    }
 
-    return result.rows.map(
-        fila => ({
+    const result = await db().query(
+        `
+        SELECT
+            institucion,
+            ubicacion,
+            registros,
+            fuente_recurso
+        FROM pronabec_dim_instituciones
+        ${filtro}
+        ORDER BY institucion
+        `,
+        valores
+    );
 
-            recurso:
-                fila.recurso,
+    const datos = result.rows.map(fila => ({
+        nombre: fila.institucion,
+        institucion: fila.institucion,
+        ubicacion:
+            fila.ubicacion ||
+            "No especificada",
+        region:
+            fila.ubicacion ||
+            "No especificada",
+        tipo: "Institución educativa",
+        convenio:
+            fila.fuente_recurso === "Convenio"
+                ? "Convenio PRONABEC"
+                : "PRONABEC",
+        estado: "Disponible",
+        registros: Number(
+            fila.registros || 0
+        ),
+        fuente: "PRONABEC - PostgreSQL"
+    }));
 
-            total_rows:
-                Number(
-                    fila.total_rows ||
-                    0
-                ),
+    return {
+        modo: "POSTGRES_SINCRONIZADO",
+        fuente: "PRONABEC - PostgreSQL",
+        total: datos.length,
+        datos
+    };
+}
 
-            built_at:
-                fila.synced_at,
+async function listarTerritorio() {
+    if (!(await tablaExiste("pronabec_dim_territorio"))) {
+        return {
+            modo: "POSTGRES_SINCRONIZADO",
+            fuente: "PRONABEC - PostgreSQL",
+            total: 0,
+            totalRegistros: 0,
+            datos: []
+        };
+    }
 
-            status:
-                fila.status
+    const result = await db().query(
+        `
+        SELECT
+            region,
+            carrera,
+            oportunidades,
+            institucion_muestra,
+            convocatoria_muestra
+        FROM pronabec_dim_territorio
+        ORDER BY region, carrera
+        `
+    );
 
+    const sync =
+        await syncActivo(
+            "CarrerasElegiblesNacional"
+        );
+
+    const datos = result.rows.map(
+        (fila, indice) => ({
+            id: `territorio-${indice + 1}`,
+            carrera: fila.carrera,
+            nombre: fila.carrera,
+            region: fila.region || "Nacional",
+            sede: fila.region || "Nacional",
+            institucion:
+                fila.institucion_muestra ||
+                "",
+            convocatoria:
+                fila.convocatoria_muestra ||
+                "",
+            oportunidades: Number(
+                fila.oportunidades || 0
+            ),
+            estado: "Disponible",
+            fuente: "PRONABEC - PostgreSQL"
         })
     );
 
+    return {
+        modo: "POSTGRES_SINCRONIZADO",
+        fuente: "PRONABEC - PostgreSQL",
+        totalRegistros: Number(
+            sync?.total_rows || 0
+        ),
+        total: datos.length,
+        datos
+    };
 }
 
+async function resumen() {
+    const result = await db().query(
+        `
+        SELECT
+            recurso,
+            total_rows,
+            synced_at,
+            status
+        FROM pronabec_sync
+        WHERE
+            status = 'COMPLETADO'
+            AND active_sync_id IS NOT NULL
+        ORDER BY recurso
+        `
+    );
+
+    return result.rows.map(fila => ({
+        recurso: fila.recurso,
+        total_rows: Number(
+            fila.total_rows || 0
+        ),
+        built_at: fila.synced_at,
+        status: fila.status
+    }));
+}
 
 async function estadisticas() {
+    const filas = await resumen();
 
-    const filas =
-        await resumen();
-
-
-    const mapa =
-        Object.fromEntries(
-            filas.map(
-                fila => [
-                    fila.recurso,
-                    fila.total_rows
-                ]
-            )
-        );
-
+    const mapa = Object.fromEntries(
+        filas.map(fila => [
+            fila.recurso,
+            fila.total_rows
+        ])
+    );
 
     const carreras =
         await listarCarreras();
 
-
     return {
-
         resumen: {
-
             totalConvocatorias:
                 mapa.ConvocatoriaCarreraVigentes ||
                 0,
-
             totalCarreras:
                 mapa.CarrerasElegiblesNacional ||
                 0,
-
             totalConvenios:
                 mapa.Convenio ||
                 0,
-
             totalPostulaciones:
                 mapa.PostulacionesVigentes ||
                 0,
-
             totalDocumentos:
                 mapa.DocumentosSolicitadosABecarios ||
                 0,
-
-            totalRegiones:
-                25
-
+            totalRegiones: 25
         },
 
         catalogos: {
-
             carreras:
                 carreras.datos.map(
-                    item =>
-                        item.nombre
+                    item => item.nombre
                 ),
 
             regiones: [
@@ -1916,190 +686,89 @@ async function estadisticas() {
                 "Tumbes",
                 "Ucayali"
             ]
-
         },
 
         fuentes: {
-
             convocatorias:
                 "POSTGRES_SINCRONIZADO",
-
             carreras:
                 "POSTGRES_SINCRONIZADO",
-
             convenios:
                 "POSTGRES_SINCRONIZADO",
-
             postulaciones:
                 "POSTGRES_SINCRONIZADO",
-
             instituciones:
                 "POSTGRES_SINCRONIZADO"
-
         }
-
     };
-
 }
 
-
 async function consultaGeneral() {
-
     const [
-        oportunidades,
+        convocatorias,
         postulaciones,
         convenios
-    ] =
-        await Promise.all([
+    ] = await Promise.all([
+        listarRegistros(
+            "ConvocatoriaCarreraVigentes",
+            { page: 1, rows: 100 },
+            { rowsDefecto: 100, rowsMax: 100 }
+        ),
 
-            listarRegistros(
-                "CarrerasElegiblesNacional",
-                {
-                    page:
-                        1,
-                    rows:
-                        100
-                },
-                {
-                    rowsDefecto:
-                        100,
-                    rowsMax:
-                        100
-                }
-            ),
+        listarRegistros(
+            "PostulacionesVigentes",
+            { page: 1, rows: 100 },
+            { rowsDefecto: 100, rowsMax: 100 }
+        ),
 
-            listarRegistros(
-                "PostulacionesVigentes",
-                {
-                    page:
-                        1,
-                    rows:
-                        100
-                },
-                {
-                    rowsDefecto:
-                        100,
-                    rowsMax:
-                        100
-                }
-            ),
-
-            listarRegistros(
-                "Convenio",
-                {
-                    page:
-                        1,
-                    rows:
-                        100
-                },
-                {
-                    rowsDefecto:
-                        100,
-                    rowsMax:
-                        100
-                }
-            )
-
-        ]);
-
+        listarRegistros(
+            "Convenio",
+            { page: 1, rows: 100 },
+            { rowsDefecto: 100, rowsMax: 100 }
+        )
+    ]);
 
     return {
-
         convocatorias: {
-
-            modo:
-                "POSTGRES_SINCRONIZADO",
-
-            fuente:
-                "PRONABEC - PostgreSQL",
-
-            disponible:
-                true,
-
-            total:
-                oportunidades.total,
-
-            datos:
-                oportunidades
-
+            modo: "POSTGRES_SINCRONIZADO",
+            fuente: "PRONABEC - PostgreSQL",
+            disponible: true,
+            total: convocatorias.total,
+            datos: convocatorias
         },
 
         postulaciones: {
-
-            modo:
-                "POSTGRES_SINCRONIZADO",
-
-            fuente:
-                "PRONABEC - PostgreSQL",
-
-            disponible:
-                true,
-
-            total:
-                postulaciones.total,
-
-            datos:
-                postulaciones
-
+            modo: "POSTGRES_SINCRONIZADO",
+            fuente: "PRONABEC - PostgreSQL",
+            disponible: true,
+            total: postulaciones.total,
+            datos: postulaciones
         },
 
         convenios: {
-
-            modo:
-                "POSTGRES_SINCRONIZADO",
-
-            fuente:
-                "PRONABEC - PostgreSQL",
-
-            disponible:
-                true,
-
-            total:
-                convenios.total,
-
-            datos:
-                convenios
-
+            modo: "POSTGRES_SINCRONIZADO",
+            fuente: "PRONABEC - PostgreSQL",
+            disponible: true,
+            total: convenios.total,
+            datos: convenios
         },
 
         documentos: {
-
-            modo:
-                "NO_DISPONIBLE",
-
-            fuente:
-                "PRONABEC",
-
-            disponible:
-                false,
-
-            total:
-                0,
-
-            datos:
-                []
-
+            modo: "NO_DISPONIBLE",
+            fuente: "PRONABEC",
+            disponible: false,
+            total: 0,
+            datos: []
         }
-
     };
-
 }
 
-
 module.exports = {
-
     listarRegistros,
-
     listarCarreras,
-
     listarInstituciones,
-
     listarTerritorio,
-
     resumen,
-
     estadisticas,
-
     consultaGeneral
-
 };
