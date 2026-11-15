@@ -26,7 +26,8 @@
     "postgres:compat-schema": "node scripts/postgres-aplicar-compat.js",
     "postgres:compat-smoke": "node scripts/postgres-compat-smoke.js",
     "render:verificar": "node scripts/verificar-render.js",
-    "auth-nav:verificar": "node scripts/verificar-fix-login-logout.js"
+    "auth-nav:verificar": "node scripts/verificar-fix-login-logout.js",
+    "email:provider-verificar": "node scripts/verificar-email-provider.js"
   },
   "keywords": [],
   "author": "",
@@ -40,6 +41,7 @@
     "express": "^5.0.0",
     "jsonwebtoken": "^9.0.3",
     "mssql": "^12.7.2",
+    "nodemailer": "^10.5.0",
     "pg": "^8.23.1",
     "swagger-ui-express": "^5.0.1"
   }
