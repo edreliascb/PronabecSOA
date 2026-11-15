@@ -27,7 +27,8 @@
     "postgres:compat-smoke": "node scripts/postgres-compat-smoke.js",
     "render:verificar": "node scripts/verificar-render.js",
     "auth-nav:verificar": "node scripts/verificar-fix-login-logout.js",
-    "email:provider-verificar": "node scripts/verificar-email-provider.js"
+    "email:provider-verificar": "node scripts/verificar-email-provider.js",
+    "pronabec:sincronizar": "node scripts/sincronizar-pronabec-postgres.js"
   },
   "keywords": [],
   "author": "",

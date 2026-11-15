@@ -1,5 +1,10 @@
 const axios = require("axios");
 
+const pronabecCatalogoPostgres =
+    require(
+        "./pronabecCatalogoPostgres.service"
+    );
+
 const resilienciaHttp =
     require("./resilienciaHttp.service");
 
@@ -271,6 +276,36 @@ async function consultarRecurso(
     parametros = {}
 ) {
 
+    /* EDUPERU_POSTGRES_CATALOGO_COMPAT */
+    try {
+
+        const sincronizado =
+            await pronabecCatalogoPostgres
+                .consultarCompatible(
+                    recurso,
+                    parametros
+                );
+
+
+        if (
+            sincronizado &&
+            sincronizado.disponible
+        ) {
+
+            return sincronizado;
+
+        }
+
+    } catch (errorCatalogo) {
+
+        console.warn(
+            `[PRONABEC-POSTGRES] ${recurso}: ${errorCatalogo.message}`
+        );
+
+    }
+
+
+
     const apiKey =
         process.env.PRONABEC_API_KEY;
 
@@ -345,6 +380,56 @@ async function consultarFuenteOficial(
     recurso,
     parametros = {}
 ) {
+
+    /* EDUPERU_POSTGRES_FUENTE_OFICIAL */
+    try {
+
+        const pagina =
+            Number(
+                parametros.page ||
+                parametros.pagina ||
+                1
+            ) ||
+            1;
+
+
+        const filas =
+            Number(
+                parametros.rows ||
+                parametros.filas ||
+                10
+            ) ||
+            10;
+
+
+        const sincronizado =
+            await pronabecCatalogoPostgres
+                .consultarPaginado(
+                    recurso,
+                    pagina,
+                    filas,
+                    parametros
+                );
+
+
+        if (
+            sincronizado &&
+            sincronizado.disponible
+        ) {
+
+            return sincronizado;
+
+        }
+
+    } catch (errorCatalogo) {
+
+        console.warn(
+            `[PRONABEC-POSTGRES] ${recurso}: ${errorCatalogo.message}`
+        );
+
+    }
+
+
 
     let errorApi =
         null;
